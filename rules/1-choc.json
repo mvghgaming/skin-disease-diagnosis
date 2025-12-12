@@ -1,0 +1,149 @@
+{
+  "disease": "Chốc (Impetigo)",
+  "description": "Luật chẩn đoán và điều trị bệnh Chốc",
+  "rules": [
+    {
+      "rule_id": "CHOC_1",
+      "rule_name": "Chẩn đoán chốc điển hình bằng tổn thương",
+      "category": "Chẩn đoán",
+      "conditions": {
+        "SkinLesionMorphology.vesicle_or_bulla": true,
+        "SkinLesionMorphology.crust_presence": true,
+        "SkinLesionMorphology.crust_color": "Vàng nâu"
+      },
+      "actions": {
+        "DiagnosisAssessment.main_diagnosis": "Chốc điển hình"
+      },
+      "explanation": "Bệnh chốc điển hình được Bộ Y tế mô tả đặc trưng bởi bóng nước nông + nhanh vỡ + đóng vảy màu vàng mật ong. Đây là tiêu chí quan trọng nhất để phân biệt chốc với các bệnh bóng nước khác. Luật này cho phép hệ thống nhận diện chốc khu trú chỉ dựa trên tổn thương đặc trưng mà không cần thêm triệu chứng toàn thân."
+    },
+    {
+      "rule_id": "CHOC_2",
+      "rule_name": "Vị trí gợi ý chốc",
+      "category": "Chẩn đoán",
+      "conditions": {
+        "LesionDistribution.main_location": ["Mặt", "Tay", "Chân"]
+      },
+      "actions": {
+        "LesionDistribution.typical_for_disease": true
+      },
+      "explanation": "Chốc thường gặp ở mặt, tay và chân, đặc biệt ở trẻ nhỏ do chấn thương nhỏ và vệ sinh kém. Vị trí giúp tăng độ tin cậy của chẩn đoán, và hỗ trợ các luật sau xác nhận bệnh."
+    },
+    {
+      "rule_id": "CHOC_3",
+      "rule_name": "Tăng khả năng chẩn đoán chốc khi có vị trí đặc trưng",
+      "category": "Chẩn đoán",
+      "conditions": {
+        "LesionDistribution.typical_for_disease": true,
+        "SkinLesionMorphology.crust_color": "Vàng nâu"
+      },
+      "actions": {
+        "DiagnosisAssessment.main_diagnosis": "Chốc"
+      },
+      "explanation": "Khi tổn thương 'mật ong' xuất hiện đúng vị trí hay gặp, khả năng chốc tăng rất cao. Đây là cách hệ thống suy diễn giống bác sĩ: kết hợp cả hình thái và phân bố để củng cố chẩn đoán."
+    },
+    {
+      "rule_id": "CHOC_4",
+      "rule_name": "Nguy cơ cao nhiễm chốc",
+      "category": "Yếu tố nguy cơ",
+      "conditions": {
+        "OR": [
+          {"RiskFactorAssessment.hygiene_level": "Kém"},
+          {"RiskFactorAssessment.skin_trauma": true},
+          {"RiskFactorAssessment.hot_humid_environment": true}
+        ]
+      },
+      "actions": {
+        "RiskFactorAssessment.overall_infection_risk": "Tăng"
+      },
+      "explanation": "Theo Bộ Y tế, chốc dễ xuất hiện khi: vệ sinh kém, có trầy xước da, sống trong môi trường nóng ẩm. Luật này không chẩn đoán bệnh, nhưng giúp hệ thống đánh giá bối cảnh nguy cơ, làm tăng trọng số chẩn đoán."
+    },
+    {
+      "rule_id": "CHOC_5",
+      "rule_name": "Gợi ý chẩn đoán phân biệt",
+      "category": "Chẩn đoán phân biệt",
+      "conditions": {
+        "OR": [
+          {"SkinLesionMorphology.crust_color": "≠ Vàng nâu"},
+          {"SkinLesionMorphology.vesicle_or_bulla": false}
+        ]
+      },
+      "actions": {
+        "DiagnosisAssessment.differential_list": ["Herpes", "Chàm", "Viêm da tiết bã"]
+      },
+      "explanation": "Nếu tổn thương không điển hình, hệ thống cần đề xuất các chẩn đoán khác: Herpes, Chàm, Viêm da tiết bã. Điều này làm mô hình thông minh hơn thay vì kết luận sai."
+    },
+    {
+      "rule_id": "CHOC_6",
+      "rule_name": "Điều trị tại chỗ khi chốc khu trú",
+      "category": "Điều trị",
+      "conditions": {
+        "SeverityAssessment.extent_of_lesions": "Khu trú"
+      },
+      "actions": {
+        "TreatmentPlan.local_antiseptic": ["KMnO4", "Xanh methylen", "Chlorhexidin"],
+        "TreatmentPlan.topical_antibiotic": "Mupirocin/Fusidic acid",
+        "TreatmentPlan.treatment_duration": "5–7 ngày"
+      },
+      "explanation": "Theo phác đồ Bộ Y tế: Chốc khu trú không cần kháng sinh uống, chỉ cần: dung dịch sát khuẩn, kháng sinh bôi (Mupirocin, Fucidin), trong 5–7 ngày. Luật phản ánh phác đồ điều trị chuẩn cấp quốc gia."
+    },
+    {
+      "rule_id": "CHOC_7",
+      "rule_name": "Điều trị toàn thân khi lan rộng hoặc có sốt",
+      "category": "Điều trị",
+      "conditions": {
+        "OR": [
+          {"SeverityAssessment.extent_of_lesions": "Lan rộng"},
+          {"SystemicAndNeurologicSigns.fever": true}
+        ]
+      },
+      "actions": {
+        "TreatmentPlan.systemic_antibiotic": ["Cloxacillin", "Cephalexin", "Amoxicillin/Clavulanate"],
+        "TreatmentPlan.treatment_duration": "7–10 ngày"
+      },
+      "explanation": "Bộ Y tế yêu cầu dùng kháng sinh đường uống khi: tổn thương lan rộng, hoặc có sốt/triệu chứng toàn thân. Các kháng sinh lựa chọn: Cloxacillin, Cephalexin, Amoxicillin/Clavulanate. Luật đảm bảo hệ thống không over-treat và cũng không bỏ sót trường hợp nặng."
+    },
+    {
+      "rule_id": "CHOC_8",
+      "rule_name": "Điều trị thay thế khi nghi ngờ kháng penicillin",
+      "category": "Điều trị",
+      "conditions": {
+        "TreatmentPlan.systemic_antibiotic": "Không dùng được do kháng thuốc"
+      },
+      "actions": {
+        "TreatmentPlan.systemic_antibiotic": "Clindamycin"
+      },
+      "explanation": "Trong bối cảnh tụ cầu vàng kháng penicillin, Bộ Y tế khuyến cáo dùng Clindamycin. Luật này phù hợp khi bệnh nhân: thất bại với phác đồ ban đầu, hoặc sống trong vùng có tỉ lệ MRSA cao."
+    },
+    {
+      "rule_id": "CHOC_9",
+      "rule_name": "Giảm đau hoặc ngứa",
+      "category": "Hỗ trợ triệu chứng",
+      "conditions": {
+        "OR": [
+          {"SystemicAndNeurologicSigns.pruritus": true},
+          {"SystemicAndNeurologicSigns.pain": true}
+        ]
+      },
+      "actions": {
+        "TreatmentPlan.antipruritic": "Kháng histamin",
+        "TreatmentPlan.pain_relief": "Paracetamol"
+      },
+      "explanation": "Dù không làm thay đổi tiến triển bệnh, nhưng Bộ Y tế khuyến cáo: Dùng kháng histamin khi ngứa, Dùng Paracetamol khi đau/sốt. Luật này giúp hệ thống đưa ra các hướng dẫn chăm sóc triệu chứng đầy đủ hơn."
+    },
+    {
+      "rule_id": "CHOC_10",
+      "rule_name": "Nghi biến chứng viêm cầu thận cấp",
+      "category": "Biến chứng",
+      "conditions": {
+        "DiagnosisAssessment.main_diagnosis": "Chốc",
+        "SystemicAndNeurologicSigns.malaise": true,
+        "SeverityAssessment.systemic_involvement": true
+      },
+      "actions": {
+        "DiagnosisAssessment.complication_flag": true,
+        "DiagnosisAssessment.complication_type": "Viêm cầu thận cấp sau nhiễm liên cầu"
+      },
+      "explanation": "Biến chứng nguy hiểm nhất nhưng dễ bị bỏ sót của chốc là: Viêm cầu thận cấp sau nhiễm liên cầu. Luật này giúp hệ thống phát hiện cảnh báo đỏ khi bệnh nhân có: mệt mỏi, dấu hiệu toàn thân, chẩn đoán chốc trước đó."
+    }
+  ]
+}

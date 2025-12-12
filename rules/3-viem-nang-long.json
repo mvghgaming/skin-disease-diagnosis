@@ -1,0 +1,220 @@
+{
+  "disease": "Viêm Nang Lông (Folliculitis)",
+  "description": "Luật chẩn đoán và điều trị bệnh Viêm Nang Lông",
+  "rules": [
+    {
+      "rule_id": "FOL_1",
+      "rule_name": "Viêm nang lông thường",
+      "category": "Chẩn đoán các thể viêm nang lông",
+      "conditions": {
+        "SkinLesionMorphology.pustule": true,
+        "LesionDistribution.follicular_area": true,
+        "SystemicAndNeurologicSigns.pruritus": true,
+        "SkinLesionMorphology.scar": false
+      },
+      "actions": {
+        "DiagnosisAssessment.main_diagnosis": "Viêm nang lông",
+        "DiagnosisAssessment.diagnostic_certainty": "Viêm nang lông thường"
+      },
+      "explanation": "Viêm nang lông thường là dạng nhẹ và hay gặp nhất. Người bệnh thường nổi vài mụn mủ nhỏ ngay tại lỗ chân lông, kèm cảm giác ngứa khó chịu. Các tổn thương nông, không để lại sẹo. Khi xuất hiện đúng bộ ba dấu hiệu: mụn mủ nhỏ – nằm quanh nang lông – có ngứa, bác sĩ có thể khẳng định đây là viêm nang lông thông thường."
+    },
+    {
+      "rule_id": "FOL_2",
+      "rule_name": "Giả viêm nang lông (Pseudo-folliculitis)",
+      "category": "Chẩn đoán các thể viêm nang lông",
+      "conditions": {
+        "DiagnosisAssessment.main_diagnosis": "Viêm nang lông",
+        "LesionDistribution.main_location": "Cằm",
+        "LesionDistribution.follicular_area": true,
+        "RiskFactorAssessment.skin_trauma": true
+      },
+      "actions": {
+        "DiagnosisAssessment.diagnostic_certainty": "Giả viêm nang lông (Pseudo-folliculitis)"
+      },
+      "explanation": "Giả viêm nang lông chủ yếu xảy ra ở người hay cạo râu. Khi sợi râu mọc lệch vào trong, nó 'chọc' vào da, gây đỏ, đau và giống như viêm nang lông thật. Điểm quan trọng để nhận ra là tổn thương tập trung ở cằm hoặc vùng cạo râu, kèm cảm giác khó chịu sau mỗi lần cạo. Đây không phải nhiễm khuẩn thật sự mà do lông mọc ngược gây kích ứng da."
+    },
+    {
+      "rule_id": "FOL_3",
+      "rule_name": "Viêm nang lông tăng bạch cầu ái toan",
+      "category": "Chẩn đoán các thể viêm nang lông",
+      "conditions": {
+        "DiagnosisAssessment.main_diagnosis": "Viêm nang lông",
+        "PatientInfo.immunosuppressed": true,
+        "SystemicAndNeurologicSigns.pruritus": true
+      },
+      "actions": {
+        "DiagnosisAssessment.diagnostic_certainty": "Viêm nang lông tăng bạch cầu ái toan",
+        "SeverityAssessment.overall_severity": "Trung bình"
+      },
+      "explanation": "Thể này hay gặp ở những người có hệ miễn dịch suy yếu, đặc biệt bệnh nhân HIV. Họ thường bị ngứa nhiều và dai dẳng, các mụn mủ xuất hiện lặp đi lặp lại. Khi người bệnh có suy giảm miễn dịch và ngứa nổi bật, bác sĩ cần nghĩ tới thể tăng bạch cầu ái toan – một dạng viêm nang lông khó điều trị hơn bình thường."
+    },
+    {
+      "rule_id": "FOL_4",
+      "rule_name": "Viêm nang lông Decalvans (sẹo rụng tóc vĩnh viễn)",
+      "category": "Chẩn đoán các thể viêm nang lông",
+      "conditions": {
+        "DiagnosisAssessment.main_diagnosis": "Viêm nang lông",
+        "LesionDistribution.main_location": "Da đầu",
+        "SkinLesionMorphology.scar": true
+      },
+      "actions": {
+        "DiagnosisAssessment.diagnostic_certainty": "Viêm nang lông Decalvans",
+        "SeverityAssessment.overall_severity": "Nặng",
+        "SeverityAssessment.deformity_or_disability": true
+      },
+      "explanation": "Nếu các mụn viêm xuất hiện ở da đầu và theo thời gian khiến tóc rụng không mọc lại, rất có thể đây là viêm nang lông mạn tính dạng Decalvans. Đặc trưng của thể này là sẹo rụng tóc vĩnh viễn, nghĩa là vùng da bị viêm sẽ không mọc tóc nữa. Đây là thể nặng, cần điều trị sớm để hạn chế lan rộng."
+    },
+    {
+      "rule_id": "FOL_5",
+      "rule_name": "Phân biệt với Nhọt",
+      "category": "Chẩn đoán phân biệt",
+      "conditions": {
+        "DiagnosisAssessment.main_diagnosis": "Viêm nang lông",
+        "SkinLesionMorphology.nodule_or_abscess": true,
+        "SystemicAndNeurologicSigns.pain": true
+      },
+      "actions": {
+        "DiagnosisAssessment.differential_list": "Nhọt"
+      },
+      "explanation": "Đôi khi viêm nang lông bị nhầm với nhọt. Nhọt thường đau nhiều, sưng nóng đỏ và có 'ngòi mủ' ở giữa – biểu hiện sâu và nặng hơn viêm nang lông. Nếu một tổn thương quanh nang lông mà đau dữ dội hoặc nổi cục sâu, bác sĩ phải đặt vấn đề đây có thể là nhọt chứ không chỉ là viêm nang lông."
+    },
+    {
+      "rule_id": "FOL_6",
+      "rule_name": "Phân biệt với Sẩn ngứa (Sẩn ngứa ngoài nang lông)",
+      "category": "Chẩn đoán phân biệt",
+      "conditions": {
+        "DiagnosisAssessment.main_diagnosis": "Viêm nang lông",
+        "LesionDistribution.follicular_area": false,
+        "SystemicAndNeurologicSigns.pruritus": true
+      },
+      "actions": {
+        "DiagnosisAssessment.differential_list": "Sẩn ngứa"
+      },
+      "explanation": "Sẩn ngứa là những nốt đỏ, cứng, nổi cao trên da nhưng không nằm ở lỗ chân lông, khác hoàn toàn với viêm nang lông. Khi tổn thương nằm ngoài vùng nang lông nhưng bệnh nhân ngứa nhiều, chẩn đoán nên hướng về sẩn ngứa, tránh nhầm với viêm nang lông."
+    },
+    {
+      "rule_id": "FOL_7",
+      "rule_name": "Nguyên tắc loại bỏ yếu tố thuận lợi",
+      "category": "Nguyên tắc điều trị",
+      "conditions": {
+        "DiagnosisAssessment.main_diagnosis": "Viêm nang lông"
+      },
+      "actions": {
+        "RiskFactorAssessment.overall_infection_risk": "Giảm nếu loại bỏ yếu tố thuận lợi"
+      },
+      "explanation": "Viêm nang lông dễ tái phát nếu da luôn trong tình trạng ẩm ướt, bí bách hoặc vệ sinh kém. Vì vậy trong mọi trường hợp, bác sĩ luôn dặn bệnh nhân giữ da sạch, khô thoáng và tránh mặc đồ quá chật. Chỉ cần thay đổi thói quen chăm sóc da, bệnh có thể cải thiện rõ rệt mà không cần dùng quá nhiều thuốc."
+    },
+    {
+      "rule_id": "FOL_8",
+      "rule_name": "Nguyên tắc vệ sinh cá nhân",
+      "category": "Nguyên tắc điều trị",
+      "conditions": {
+        "DiagnosisAssessment.main_diagnosis": "Viêm nang lông"
+      },
+      "actions": {
+        "TreatmentPlan.prevention_advice": "Rửa tay thân mình thường xuyên bằng xà phòng sát khuẩn"
+      },
+      "explanation": "Một bước đơn giản nhưng cực kỳ quan trọng: rửa vùng da bị ảnh hưởng bằng xà phòng sát khuẩn mỗi ngày. Điều này giúp giảm vi khuẩn trên da, giảm tình trạng viêm và hạn chế lan sang vùng khác."
+    },
+    {
+      "rule_id": "FOL_9",
+      "rule_name": "Nguyên tắc tránh gãi, kích thích tổn thương",
+      "category": "Nguyên tắc điều trị",
+      "conditions": {
+        "DiagnosisAssessment.main_diagnosis": "Viêm nang lông",
+        "SystemicAndNeurologicSigns.pruritus": true
+      },
+      "actions": {
+        "TreatmentPlan.antipruritic": "Kháng histamin",
+        "TreatmentPlan.prevention_advice": "Tránh cào gãi, kích thích thương tổn"
+      },
+      "explanation": "Khi ngứa, người bệnh hay cào gãi, nhưng chính hành động này lại làm trầy da, tạo cơ hội cho vi khuẩn xâm nhập sâu hơn. Bác sĩ thường kê thêm thuốc kháng histamin để giảm ngứa, giúp bệnh nhân bớt gãi và thương tổn nhanh lành hơn."
+    },
+    {
+      "rule_id": "FOL_10",
+      "rule_name": "Điều trị tại chỗ cho viêm nang lông nhẹ",
+      "category": "Điều trị cụ thể",
+      "conditions": {
+        "DiagnosisAssessment.main_diagnosis": "Viêm nang lông",
+        "SeverityAssessment.overall_severity": "Nhẹ"
+      },
+      "actions": {
+        "TreatmentPlan.local_antiseptic": "Povidon-iodin / Hexamidine / Chlorhexidin",
+        "TreatmentPlan.topical_antibiotic": "Fucidin hoặc Mupirocin",
+        "TreatmentPlan.treatment_duration": "7–10 ngày"
+      },
+      "explanation": "Với đa số trường hợp viêm nang lông nhẹ, chỉ cần rửa bằng dung dịch sát khuẩn và bôi kháng sinh nhẹ như Fucidin hoặc Mupirocin. Nếu được chăm sóc đúng cách, bệnh sẽ cải thiện sau khoảng 7–10 ngày mà không cần dùng kháng sinh toàn thân."
+    },
+    {
+      "rule_id": "FOL_11",
+      "rule_name": "Kháng sinh bôi khác (Neomycin, Silver sulfadiazine, Erythromycin, Clindamycin)",
+      "category": "Điều trị cụ thể",
+      "conditions": {
+        "DiagnosisAssessment.main_diagnosis": "Viêm nang lông",
+        "SeverityAssessment.overall_severity": "Nhẹ",
+        "TreatmentPlan.topical_antibiotic": "Không dung nạp Fucidin/Mupirocin"
+      },
+      "actions": {
+        "TreatmentPlan.topical_antibiotic": "Neomycin / Silver sulfadiazine / Erythromycin / Clindamycin",
+        "TreatmentPlan.treatment_duration": "7–10 ngày"
+      },
+      "explanation": "Nếu người bệnh dị ứng hoặc không đáp ứng với Fucidin/Mupirocin, bác sĩ có thể đổi sang Neomycin, Silver sulfadiazine, Erythromycin hoặc Clindamycin bôi. Đây đều là những lựa chọn an toàn và có hiệu quả tương đương."
+    },
+    {
+      "rule_id": "FOL_12",
+      "rule_name": "Chỉ định điều trị toàn thân",
+      "category": "Điều trị cụ thể",
+      "conditions": {
+        "DiagnosisAssessment.main_diagnosis": "Viêm nang lông",
+        "SeverityAssessment.overall_severity": "Nặng"
+      },
+      "actions": {
+        "SeverityAssessment.systemic_involvement": true,
+        "TreatmentPlan.systemic_antibiotic": "Cloxacillin / Amoxicillin-Clavulanate / Clindamycin",
+        "TreatmentPlan.treatment_duration": "7–10 ngày"
+      },
+      "explanation": "Khi viêm nang lông lan rộng, tái phát nhiều lần hoặc có dấu hiệu nặng, điều trị tại chỗ là không đủ. Lúc này cần uống kháng sinh toàn thân như Cloxacillin, Amoxicillin/Clavulanate hoặc Clindamycin trong 7–10 ngày để kiểm soát viêm và ngăn biến chứng."
+    },
+    {
+      "rule_id": "FOL_13",
+      "rule_name": "Điều trị toàn thân khi nghi MRSA",
+      "category": "Điều trị cụ thể",
+      "conditions": {
+        "DiagnosisAssessment.main_diagnosis": "Viêm nang lông",
+        "SeverityAssessment.overall_severity": "Nặng",
+        "TreatmentPlan.systemic_antibiotic": "Không đáp ứng"
+      },
+      "actions": {
+        "TreatmentPlan.systemic_antibiotic": "Vancomycin",
+        "TreatmentPlan.treatment_duration": "7–10 ngày"
+      },
+      "explanation": "Nếu bệnh không đáp ứng với các kháng sinh uống thông thường, bác sĩ sẽ nghĩ đến tụ cầu vàng kháng methicillin (MRSA). Trong trường hợp này, Vancomycin là lựa chọn phù hợp nhất vì có hiệu quả mạnh đối với chủng vi khuẩn này."
+    },
+    {
+      "rule_id": "FOL_14",
+      "rule_name": "Nguyên nhân không phải do vi khuẩn (nấm, virus…)",
+      "category": "Nguyên nhân khác & phòng bệnh",
+      "conditions": {
+        "DiagnosisAssessment.main_diagnosis": "Viêm nang lông",
+        "DiagnosisAssessment.differential_list": "Nấm hoặc Virus"
+      },
+      "actions": {
+        "TreatmentPlan.systemic_antibiotic": "Điều trị theo nguyên nhân cụ thể"
+      },
+      "explanation": "Không phải mọi trường hợp 'mụn quanh nang lông' đều do vi khuẩn. Nếu xét nghiệm hoặc lâm sàng gợi ý do nấm hoặc virus, việc dùng kháng sinh sẽ không hiệu quả. Bác sĩ cần chuyển hướng sang điều trị theo đúng căn nguyên gây bệnh."
+    },
+    {
+      "rule_id": "FOL_15",
+      "rule_name": "Phòng bệnh chung: vệ sinh cá nhân, hạn chế yếu tố thuận lợi",
+      "category": "Nguyên nhân khác & phòng bệnh",
+      "conditions": {
+        "DiagnosisAssessment.main_diagnosis": "Viêm nang lông",
+        "TreatmentPlan.treatment_duration": "IS NOT NULL"
+      },
+      "actions": {
+        "TreatmentPlan.prevention_advice": "Giữ vệ sinh cá nhân, tránh nóng ẩm, quần áo bí, điều trị sớm các tổn thương da"
+      },
+      "explanation": "Sau khi điều trị, bệnh nhân nên duy trì vệ sinh cá nhân tốt, tránh mặc đồ bí, hạn chế môi trường nóng ẩm và điều trị sớm các tổn thương da nhỏ. Những thói quen này giúp giảm viêm nang lông tái phát – điều vốn rất hay gặp ở nhóm bệnh này."
+    }
+  ]
+}
