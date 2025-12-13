@@ -1,0 +1,320 @@
+{
+  "disease": "Chốc",
+  "disease_code": "CHOC",
+  "rules": [
+    {
+      "id": "CHOC_1",
+      "group": "Chẩn đoán",
+      "description": "Chẩn đoán chốc điển hình bằng tổn thương bóng nước + vảy màu vàng mật ong.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "vesicle_or_bulla",
+          "operator": "=",
+          "value": true
+        },
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "crust_presence",
+          "operator": "=",
+          "value": true
+        },
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "crust_color",
+          "operator": "=",
+          "value": "Vàng nâu"
+        }
+      ],
+      "then": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "main_diagnosis",
+          "value": "Chốc điển hình"
+        }
+      ],
+      "explanation": "Bóng nước nông vỡ nhanh, đóng vảy vàng mật ong là hình ảnh điển hình của chốc theo Bộ Y tế; đủ để chẩn đoán chốc khu trú chỉ dựa trên tổn thương."
+    },
+
+    {
+      "id": "CHOC_2",
+      "group": "Chẩn đoán",
+      "description": "Xác định vị trí tổn thương điển hình cho chốc.",
+      "logic": "OR",
+      "if": [
+        {
+          "concept": "LESION_DISTRIBUTION",
+          "attribute": "main_location",
+          "operator": "IN",
+          "value": ["Mặt", "Tay", "Chân"]
+        }
+      ],
+      "then": [
+        {
+          "concept": "LESION_DISTRIBUTION",
+          "attribute": "typical_for_disease",
+          "value": true
+        }
+      ],
+      "explanation": "Chốc thường gặp ở mặt, tay, chân – đặc biệt ở trẻ nhỏ; vị trí giúp tăng độ tin cậy cho các luật chẩn đoán sau đó."
+    },
+
+    {
+      "id": "CHOC_3",
+      "group": "Chẩn đoán",
+      "description": "Tăng khả năng chẩn đoán chốc khi có vị trí đặc trưng và màu vảy mật ong.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "LESION_DISTRIBUTION",
+          "attribute": "typical_for_disease",
+          "operator": "=",
+          "value": true
+        },
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "crust_color",
+          "operator": "=",
+          "value": "Vàng nâu"
+        }
+      ],
+      "then": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "main_diagnosis",
+          "value": "Chốc"
+        }
+      ],
+      "explanation": "Khi tổn thương 'mật ong' xuất hiện đúng vị trí hay gặp, khả năng chốc tăng cao – mô phỏng cách bác sĩ kết hợp hình thái + phân bố."
+    },
+
+    {
+      "id": "CHOC_4",
+      "group": "Yếu tố nguy cơ",
+      "description": "Đánh giá nguy cơ cao nhiễm chốc dựa trên vệ sinh, trầy xước và môi trường nóng ẩm.",
+      "logic": "OR",
+      "if": [
+        {
+          "concept": "RISK_FACTOR_ASSESSMENT",
+          "attribute": "hygiene_level",
+          "operator": "=",
+          "value": "Kém"
+        },
+        {
+          "concept": "RISK_FACTOR_ASSESSMENT",
+          "attribute": "skin_trauma",
+          "operator": "=",
+          "value": true
+        },
+        {
+          "concept": "RISK_FACTOR_ASSESSMENT",
+          "attribute": "hot_humid_environment",
+          "operator": "=",
+          "value": true
+        }
+      ],
+      "then": [
+        {
+          "concept": "RISK_FACTOR_ASSESSMENT",
+          "attribute": "overall_infection_risk",
+          "value": "Tăng"
+        }
+      ],
+      "explanation": "Vệ sinh kém, có trầy xước da và sống ở môi trường nóng ẩm đều làm tăng nguy cơ chốc; luật này không chẩn đoán nhưng đánh dấu bối cảnh nguy cơ cao."
+    },
+
+    {
+      "id": "CHOC_5",
+      "group": "Chẩn đoán phân biệt",
+      "description": "Gợi ý chẩn đoán phân biệt khi tổn thương không điển hình cho chốc.",
+      "logic": "OR",
+      "if": [
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "crust_color",
+          "operator": "!=",
+          "value": "Vàng nâu"
+        },
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "vesicle_or_bulla",
+          "operator": "=",
+          "value": false
+        }
+      ],
+      "then": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "differential_list",
+          "value": ["Herpes", "Chàm", "Viêm da tiết bã"]
+        }
+      ],
+      "explanation": "Nếu không có bóng nước điển hình hoặc không có vảy vàng mật ong, hệ thống cần gợi ý các chẩn đoán phân biệt theo hướng dẫn Bộ Y tế."
+    },
+
+    {
+      "id": "CHOC_6",
+      "group": "Điều trị",
+      "description": "Điều trị tại chỗ khi chốc khu trú.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "extent_of_lesions",
+          "operator": "=",
+          "value": "Khu trú"
+        }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "local_antiseptic",
+          "value": ["KMnO4", "Xanh methylen", "Chlorhexidin"]
+        },
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "topical_antibiotic",
+          "value": "Mupirocin/Fusidic acid"
+        },
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "treatment_duration",
+          "value": "5–7 ngày"
+        }
+      ],
+      "explanation": "Chốc khu trú: chỉ cần sát khuẩn + kháng sinh bôi (Mupirocin/Fucidin) trong 5–7 ngày, không cần kháng sinh toàn thân."
+    },
+
+    {
+      "id": "CHOC_7",
+      "group": "Điều trị",
+      "description": "Điều trị toàn thân khi chốc lan rộng hoặc có sốt.",
+      "logic": "OR",
+      "if": [
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "extent_of_lesions",
+          "operator": "=",
+          "value": "Lan rộng"
+        },
+        {
+          "concept": "SYSTEMIC_AND_NEURO_SIGNS",
+          "attribute": "fever",
+          "operator": "=",
+          "value": true
+        }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "systemic_antibiotic",
+          "value": ["Cloxacillin", "Cephalexin", "Amoxicillin/Clavulanate"]
+        },
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "treatment_duration",
+          "value": "7–10 ngày"
+        }
+      ],
+      "explanation": "Khi tổn thương lan rộng hoặc có sốt, cần thêm kháng sinh đường uống theo phác đồ: Cloxacillin, Cephalexin hoặc Amoxicillin/Clavulanate trong 7–10 ngày."
+    },
+
+    {
+      "id": "CHOC_8",
+      "group": "Điều trị",
+      "description": "Điều trị thay thế khi nghi ngờ kháng penicillin hoặc không dùng được phác đồ ban đầu.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "systemic_antibiotic",
+          "operator": "=",
+          "value": "Không dùng được do kháng thuốc"
+        }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "systemic_antibiotic",
+          "value": "Clindamycin"
+        }
+      ],
+      "explanation": "Khi bệnh nhân không đáp ứng hoặc không dùng được kháng sinh nhóm penicillin, Bộ Y tế khuyến cáo chuyển sang Clindamycin."
+    },
+
+    {
+      "id": "CHOC_9",
+      "group": "Điều trị triệu chứng",
+      "description": "Giảm ngứa và giảm đau trong chốc.",
+      "logic": "OR",
+      "if": [
+        {
+          "concept": "SYSTEMIC_AND_NEURO_SIGNS",
+          "attribute": "pruritus",
+          "operator": "=",
+          "value": true
+        },
+        {
+          "concept": "SYSTEMIC_AND_NEURO_SIGNS",
+          "attribute": "pain",
+          "operator": "=",
+          "value": true
+        }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "antipruritic",
+          "value": "Kháng histamin"
+        },
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "pain_relief",
+          "value": "Paracetamol"
+        }
+      ],
+      "explanation": "Kháng histamin được dùng khi ngứa; Paracetamol khi đau/sốt, giúp bệnh nhân dễ chịu hơn dù không thay đổi tiến triển bệnh."
+    },
+
+    {
+      "id": "CHOC_10",
+      "group": "Biến chứng",
+      "description": "Nghi ngờ biến chứng viêm cầu thận cấp sau nhiễm liên cầu ở bệnh nhân chốc.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "main_diagnosis",
+          "operator": "=",
+          "value": "Chốc"
+        },
+        {
+          "concept": "SYSTEMIC_AND_NEURO_SIGNS",
+          "attribute": "malaise",
+          "operator": "=",
+          "value": true
+        },
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "systemic_involvement",
+          "operator": "=",
+          "value": true
+        }
+      ],
+      "then": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "complication_flag",
+          "value": true
+        },
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "complication_type",
+          "value": "Viêm cầu thận cấp sau nhiễm liên cầu"
+        }
+      ],
+      "explanation": "Khi bệnh nhân đã được chẩn đoán chốc, có mệt mỏi và biểu hiện toàn thân, hệ thống cần cảnh báo nguy cơ viêm cầu thận cấp sau nhiễm liên cầu."
+    }
+  ]
+}

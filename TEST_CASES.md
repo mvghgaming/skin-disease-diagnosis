@@ -1,228 +1,265 @@
-# Medical Expert System - Test Cases
+# Test Cases - Hệ Thống Chẩn Đoán Bệnh Da
 
-Comprehensive test scenarios for the 3-disease diagnostic system.
+## Chốc (Impetigo)
 
-**Total**: 15 test cases covering Chốc (7), Nhọt (3), Viêm Nang Lông (5)
+### TC01: Chốc điển hình
+**Input:**
+- SKIN_LESION_MORPHOLOGY.vesicle_or_bulla = `true`
+- SKIN_LESION_MORPHOLOGY.crust_presence = `true`
+- SKIN_LESION_MORPHOLOGY.crust_color = `Vàng nâu`
+- LESION_DISTRIBUTION.main_location = `Mặt`
+- RISK_FACTOR_ASSESSMENT.hygiene_level = `Kém`
 
----
-
-## Test Case Matrix
-
-| ID | Disease | Scenario | Severity | Rules Expected |
-|----|---------|----------|----------|----------------|
-| TC1 | Chốc | Typical with itching | Mild | 5/10 |
-| TC2 | Chốc | Localized, low risk | Mild | 4/10 |
-| TC3 | Chốc | Widespread + fever | Severe | 7/10 |
-| TC4 | Chốc | With complications | Severe | 7/10 ⚠️ |
-| TC5 | Chốc | Atypical (differential) | N/A | 2/10 |
-| TC6 | Chốc | Minimal symptoms | Mild | 1/10 |
-| TC7 | Chốc | Drug resistance | Severe | 7/10 |
-| TC8 | Nhọt | Mild localized | Mild | 3/10 |
-| TC9 | Nhọt | Facial (danger zone) | Severe | 4/10 ⚠️ |
-| TC10 | Nhọt | Multiple + diabetes | Severe | 8/10 |
-| TC11 | Viêm NL | Common mild | Mild | 6/15 |
-| TC12 | Viêm NL | Pseudo (shaving) | Mild | 7/15 |
-| TC13 | Viêm NL | Eosinophilic (HIV) | Moderate | 6-7/15 |
-| TC14 | Viêm NL | Decalvans (scarring) | Severe | 5/15 ⚠️ |
-| TC15 | Viêm NL | Differential vs Nhọt | N/A | 2-3 |
-
-⚠️ = Critical/urgent case
+**Expected:** Chẩn đoán = "Chốc điển hình"
 
 ---
 
-## Chốc (Impetigo) Test Cases
+### TC02: Chốc lan rộng
+**Input:**
+- SKIN_LESION_MORPHOLOGY.vesicle_or_bulla = `true`
+- SKIN_LESION_MORPHOLOGY.crust_color = `Vàng nâu`
+- LESION_DISTRIBUTION.number_of_lesions = `Nhiều`
+- SEVERITY_ASSESSMENT.extent_of_lesions = `Lan rộng`
+- RISK_FACTOR_ASSESSMENT.hygiene_level = `Kém`
 
-### TC1: Typical Chốc with Itching
-
-**Input**: Vesicle+crust (yellow-brown) on face, hot/humid environment, itching
-**Expected**: Diagnosis "Chốc điển hình", local treatment 5-7 days, antihistamine
-**Rules**: CHOC_1, CHOC_2, CHOC_3, CHOC_6, CHOC_9
-
-### TC3: Widespread Chốc with Fever
-
-**Input**: Yellow crust on face, poor hygiene, trauma, fever, pain, widespread
-**Expected**: Systemic antibiotics 7-10 days, pain relief
-**Rules**: CHOC_1, CHOC_2, CHOC_3, CHOC_4, CHOC_6, CHOC_7, CHOC_9
-
-### TC4: Chốc with Complications ⚠️
-
-**Input**: Yellow crust on leg, fever, malaise, systemic involvement
-**Expected**: **Complication flag** = Acute post-streptococcal glomerulonephritis
-**Rules**: CHOC_1-4, CHOC_6, CHOC_7, CHOC_10
-**Note**: Critical warning should be visible in UI
-
-### TC5: Atypical - Differential Diagnosis
-
-**Input**: NO vesicles, red crust (not yellow-brown), trunk location
-**Expected**: Differential list = [Herpes, Chàm, Viêm da tiết bã]
-**Rules**: CHOC_5, CHOC_9 (only 2 rules fire)
-
-### TC7: Drug Resistance
-
-**Input**: Widespread + fever, but antibiotics "Không dùng được do kháng thuốc"
-**Expected**: Alternative = Clindamycin
-**Rules**: CHOC_1-4, CHOC_6, CHOC_7, CHOC_8
+**Expected:** Chẩn đoán = "Chốc lan rộng", Điều trị tích cực hơn
 
 ---
 
-## Nhọt (Boils) Test Cases
+### TC03: Chốc có biến chứng
+**Input:**
+- DIAGNOSIS_ASSESSMENT.main_diagnosis = `Chốc`
+- SYSTEMIC_AND_NEURO_SIGNS.fever = `true`
+- SKIN_LESION_MORPHOLOGY.lymph_node = `Hạch vùng`
+- SEVERITY_ASSESSMENT.systemic_involvement = `true`
 
-### TC8: Mild Localized Boil
-
-**Input**: Nodule+pustule on back, follicular area, pain, mild severity
-**Expected**: Local antiseptic 5-7 days, Paracetamol
-**Rules**: NHOT_1, NHOT_6, NHOT_9
-
-### TC9: Facial Boil (Danger Zone) ⚠️
-
-**Input**: Nodule+pustule on **face**, pain
-**Expected**: **Severity auto-upgraded to Nặng**, systemic antibiotics 7-10 days
-**Rules**: NHOT_1, NHOT_4, NHOT_7, NHOT_9
-**Note**: Facial location triggers danger zone protocol
-
-### TC10: Multiple Boils + Diabetes
-
-**Input**: Multiple boils on buttocks, diabetes=Yes, poor hygiene, occlusive clothing
-**Expected**: Severe, widespread, systemic antibiotics, drainage, follow-up
-**Rules**: NHOT_1-3, NHOT_5, NHOT_7-10 (8 rules)
-**Note**: High-risk patient requiring aggressive treatment
+**Expected:** Biến chứng = `true`, Kháng sinh toàn thân
 
 ---
 
-## Viêm Nang Lông (Folliculitis) Test Cases
+## Nhọt (Boils/Furuncles)
 
-### TC11: Common Folliculitis
+### TC04: Nhọt nhẹ
+**Input:**
+- SKIN_LESION_MORPHOLOGY.nodule_or_abscess = `true`
+- SKIN_LESION_MORPHOLOGY.pustule = `true`
+- LESION_DISTRIBUTION.main_location = `Lưng`
+- SYSTEMIC_AND_NEURO_SIGNS.fever = `false`
+- SYSTEMIC_AND_NEURO_SIGNS.pain = `true`
+- SEVERITY_ASSESSMENT.overall_severity = `Nhẹ`
 
-**Input**: Pustules on back, follicular area, itching, no scar, mild
-**Expected**: Local antiseptic + Fucidin/Mupirocin 7-10 days, antihistamine
-**Rules**: FOL_1, FOL_7, FOL_8, FOL_9, FOL_10, FOL_15
-
-### TC12: Pseudo-Folliculitis (Shaving)
-
-**Input**: Pustules on **chin**, skin trauma (shaving), itching
-**Expected**: Diagnosis = "Giả viêm nang lông", prevention advice (avoid close shaving)
-**Rules**: FOL_1, FOL_2, FOL_7-10, FOL_15
-
-### TC13: Eosinophilic Folliculitis (HIV)
-
-**Input**: Pustules on chest, **immunosuppressed=Yes**, severe itching, moderate
-**Expected**: Diagnosis = "Viêm nang lông tăng bạch cầu ái toan", systemic treatment may be needed
-**Rules**: FOL_1, FOL_3, FOL_7-10, FOL_12/13
-**Note**: HIV patient requires close monitoring
-
-### TC14: Decalvans (Scarring Hair Loss) ⚠️
-
-**Input**: Pustules on **scalp**, **scar=Yes**, pain, severe, deformity
-**Expected**: Diagnosis = "Viêm nang lông Decalvans", systemic antibiotics, **urgent referral**
-**Rules**: FOL_1, FOL_4, FOL_7, FOL_8, FOL_12
-**Note**: Permanent hair loss - requires early aggressive treatment
-
-### TC15: Differential - Folliculitis vs Boil
-
-**Input**: Pustule + deep nodule, follicular area, severe pain
-**Expected**: Could be either disease, differential list includes "Nhọt"
-**Rules**: FOL_1, FOL_5, (possibly NHOT_1)
-**Note**: Demonstrates overlapping symptoms
+**Expected:** Chẩn đoán = "Nhọt", Mức độ = "Nhẹ"
 
 ---
 
-## Quick Reference
+### TC05: Nhọt vùng nguy hiểm
+**Input:**
+- SKIN_LESION_MORPHOLOGY.nodule_or_abscess = `true`
+- LESION_DISTRIBUTION.main_location = `Mũi` hoặc `Môi` hoặc `Mắt`
+- PATIENT_INFO.diabetes = `true`
+- SEVERITY_ASSESSMENT.overall_severity = `Nặng`
 
-### Input Variables
-
-| Category | Key Variables |
-|----------|---------------|
-| **Morphology** | vesicle_or_bulla, pustule, crust_color, nodule_or_abscess, scar |
-| **Distribution** | main_location, follicular_area, number_of_lesions |
-| **Risk** | hygiene_level, skin_trauma, hot_humid_environment, diabetes, immunosuppressed |
-| **Systemic** | fever, pruritus, pain, malaise |
-| **Severity** | extent_of_lesions, overall_severity, systemic_involvement |
-
-### Common Patterns
-
-**Chốc**: Yellow-brown crust + face/hands/legs
-**Nhọt**: Deep nodule + pain + follicular area
-**Viêm NL**: Pustules + follicular + itching (mild scar)
-
-### Severity Indicators
-
-- **Mild**: Localized, no systemic signs
-- **Moderate**: Multiple lesions OR immunosuppressed
-- **Severe**: Widespread OR facial OR diabetes OR fever OR complications
+**Expected:** Cảnh báo vùng nguy hiểm, Nguy cơ cao
 
 ---
 
-## Validation Checklist
+### TC06: Nhọt ở bệnh nhân đái tháo đường
+**Input:**
+- SKIN_LESION_MORPHOLOGY.nodule_or_abscess = `true`
+- PATIENT_INFO.diabetes = `true`
+- SEVERITY_ASSESSMENT.recurrent_infections = `true`
+- RISK_FACTOR_ASSESSMENT.overall_infection_risk = `Cao`
 
-### Functional
-- [ ] All 35 rules can fire under appropriate conditions
-- [ ] AND/OR logic works correctly
-- [ ] Vietnamese text displays properly
-- [ ] Session data persists
-
-### UI
-- [ ] Multi-step form navigation
-- [ ] All input types render correctly
-- [ ] Diagnosis results show all sections
-- [ ] Fired rules are expandable
-
-### API
-- [ ] POST /api/diagnosis returns valid results
-- [ ] GET /api/rules returns all 35 rules
-- [ ] Database handles UTF-8 characters
-
-### Edge Cases
-- [ ] Empty input
-- [ ] Conflicting symptoms
-- [ ] Maximum differential diagnoses
-- [ ] All symptoms = No
+**Expected:** Điều trị tích cực, Kiểm soát đường huyết
 
 ---
 
-## Testing Instructions
+## Viêm Nang Lông (Folliculitis)
 
-### Manual Testing
-```bash
-# 1. Start server
-pnpm run dev
+### TC07: Viêm nang lông thông thường
+**Input:**
+- SKIN_LESION_MORPHOLOGY.pustule = `true`
+- LESION_DISTRIBUTION.follicular_area = `true`
+- LESION_DISTRIBUTION.main_location = `Chân` hoặc `Tay`
+- RISK_FACTOR_ASSESSMENT.hot_humid_environment = `true`
+- SEVERITY_ASSESSMENT.overall_severity = `Nhẹ`
 
-# 2. Navigate to http://localhost:3000
-
-# 3. Test each case:
-- Click "Get Diagnosis"
-- Enter symptoms per test case
-- Verify expected results
-- Check fired rules
-
-# 4. Admin Dashboard:
-- Click "Manage Rules"
-- Verify all 35 rules appear
-```
-
-### Performance Benchmarks
-- **Diagnosis API**: < 500ms
-- **Rules List**: < 200ms
-- **Page Load**: < 2s
+**Expected:** Chẩn đoán = "Viêm nang lông thông thường"
 
 ---
 
-## Critical Test Cases Summary
+### TC08: Viêm nang lông giả mủ xanh
+**Input:**
+- SKIN_LESION_MORPHOLOGY.pustule = `true`
+- LESION_DISTRIBUTION.follicular_area = `true`
+- RISK_FACTOR_ASSESSMENT.hygiene_level = `Bể bơi/Jacuzzi`
+- LABORATORY_ASSESSMENT.bacteria_test = `Pseudomonas`
 
-**Must Pass**:
-1. **TC1** - Basic Chốc diagnosis
-2. **TC4** - Complication detection ⚠️
-3. **TC9** - Facial boil danger zone ⚠️
-4. **TC10** - Diabetes high-risk scenario
-5. **TC14** - Decalvans urgent case ⚠️
-
-**Edge Cases**:
-1. **TC5** - Differential when not matching
-2. **TC7** - Drug resistance handling
-3. **TC15** - Multi-disease overlap
+**Expected:** Chẩn đoán = "Viêm nang lông giả mủ xanh"
 
 ---
 
-**Document Version**: 2.0
-**Last Updated**: 2025-12-13
-**Diseases**: Chốc, Nhọt, Viêm Nang Lông
-**Total Test Cases**: 15
+### TC09: Viêm nang lông decalvans
+**Input:**
+- SKIN_LESION_MORPHOLOGY.pustule = `true`
+- LESION_DISTRIBUTION.main_location = `Da đầu`
+- SKIN_LESION_MORPHOLOGY.scar = `true`
+- SYSTEMIC_AND_NEURO_SIGNS.hair_loss = `true`
+- SEVERITY_ASSESSMENT.overall_severity = `Nặng`
+
+**Expected:** Chẩn đoán = "Viêm nang lông decalvans"
+
+---
+
+## Trứng Cá (Acne)
+
+### TC10: Trứng cá thông thường
+**Input:**
+- SKIN_LESION_MORPHOLOGY.comedones_present = `true`
+- SKIN_LESION_MORPHOLOGY.pustule = `true`
+- LESION_DISTRIBUTION.seborrheic_area = `true`
+- LESION_DISTRIBUTION.main_location = `Mặt`
+- PATIENT_INFO.age = `16`
+
+**Expected:** Chẩn đoán = "Trứng cá thông thường"
+
+---
+
+### TC11: Trứng cá sơ sinh
+**Input:**
+- PATIENT_INFO.age = `0` (hoặc ≤ 1)
+- SKIN_LESION_MORPHOLOGY.comedones_present = `true`
+- LESION_DISTRIBUTION.main_location = `Tháp mũi` hoặc `Má` hoặc `Trán`
+
+**Expected:** Chẩn đoán = "Trứng cá sơ sinh", Tự khỏi sau 5-7 ngày
+
+---
+
+### TC12: Cảnh báo Isotretinoin - Thai kỳ
+**Input:**
+- DIAGNOSIS_ASSESSMENT.main_diagnosis = `Trứng cá%` (LIKE)
+- TREATMENT_PLAN.acne_regimen = `%Isotretinoin%` (LIKE)
+- PATIENT_INFO.pregnant = `true`
+
+**Expected:** CHỐNG CHỈ ĐỊNH tuyệt đối Isotretinoin
+
+---
+
+### TC13: Cảnh báo Isotretinoin - Tuổi
+**Input:**
+- DIAGNOSIS_ASSESSMENT.main_diagnosis = `Trứng cá%` (LIKE)
+- TREATMENT_PLAN.acne_regimen = `%Isotretinoin%` (LIKE)
+- PATIENT_INFO.age = `14` (< 16)
+
+**Expected:** Không dùng Isotretinoin cho trẻ < 16 tuổi
+
+---
+
+### TC14: Cảnh báo tương tác thuốc
+**Input:**
+- TREATMENT_PLAN.acne_regimen = `%Isotretinoin%` (LIKE)
+- TREATMENT_PLAN.systemic_antibiotic = `Doxycyclin` hoặc `Tetracyclin`
+
+**Expected:** Cảnh báo nguy cơ tăng áp lực nội sọ
+
+---
+
+## Lao Da (Cutaneous TB)
+
+### TC15: Lao da - Lupus vulgaris
+**Input:**
+- SKIN_LESION_MORPHOLOGY.tuberculous_plaque = `true`
+- SKIN_LESION_MORPHOLOGY.visual_features = `Màu vàng đỏ, Ấn kính vàng nâu`
+- LABORATORY_ASSESSMENT.tuberculin_test = `Dương tính`
+- LABORATORY_ASSESSMENT.histopathology = `Nang lao điển hình`
+
+**Expected:** Chẩn đoán = "Lupus vulgaris"
+
+---
+
+### TC16: Lao da - Scrofuloderma
+**Input:**
+- SKIN_LESION_MORPHOLOGY.ulceration = `true`
+- SKIN_LESION_MORPHOLOGY.chronic_inflamation_features = `Đường hầm, Vỡ rò`
+- SKIN_LESION_MORPHOLOGY.lymph_node = `Hạch toàn thân`
+- SKIN_LESION_MORPHOLOGY.visual_features = `Mủ nhầy thối`
+
+**Expected:** Chẩn đoán = "Scrofuloderma"
+
+---
+
+### TC17: Lao da ở bệnh nhân HIV
+**Input:**
+- DIAGNOSIS_ASSESSMENT.main_diagnosis = `Lao da%` (LIKE)
+- PATIENT_INFO.HIV_status = `true`
+
+**Expected:** Thời gian điều trị = 9 tháng (thay vì 6 tháng)
+
+---
+
+## SSSS (Staphylococcal Scalded Skin Syndrome)
+
+### TC18: SSSS điển hình
+**Input:**
+- PATIENT_INFO.age = `3` (< 5)
+- SEVERITY_ASSESSMENT.systemic_involvement = `true`
+- SKIN_LESION_MORPHOLOGY.exfoliative_erythema = `true`
+- SKIN_LESION_MORPHOLOGY.crust_presence = `false`
+- SKIN_LESION_MORPHOLOGY.vesicle_or_bulla = `true`
+
+**Expected:** Chẩn đoán = "SSSS"
+
+---
+
+### TC19: SSSS - Phân biệt TEN
+**Input:**
+- SKIN_LESION_MORPHOLOGY.exfoliative_erythema = `true`
+- SKIN_LESION_MORPHOLOGY.vesicle_or_bulla = `true`
+- TREATMENT_PLAN.systemic_antibiotic = `Không đáp ứng`
+
+**Expected:** Chẩn đoán phân biệt = "Hội chứng Lyell (TEN)"
+
+---
+
+### TC20: SSSS - MRSA
+**Input:**
+- DIAGNOSIS_ASSESSMENT.main_diagnosis = `SSSS`
+- LABORATORY_ASSESSMENT.other_myco_tests = `MRSA`
+
+**Expected:** Điều trị = Vancomycin 7-14 ngày
+
+---
+
+## Bệnh Phong (Leprosy)
+
+### TC21: Phong thể củ (T) - PB
+**Input:**
+- SKIN_LESION_MORPHOLOGY.plaque_type = `true`
+- LESION_DISTRIBUTION.border_clarity = `Rõ`
+- SYSTEMIC_AND_NEURO_SIGNS.center_sensation = `Mất` hoặc `Giảm`
+- SEVERITY_ASSESSMENT.total_lesion_count = `3` (≤ 5)
+- LABORATORY_ASSESSMENT.bacteriological_index = `0`
+
+**Expected:** Thể = "Củ (T)", WHO = "PB (ít vi khuẩn)", MDT 6 tháng
+
+---
+
+### TC22: Phong thể u (L) - MB
+**Input:**
+- SKIN_LESION_MORPHOLOGY.diffuse_infiltration = `true`
+- LESION_DISTRIBUTION.symmetry = `Đối xứng 2 bên`
+- LESION_DISTRIBUTION.border_clarity = `Không rõ`
+- SEVERITY_ASSESSMENT.total_lesion_count = `8` (> 5)
+- LABORATORY_ASSESSMENT.bacteriological_index = `3` (> 0)
+
+**Expected:** Thể = "U (L)", WHO = "MB (nhiều vi khuẩn)", MDT 12 tháng
+
+---
+
+### TC23: Phong - Phát hiện sớm
+**Input:**
+- DIAGNOSIS_ASSESSMENT.main_diagnosis = `Bệnh phong%` (LIKE)
+- DIAGNOSIS_ASSESSMENT.early_detection = `true`
+- TREATMENT_PLAN.MDT_completed_as_recommended = `true`
+
+**Expected:** Tiên lượng = "Tốt, khỏi hoàn toàn hoặc ít di chứng"

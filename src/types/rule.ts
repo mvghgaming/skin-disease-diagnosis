@@ -1,6 +1,6 @@
 export type LogicOperator = 'AND' | 'OR';
 
-export type ComparisonOperator = '=' | '!=' | 'IN' | 'NOT_IN' | '>' | '<' | '>=' | '<=';
+export type ComparisonOperator = '=' | '!=' | 'IN' | 'NOT_IN' | '>' | '<' | '>=' | '<=' | 'CONTAINS_ANY' | 'IS_NOT_NULL' | 'IS_NULL' | 'LIKE';
 
 export type RuleStatus = 'active' | 'inactive' | 'draft';
 

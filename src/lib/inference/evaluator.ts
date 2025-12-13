@@ -13,6 +13,16 @@ export function evaluateCondition(
 ): boolean {
   const actualValue = workingMemory[condition.variable];
 
+  // Special handling for IS_NOT_NULL operator
+  if (condition.operator === 'IS_NOT_NULL') {
+    return actualValue !== undefined && actualValue !== null;
+  }
+
+  // Special handling for IS_NULL operator
+  if (condition.operator === 'IS_NULL') {
+    return actualValue === undefined || actualValue === null;
+  }
+
   // If the variable is not in working memory, condition fails
   if (actualValue === undefined || actualValue === null) {
     return false;
@@ -63,6 +73,38 @@ function compareValues(actual: any, operator: ComparisonOperator, expected: any)
 
     case '<=':
       return Number(actual) <= Number(expected);
+
+    case 'CONTAINS_ANY':
+      // Check if actual array contains any value from expected array
+      if (!Array.isArray(actual)) {
+        console.warn('CONTAINS_ANY operator requires actual value to be an array');
+        return false;
+      }
+      if (!Array.isArray(expected)) {
+        console.warn('CONTAINS_ANY operator requires expected value to be an array');
+        return false;
+      }
+      return expected.some(expectedItem => actual.includes(expectedItem));
+
+    case 'IS_NOT_NULL':
+      // Already handled above
+      return actual !== undefined && actual !== null;
+
+    case 'IS_NULL':
+      // Already handled above
+      return actual === undefined || actual === null;
+
+    case 'LIKE':
+      // String pattern matching (case-insensitive)
+      if (typeof actual !== 'string' || typeof expected !== 'string') {
+        return false;
+      }
+      // Convert SQL LIKE pattern to regex (% becomes .*, _ becomes .)
+      const regexPattern = expected
+        .replace(/%/g, '.*')
+        .replace(/_/g, '.');
+      const regex = new RegExp(`^${regexPattern}$`, 'i');
+      return regex.test(actual);
 
     default:
       console.warn(`Unknown operator: ${operator}`);

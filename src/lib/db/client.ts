@@ -24,9 +24,10 @@ export async function query<T = any>(
   try {
     const sqlClient = getSql();
     const rows = await sqlClient(text, params || []);
+    const rowArray = Array.isArray(rows) ? rows : [];
     return {
-      rows: rows as T[],
-      rowCount: rows.length,
+      rows: rowArray as T[],
+      rowCount: rowArray.length,
     };
   } catch (error) {
     console.error('Database query error:', error);

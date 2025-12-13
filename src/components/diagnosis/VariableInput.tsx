@@ -69,20 +69,35 @@ export function VariableInput({ variable, definition, value, onChange }: Variabl
       );
     }
 
-    // Array type - for now, render as text input (comma-separated)
-    if (definition.type === 'array') {
-      const arrayValue = Array.isArray(value) ? value.join(', ') : '';
+    // Array type with enum - render as checkboxes
+    if (definition.type === 'array' && definition.enum) {
+      const selectedValues = Array.isArray(value) ? value : [];
       return (
-        <Input
-          type="text"
-          value={arrayValue}
-          onChange={(e) => {
-            const values = e.target.value.split(',').map((v) => v.trim()).filter((v) => v);
-            onChange(values);
-          }}
-          placeholder="Nhập các giá trị, cách nhau bằng dấu phẩy"
-        />
+        <div className="space-y-2">
+          {definition.enum.map((option) => (
+            <label key={option} className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={selectedValues.includes(option)}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    onChange([...selectedValues, option]);
+                  } else {
+                    onChange(selectedValues.filter((v) => v !== option));
+                  }
+                }}
+                className="rounded border-gray-300"
+              />
+              <span className="text-sm">{option}</span>
+            </label>
+          ))}
+        </div>
       );
+    }
+
+    // Array type without enum - should not happen, but fallback to empty div
+    if (definition.type === 'array') {
+      return <div className="text-sm text-muted-foreground">No options available</div>;
     }
 
     return <Input type="text" value={value || ''} onChange={(e) => onChange(e.target.value)} />;

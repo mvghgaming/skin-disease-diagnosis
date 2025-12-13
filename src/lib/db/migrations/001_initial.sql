@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS conditions (
   id SERIAL PRIMARY KEY,
   rule_id VARCHAR(50) REFERENCES rules(id) ON DELETE CASCADE,
   variable VARCHAR(255) NOT NULL,
-  operator VARCHAR(10) NOT NULL CHECK (operator IN ('=', '!=', 'IN', 'NOT_IN', '>', '<', '>=', '<=')),
+  operator VARCHAR(20) NOT NULL CHECK (operator IN ('=', '!=', 'IN', 'NOT_IN', '>', '<', '>=', '<=', 'CONTAINS_ANY', 'IS_NOT_NULL', 'IS_NULL', 'LIKE')),
   value JSONB NOT NULL,
   position INTEGER NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

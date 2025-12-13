@@ -1,0 +1,249 @@
+{
+  "disease": "Viêm nang lông",
+  "disease_code": "FOL",
+  "rules": [
+    {
+      "id": "FOL_1",
+      "group": "Chẩn đoán",
+      "description": "Viêm nang lông thường",
+      "logic": "AND",
+      "if": [
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "pustule", "operator": "=", "value": true },
+        { "concept": "LESION_DISTRIBUTION", "attribute": "follicular_area", "operator": "=", "value": true },
+        { "concept": "SYSTEMIC_AND_NEURO_SIGNS", "attribute": "pruritus", "operator": "=", "value": true },
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "scar", "operator": "=", "value": false }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "value": "Viêm nang lông" },
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "diagnostic_certainty", "value": "Viêm nang lông thường" }
+      ],
+      "explanation": "Viêm nang lông thường là dạng nhẹ hay gặp: mụn mủ nhỏ tại lỗ chân lông, ngứa, tổn thương nông và không để lại sẹo. Khi có mụn mủ + đúng vùng nang lông + ngứa + không sẹo, hệ thống xác định viêm nang lông thường."
+    },
+
+    {
+      "id": "FOL_2",
+      "group": "Chẩn đoán thể bệnh",
+      "description": "Giả viêm nang lông (Pseudo–folliculitis) ở vùng cằm liên quan cạo râu/vi chấn thương",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Viêm nang lông" },
+        { "concept": "LESION_DISTRIBUTION", "attribute": "main_location", "operator": "=", "value": "Cằm" },
+        { "concept": "LESION_DISTRIBUTION", "attribute": "follicular_area", "operator": "=", "value": true },
+        { "concept": "RISK_FACTOR_ASSESSMENT", "attribute": "skin_trauma", "operator": "=", "value": true }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "diagnostic_certainty", "value": "Giả viêm nang lông (Pseudo-folliculitis)" }
+      ],
+      "explanation": "Giả viêm nang lông thường gặp ở người hay cạo râu: lông mọc ngược gây kích ứng giống viêm nang lông. Khi tổn thương tập trung ở cằm/vùng cạo râu, đúng vùng nang lông và có yếu tố vi chấn thương, hệ thống ghi nhận thể Pseudo-folliculitis."
+    },
+
+    {
+      "id": "FOL_3",
+      "group": "Chẩn đoán thể bệnh",
+      "description": "Viêm nang lông tăng bạch cầu ái toan (gợi ý ở người suy giảm miễn dịch, ngứa nổi bật)",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Viêm nang lông" },
+        { "concept": "PATIENT_INFO", "attribute": "immunosuppressed", "operator": "=", "value": true },
+        { "concept": "SYSTEMIC_AND_NEURO_SIGNS", "attribute": "pruritus", "operator": "=", "value": true }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "diagnostic_certainty", "value": "Viêm nang lông tăng bạch cầu ái toan" },
+        { "concept": "SEVERITY_ASSESSMENT", "attribute": "overall_severity", "value": "Trung bình" }
+      ],
+      "explanation": "Thể tăng bạch cầu ái toan hay gặp ở người suy giảm miễn dịch (đặc biệt HIV), thường ngứa nhiều và dai dẳng. Khi có suy giảm miễn dịch + ngứa nổi bật, hệ thống gợi ý thể này và nâng mức độ lên trung bình."
+    },
+
+    {
+      "id": "FOL_4",
+      "group": "Chẩn đoán thể bệnh",
+      "description": "Viêm nang lông Decalvans (sẹo rụng tóc vĩnh viễn) ở da đầu",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Viêm nang lông" },
+        { "concept": "LESION_DISTRIBUTION", "attribute": "main_location", "operator": "=", "value": "Da đầu" },
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "scar", "operator": "=", "value": true }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "diagnostic_certainty", "value": "Viêm nang lông Decalvans" },
+        { "concept": "SEVERITY_ASSESSMENT", "attribute": "overall_severity", "value": "Nặng" },
+        { "concept": "SEVERITY_ASSESSMENT", "attribute": "deformity_or_disability", "value": true }
+      ],
+      "explanation": "Nếu tổn thương viêm quanh nang lông ở da đầu kèm sẹo (rụng tóc vĩnh viễn), nghĩ nhiều đến Decalvans. Đây là thể nặng, cần điều trị sớm để hạn chế lan rộng, nên hệ thống đánh dấu mức độ nặng và có nguy cơ để lại di chứng."
+    },
+
+    {
+      "id": "FOL_5",
+      "group": "Chẩn đoán phân biệt",
+      "description": "Phân biệt với Nhọt khi có ổ viêm sâu và đau",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Viêm nang lông" },
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "nodule_or_abscess", "operator": "=", "value": true },
+        { "concept": "SYSTEMIC_AND_NEURO_SIGNS", "attribute": "pain", "operator": "=", "value": true }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "differential_list", "value": "Nhọt" }
+      ],
+      "explanation": "Viêm nang lông đôi khi bị nhầm với nhọt. Nếu có nốt/ổ mủ sâu kèm đau rõ, hệ thống gợi ý chẩn đoán phân biệt là Nhọt."
+    },
+
+    {
+      "id": "FOL_6",
+      "group": "Chẩn đoán phân biệt",
+      "description": "Phân biệt với sẩn ngứa khi tổn thương không nằm ở nang lông nhưng ngứa nhiều",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Viêm nang lông" },
+        { "concept": "LESION_DISTRIBUTION", "attribute": "follicular_area", "operator": "=", "value": false },
+        { "concept": "SYSTEMIC_AND_NEURO_SIGNS", "attribute": "pruritus", "operator": "=", "value": true }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "differential_list", "value": "Sẩn ngứa" }
+      ],
+      "explanation": "Sẩn ngứa là nốt đỏ/cứng nhưng không ở lỗ chân lông. Nếu không phải vùng nang lông mà ngứa nhiều, hệ thống hướng chẩn đoán phân biệt sang Sẩn ngứa."
+    },
+
+    {
+      "id": "FOL_7",
+      "group": "Nguyên tắc điều trị",
+      "description": "Loại bỏ yếu tố thuận lợi (giữ da sạch, khô thoáng) để giảm nguy cơ tái phát",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Viêm nang lông" }
+      ],
+      "then": [
+        { "concept": "RISK_FACTOR_ASSESSMENT", "attribute": "overall_infection_risk", "value": "Giảm nếu loại bỏ yếu tố thuận lợi" }
+      ],
+      "explanation": "Viêm nang lông dễ tái phát nếu da ẩm ướt, bí bách hoặc vệ sinh kém. Luật này nhắc nguyên tắc cốt lõi: loại bỏ yếu tố thuận lợi giúp giảm nguy cơ và hạn chế lạm dụng thuốc."
+    },
+
+    {
+      "id": "FOL_8",
+      "group": "Nguyên tắc điều trị",
+      "description": "Khuyến cáo vệ sinh cá nhân hằng ngày",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Viêm nang lông" }
+      ],
+      "then": [
+        { "concept": "TREATMENT_PLAN", "attribute": "prevention_advice", "value": "Rửa vùng da bị ảnh hưởng thường xuyên bằng xà phòng sát khuẩn" }
+      ],
+      "explanation": "Vệ sinh bằng xà phòng sát khuẩn giúp giảm vi khuẩn trên da, giảm viêm và hạn chế lan rộng."
+    },
+
+    {
+      "id": "FOL_9",
+      "group": "Điều trị triệu chứng",
+      "description": "Giảm ngứa và tránh cào gãi để hạn chế làm nặng tổn thương",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Viêm nang lông" },
+        { "concept": "SYSTEMIC_AND_NEURO_SIGNS", "attribute": "pruritus", "operator": "=", "value": true }
+      ],
+      "then": [
+        { "concept": "TREATMENT_PLAN", "attribute": "antipruritic", "value": "Kháng histamin" },
+        { "concept": "TREATMENT_PLAN", "attribute": "prevention_advice", "value": "Tránh cào gãi, kích thích thương tổn" }
+      ],
+      "explanation": "Cào gãi làm trầy xước da và tạo cơ hội vi khuẩn xâm nhập sâu hơn. Dùng kháng histamin giúp giảm ngứa, hạn chế gãi và giúp tổn thương nhanh lành."
+    },
+
+    {
+      "id": "FOL_10",
+      "group": "Điều trị",
+      "description": "Điều trị tại chỗ cho viêm nang lông nhẹ",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Viêm nang lông" },
+        { "concept": "SEVERITY_ASSESSMENT", "attribute": "overall_severity", "operator": "=", "value": "Nhẹ" }
+      ],
+      "then": [
+        { "concept": "TREATMENT_PLAN", "attribute": "local_antiseptic", "value": "Povidon-iodin / Hexamidine / Chlorhexidin" },
+        { "concept": "TREATMENT_PLAN", "attribute": "topical_antibiotic", "value": "Fucidin hoặc Mupirocin" },
+        { "concept": "TREATMENT_PLAN", "attribute": "treatment_duration", "value": "7–10 ngày" }
+      ],
+      "explanation": "Đa số trường hợp nhẹ chỉ cần sát khuẩn + kháng sinh bôi (Fucidin/Mupirocin) và chăm sóc đúng cách trong 7–10 ngày, không cần kháng sinh toàn thân."
+    },
+
+    {
+      "id": "FOL_11",
+      "group": "Điều trị",
+      "description": "Đổi kháng sinh bôi khi không dung nạp Fucidin/Mupirocin",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Viêm nang lông" },
+        { "concept": "SEVERITY_ASSESSMENT", "attribute": "overall_severity", "operator": "=", "value": "Nhẹ" },
+        { "concept": "TREATMENT_PLAN", "attribute": "topical_antibiotic", "operator": "=", "value": "Không dung nạp Fucidin/Mupirocin" }
+      ],
+      "then": [
+        { "concept": "TREATMENT_PLAN", "attribute": "topical_antibiotic", "value": "Neomycin / Silver sulfadiazine / Erythromycin / Clindamycin" },
+        { "concept": "TREATMENT_PLAN", "attribute": "treatment_duration", "value": "7–10 ngày" }
+      ],
+      "explanation": "Nếu dị ứng/không đáp ứng với Fucidin hoặc Mupirocin, có thể chuyển sang các lựa chọn bôi khác như Neomycin, Silver sulfadiazine, Erythromycin hoặc Clindamycin, thời gian tương tự 7–10 ngày."
+    },
+
+    {
+      "id": "FOL_12",
+      "group": "Điều trị",
+      "description": "Chỉ định điều trị toàn thân khi viêm nang lông nặng",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Viêm nang lông" },
+        { "concept": "SEVERITY_ASSESSMENT", "attribute": "overall_severity", "operator": "=", "value": "Nặng" }
+      ],
+      "then": [
+        { "concept": "SEVERITY_ASSESSMENT", "attribute": "systemic_involvement", "value": true },
+        { "concept": "TREATMENT_PLAN", "attribute": "systemic_antibiotic", "value": "Cloxacillin / Amoxicillin-Clavulanate / Clindamycin" },
+        { "concept": "TREATMENT_PLAN", "attribute": "treatment_duration", "value": "7–10 ngày" }
+      ],
+      "explanation": "Khi lan rộng/tái phát hoặc có dấu hiệu nặng, điều trị tại chỗ thường không đủ. Khi đó cần kháng sinh toàn thân 7–10 ngày để kiểm soát viêm và ngăn biến chứng."
+    },
+
+    {
+      "id": "FOL_13",
+      "group": "Điều trị",
+      "description": "Điều trị toàn thân khi nghi MRSA (không đáp ứng kháng sinh thường)",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Viêm nang lông" },
+        { "concept": "SEVERITY_ASSESSMENT", "attribute": "overall_severity", "operator": "=", "value": "Nặng" },
+        { "concept": "TREATMENT_PLAN", "attribute": "systemic_antibiotic", "operator": "=", "value": "Không đáp ứng" }
+      ],
+      "then": [
+        { "concept": "TREATMENT_PLAN", "attribute": "systemic_antibiotic", "value": "Vancomycin" },
+        { "concept": "TREATMENT_PLAN", "attribute": "treatment_duration", "value": "7–10 ngày" }
+      ],
+      "explanation": "Nếu không đáp ứng kháng sinh thông thường, cần nghĩ đến MRSA. Khi đó Vancomycin là lựa chọn phù hợp để kiểm soát chủng kháng methicillin."
+    },
+
+    {
+      "id": "FOL_14",
+      "group": "Nguyên nhân khác",
+      "description": "Gợi ý không phải do vi khuẩn (nấm/virus) → điều trị theo nguyên nhân",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Viêm nang lông" },
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "differential_list", "operator": "=", "value": "Nấm hoặc Virus" }
+      ],
+      "then": [
+        { "concept": "TREATMENT_PLAN", "attribute": "systemic_antibiotic", "value": "Điều trị theo nguyên nhân cụ thể" }
+      ],
+      "explanation": "Không phải mọi trường hợp quanh nang lông đều do vi khuẩn. Nếu gợi ý do nấm/virus, kháng sinh không hiệu quả và cần chuyển hướng điều trị đúng căn nguyên."
+    },
+
+    {
+      "id": "FOL_15",
+      "group": "Phòng bệnh",
+      "description": "Phòng bệnh chung sau điều trị: vệ sinh, tránh nóng ẩm và quần áo bí",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Viêm nang lông" },
+        { "concept": "TREATMENT_PLAN", "attribute": "treatment_duration", "operator": "IS_NOT_NULL", "value": true }
+      ],
+      "then": [
+        { "concept": "TREATMENT_PLAN", "attribute": "prevention_advice", "value": "Giữ vệ sinh cá nhân, tránh nóng ẩm, quần áo bí, điều trị sớm các tổn thương da" }
+      ],
+      "explanation": "Sau khi điều trị, duy trì vệ sinh tốt, tránh môi trường nóng ẩm và quần áo bí giúp giảm nguy cơ tái phát, vốn rất hay gặp ở viêm nang lông."
+    }
+  ]
+}

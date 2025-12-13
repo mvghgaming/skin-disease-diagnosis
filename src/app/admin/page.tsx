@@ -48,7 +48,7 @@ export default function AdminPage() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h1 className="text-4xl font-bold tracking-tight mb-2">
-                Knowledge Engineer Dashboard
+                Bảng điều khiển quản lý
               </h1>
               <p className="text-xl text-muted-foreground">
                 Quản lý quy tắc chẩn đoán

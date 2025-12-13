@@ -1,0 +1,236 @@
+{
+  "disease": "Trứng cá",
+  "disease_code": "ACNE",
+  "rules": [
+    {
+      "id": "ACNE_1",
+      "group": "Chẩn đoán",
+      "description": "Chẩn đoán trứng cá thông thường dựa trên tổn thương đặc trưng và vị trí tiết bã.",
+      "logic": "AND",
+      "if": [
+        {
+          "logic": "OR",
+          "conditions": [
+            { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "pustule", "operator": "=", "value": true },
+            { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "nodule_or_abscess", "operator": "=", "value": true },
+            { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "scar", "operator": "=", "value": false }
+          ]
+        },
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "comedones_present", "operator": "=", "value": true },
+        {
+          "concept": "LESION_DISTRIBUTION",
+          "attribute": "main_location",
+          "operator": "IN",
+          "value": ["Mặt", "Trán", "Má", "Cằm", "Lưng trên", "Ngực", "Vai", "Cánh tay"]
+        }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "value": "Trứng cá thông thường" }
+      ],
+      "explanation": "Trứng cá thông thường có nhân mụn kèm sẩn, mụn mủ hoặc mụn bọc, xuất hiện ở vùng tiết bã."
+    },
+
+    {
+      "id": "ACNE_2",
+      "group": "Chẩn đoán",
+      "description": "Nghi ngờ trứng cá do thuốc khi không có nhân mụn và có tiền sử dùng thuốc gây mụn.",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Trứng cá thông thường" },
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "comedones_present", "operator": "=", "value": false },
+        {
+          "concept": "LESION_DISTRIBUTION",
+          "attribute": "main_location",
+          "operator": "IN",
+          "value": ["Mặt", "Lưng trên", "Cánh tay"]
+        },
+        {
+          "concept": "RISK_FACTOR_ASSESSMENT",
+          "attribute": "acne_inducing_drug_history",
+          "operator": "IN",
+          "value": ["Corticoid", "Isoniazid", "Halogen", "Androgen", "Lithium"]
+        }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "diagnostic_certainty", "value": "Nghi ngờ trứng cá do thuốc" }
+      ],
+      "explanation": "Trứng cá do thuốc thường là mụn viêm, ít hoặc không có nhân mụn."
+    },
+
+    {
+      "id": "ACNE_3",
+      "group": "Chẩn đoán",
+      "description": "Trứng cá sơ sinh lành tính.",
+      "logic": "AND",
+      "if": [
+        { "concept": "PATIENT_INFO", "attribute": "age", "operator": "<=", "value": 1 },
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "comedones_present", "operator": "=", "value": true },
+        {
+          "concept": "LESION_DISTRIBUTION",
+          "attribute": "main_location",
+          "operator": "IN",
+          "value": ["Tháp mũi", "Má", "Trán"]
+        }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "value": "Trứng cá sơ sinh" },
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "prevention_advice",
+          "value": "Lành tính, thường tự hết sau 5–7 ngày, chủ yếu trấn an gia đình"
+        }
+      ],
+      "explanation": "Trứng cá sơ sinh không cần điều trị tích cực."
+    },
+
+    {
+      "id": "ACNE_6",
+      "group": "Cảnh báo",
+      "description": "Nghi ngờ trứng cá tối cấp.",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "Trứng cá thông thường" },
+        {
+          "logic": "OR",
+          "conditions": [
+            { "concept": "SYSTEMIC_AND_NEURO_SIGNS", "attribute": "fever", "operator": "=", "value": true },
+            { "concept": "SYSTEMIC_AND_NEURO_SIGNS", "attribute": "malaise", "operator": "=", "value": true }
+          ]
+        },
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "ulceration", "operator": "=", "value": true }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "diagnostic_certainty", "value": "Nghi ngờ trứng cá tối cấp" },
+        { "concept": "SEVERITY_ASSESSMENT", "attribute": "overall_severity", "value": "Nặng" }
+      ],
+      "explanation": "Acne fulminans là thể nặng, có triệu chứng toàn thân."
+    },
+
+    {
+      "id": "ACNE_10",
+      "group": "Điều trị",
+      "description": "Điều trị trứng cá nhẹ bằng thuốc bôi.",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "LIKE", "value": "Trứng cá%" },
+        { "concept": "SEVERITY_ASSESSMENT", "attribute": "overall_severity", "operator": "=", "value": "Nhẹ" }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "acne_regimen",
+          "value": "Retinoid bôi hoặc Benzoyl Peroxid hoặc Acid Azelaic hoặc kháng sinh bôi"
+        }
+      ],
+      "explanation": "Trứng cá nhẹ không cần thuốc uống."
+    },
+
+    {
+      "id": "ACNE_13",
+      "group": "Cảnh báo an toàn",
+      "description": "Chống chỉ định Isotretinoin trong thai kỳ và cho con bú.",
+      "logic": "AND",
+      "if": [
+        { "concept": "TREATMENT_PLAN", "attribute": "acne_regimen", "operator": "LIKE", "value": "%Isotretinoin%" },
+        {
+          "logic": "OR",
+          "conditions": [
+            { "concept": "PATIENT_INFO", "attribute": "pregnant", "operator": "=", "value": true },
+            { "concept": "PATIENT_INFO", "attribute": "breastfeeding", "operator": "=", "value": true }
+          ]
+        }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "prevention_advice",
+          "value": "CHỐNG CHỈ ĐỊNH tuyệt đối Isotretinoin ở phụ nữ có thai hoặc cho con bú"
+        }
+      ],
+      "explanation": "Isotretinoin gây quái thai mạnh."
+    },
+
+    {
+      "id": "ACNE_14",
+      "group": "Cảnh báo an toàn",
+      "description": "Cảnh báo không dùng Isotretinoin cho bệnh nhân dưới 16 tuổi.",
+      "logic": "AND",
+      "if": [
+        { "concept": "TREATMENT_PLAN", "attribute": "acne_regimen", "operator": "LIKE", "value": "%Isotretinoin%" },
+        { "concept": "PATIENT_INFO", "attribute": "age", "operator": "<", "value": 16 }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "prevention_advice",
+          "value": "Không dùng Isotretinoin cho bệnh nhân dưới 16 tuổi"
+        }
+      ],
+      "explanation": "Ngoài thai kỳ, độ tuổi cũng là giới hạn quan trọng; trẻ <16 tuổi thường không phải đối tượng dùng Isotretinoin do nguy cơ và tác dụng phụ vượt trội lợi ích."
+    },
+    {
+      "id": "ACNE_15",
+      "group": "Cảnh báo tương tác thuốc",
+      "description": "Cảnh báo không phối hợp Isotretinoin với Tetracyclin/Doxycyclin.",
+      "logic": "AND",
+      "if": [
+        { "concept": "TREATMENT_PLAN", "attribute": "acne_regimen", "operator": "LIKE", "value": "%Isotretinoin%" },
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "systemic_antibiotic",
+          "operator": "IN",
+          "value": ["Doxycyclin", "Tetracyclin"]
+        }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "prevention_advice",
+          "value": "Không phối hợp Isotretinoin với Tetracyclin/Doxycyclin (nguy cơ tăng áp lực nội sọ)"
+        }
+      ],
+      "explanation": "Isotretinoin và nhóm tetracyclin không dùng chung do nguy cơ tăng áp lực nội sọ; luật giúp hệ thống tự động phát hiện phối hợp nguy hiểm."
+    },
+    {
+      "id": "ACNE_16",
+      "group": "Cảnh báo tác dụng phụ",
+      "description": "Cảnh báo nhạy cảm ánh sáng khi dùng Doxycyclin/Tetracyclin hoặc Retinoid/Benzoyl Peroxid.",
+      "logic": "OR",
+      "if": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "systemic_antibiotic",
+          "operator": "IN",
+          "value": ["Doxycyclin", "Tetracyclin"]
+        },
+        { "concept": "TREATMENT_PLAN", "attribute": "acne_regimen", "operator": "LIKE", "value": "%Retinoid%" },
+        { "concept": "TREATMENT_PLAN", "attribute": "acne_regimen", "operator": "LIKE", "value": "%Benzoyl Peroxid%" }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "prevention_advice",
+          "value": "Các thuốc này làm da nhạy cảm ánh sáng, cần tránh nắng kỹ và dùng kem chống nắng phù hợp"
+        }
+      ],
+      "explanation": "Doxycyclin/Tetracyclin và một số thuốc bôi (retinoid, benzoyl peroxide) có thể gây bắt nắng; cần tư vấn tránh nắng và chống nắng đầy đủ."
+    },
+    {
+      "id": "ACNE_17",
+      "group": "Tư vấn chăm sóc",
+      "description": "Tư vấn chăm sóc chung cho bệnh nhân trứng cá.",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "LIKE", "value": "Trứng cá%" }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "prevention_advice",
+          "value": "Rửa mặt bằng sữa rửa phù hợp, không chà xát mạnh, không tự nặn mụn, hạn chế dùng mỹ phẩm hoặc thuốc bôi chứa halogen/corticoid trên mặt"
+        }
+      ],
+      "explanation": "Chăm sóc da đúng (rửa nhẹ, không nặn mụn, tránh kem trộn/corticoid/halogen) giúp giảm tái phát và tăng hiệu quả điều trị."
+    }
+  ]
+}

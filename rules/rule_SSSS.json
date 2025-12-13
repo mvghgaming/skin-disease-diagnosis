@@ -1,0 +1,251 @@
+{
+  "disease": "Hội chứng bong vảy da do tụ cầu",
+  "disease_code": "SSSS",
+  "rules":
+[
+  {
+    "id": "SSSS_1",
+    "group": "Chẩn đoán",
+    "description": "Chẩn đoán SSSS ở trẻ nhỏ dựa trên nguy cơ tuổi + có liên quan toàn thân + ban đỏ bong vảy lan tỏa và bọng nước, không có mài.",
+    "logic": "AND",
+    "if": [
+      { "concept": "PATIENT_INFO", "attribute": "age", "operator": "<", "value": 5 },
+      { "concept": "SEVERITY_ASSESSMENT", "attribute": "systemic_involvement", "operator": "=", "value": true },
+      { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "exfoliative_erythema", "operator": "=", "value": true },
+      { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "crust_presence", "operator": "=", "value": false },
+      { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "vesicle_or_bulla", "operator": "=", "value": true }
+    ],
+    "then": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "value": "SSSS" }
+    ],
+    "explanation": "SSSS thường gặp ở trẻ sơ sinh/trẻ nhỏ; biểu hiện ban đỏ bong vảy lan tỏa kèm bọng nước, dấu toàn thân và không có mài gợi ý mạnh cho chẩn đoán."
+  },
+  {
+    "id": "SSSS_2",
+    "group": "Chẩn đoán",
+    "description": "Gợi ý SSSS thứ phát từ ổ tụ cầu ban đầu khi marker viêm gợi tụ cầu và trước đó có chẩn đoán phân biệt là Chốc/Nhọt.",
+    "logic": "AND",
+    "if": [
+      { "concept": "LABORATORY_ASSESSMENT", "attribute": "inflammatory_markers", "operator": "=", "value": "Nghi nhiễm khuẩn tụ cầu" },
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "differential_list", "operator": "IN", "value": ["Chốc", "Nhọt"] }
+    ],
+    "then": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "diagnostic_certainty", "value": "SSSS thứ phát từ ổ nhiễm tụ cầu" }
+    ],
+    "explanation": "SSSS có thể xuất hiện sau vài ngày từ ổ nhiễm tụ cầu (chốc/nhọt); luật này tăng mức chắc chắn theo cơ chế độc tố lan tỏa."
+  },
+  {
+    "id": "SSSS_3",
+    "group": "Chẩn đoán phân biệt",
+    "description": "Phân biệt với TEN/Lyell khi có bong đỏ da + bọng nước nhưng không đáp ứng điều trị kháng sinh theo hướng SSSS.",
+    "logic": "AND",
+    "if": [
+      { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "exfoliative_erythema", "operator": "=", "value": true },
+      { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "vesicle_or_bulla", "operator": "=", "value": true },
+      { "concept": "TREATMENT_PLAN", "attribute": "systemic_antibiotic", "operator": "=", "value": "Không đáp ứng" }
+    ],
+    "then": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "differential_list", "value": "Hội chứng Lyell (TEN)" }
+    ],
+    "explanation": "Nếu nghi SSSS mà không cải thiện với kháng sinh, phải nghĩ đến TEN (thường do thuốc, hoại tử thượng bì sâu) để xử trí khác."
+  },
+  {
+    "id": "SSSS_4",
+    "group": "Chẩn đoán phân biệt",
+    "description": "Gợi ý bỏng nhiệt khi bong đỏ da khởi phát rất nhanh sau tiếp xúc nhiệt.",
+    "logic": "AND",
+    "if": [
+      { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "exfoliative_erythema", "operator": "=", "value": true },
+      { "concept": "PATIENT_INFO", "attribute": "onset_duration", "operator": "=", "value": "Khởi phát nhanh sau tiếp xúc nhiệt" }
+    ],
+    "then": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "differential_list", "value": "Bỏng nhiệt" }
+    ],
+    "explanation": "Bỏng nhiệt có liên quan thời điểm rõ ràng với tác nhân nóng; luật này ưu tiên hướng chẩn đoán theo hoàn cảnh khởi phát."
+  },
+  {
+    "id": "SSSS_5",
+    "group": "Chẩn đoán phân biệt",
+    "description": "Gợi ý chốc bóng nước lớn khi có bọng nước nhưng không có bong đỏ da lan tỏa.",
+    "logic": "AND",
+    "if": [
+      { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "vesicle_or_bulla", "operator": "=", "value": true },
+      { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "exfoliative_erythema", "operator": "=", "value": false }
+    ],
+    "then": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "differential_list", "value": "Chốc bong nước lớn" }
+    ],
+    "explanation": "Chốc bóng nước thường khu trú, không gây da trượt/bong lan tỏa như SSSS."
+  },
+  {
+    "id": "SSSS_6",
+    "group": "Chẩn đoán phân biệt",
+    "description": "Gợi ý ban đỏ do virus khi có ban đỏ nhưng không có bong đỏ da kiểu SSSS.",
+    "logic": "AND",
+    "if": [
+      { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "erythema", "operator": "=", "value": true },
+      { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "exfoliative_erythema", "operator": "=", "value": false }
+    ],
+    "then": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "differential_list", "value": "Ban đỏ do virus" }
+    ],
+    "explanation": "Ban đỏ do virus hay gặp ở trẻ nhưng không có bọng nước/bong trợt thượng bì lan tỏa."
+  },
+  {
+    "id": "SSSS_7",
+    "group": "Chẩn đoán phân biệt",
+    "description": "Gợi ý pemphigus khi có bọng nước ở người lớn.",
+    "logic": "AND",
+    "if": [
+      { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "vesicle_or_bulla", "operator": "=", "value": true },
+      { "concept": "PATIENT_INFO", "attribute": "age", "operator": ">", "value": 15 }
+    ],
+    "then": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "differential_list", "value": "Pemphigus" }
+    ],
+    "explanation": "Pemphigus là bệnh tự miễn thường ở người lớn; SSSS chủ yếu gặp ở trẻ nhỏ."
+  },
+  {
+    "id": "SSSS_8",
+    "group": "Xác định căn nguyên",
+    "description": "Củng cố chẩn đoán SSSS khi xét nghiệm gợi tụ cầu vàng và độc tố ETA/ETB.",
+    "logic": "AND",
+    "if": [
+      { "concept": "LABORATORY_ASSESSMENT", "attribute": "other_myco_tests", "operator": "=", "value": "Tụ cầu vàng" },
+      { "concept": "LABORATORY_ASSESSMENT", "attribute": "inflammatory_markers", "operator": "=", "value": "Độc tố ETA/ETB" }
+    ],
+    "then": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "value": "SSSS" }
+    ],
+    "explanation": "SSSS do độc tố exfoliatin (ETA/ETB) của tụ cầu vàng gây tách thượng bì; bằng chứng xét nghiệm giúp khẳng định."
+  },
+  {
+    "id": "SSSS_9",
+    "group": "Xác định căn nguyên",
+    "description": "Gợi ý SSSS dạng bong nước vô trùng khi có bọng nước nhưng marker/cấy dịch không thấy vi khuẩn.",
+    "logic": "AND",
+    "if": [
+      { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "vesicle_or_bulla", "operator": "=", "value": true },
+      { "concept": "LABORATORY_ASSESSMENT", "attribute": "inflammatory_markers", "operator": "=", "value": "Không có vi khuẩn" }
+    ],
+    "then": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "diagnostic_certainty", "value": "SSSS (bong nước vô trùng)" }
+    ],
+    "explanation": "Bọng nước trong SSSS thường vô trùng vì vi khuẩn nằm ở ổ xa, độc tố lan theo máu."
+  },
+  {
+    "id": "SSSS_10",
+    "group": "Điều trị",
+    "description": "Nguyên tắc điều trị SSSS: kháng sinh toàn thân + bù nước điện giải + chăm sóc da như bỏng.",
+    "logic": "AND",
+    "if": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "SSSS" }
+    ],
+    "then": [
+      { "concept": "TREATMENT_PLAN", "attribute": "systemic_antibiotic", "value": "Kháng sinh toàn thân" },
+      { "concept": "TREATMENT_PLAN", "attribute": "pain_relief", "value": "Bù nước-điện giải; chăm sóc da như bỏng" }
+    ],
+    "explanation": "SSSS gây mất nước nhanh qua da; điều trị phải phối hợp kháng sinh và hồi sức dịch/điện giải, chăm sóc tổn thương."
+  },
+  {
+    "id": "SSSS_11",
+    "group": "Điều trị",
+    "description": "Trẻ em SSSS: ưu tiên Amoxicillin/Clavulanate trong 7 ngày.",
+    "logic": "AND",
+    "if": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "SSSS" },
+      { "concept": "PATIENT_INFO", "attribute": "age", "operator": "<", "value": 12 }
+    ],
+    "then": [
+      { "concept": "TREATMENT_PLAN", "attribute": "systemic_antibiotic", "value": "Amoxicillin/Clavulanate" },
+      { "concept": "TREATMENT_PLAN", "attribute": "treatment_duration", "value": "7 ngày" }
+    ],
+    "explanation": "Theo phác đồ bạn đưa: trẻ nhỏ thường dùng Amoxicillin/Clavulanate, liều theo cân nặng, thời gian khoảng 1 tuần nếu đáp ứng."
+  },
+  {
+    "id": "SSSS_12",
+    "group": "Điều trị",
+    "description": "Nếu xác định MSSA: dùng Oxacillin 5–7 ngày.",
+    "logic": "AND",
+    "if": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "SSSS" },
+      { "concept": "LABORATORY_ASSESSMENT", "attribute": "other_myco_tests", "operator": "=", "value": "MSSA" }
+    ],
+    "then": [
+      { "concept": "TREATMENT_PLAN", "attribute": "systemic_antibiotic", "value": "Oxacillin" },
+      { "concept": "TREATMENT_PLAN", "attribute": "treatment_duration", "value": "5–7 ngày" }
+    ],
+    "explanation": "MSSA nhạy methicillin đáp ứng tốt với Oxacillin; thời gian tùy đáp ứng lâm sàng."
+  },
+  {
+    "id": "SSSS_13",
+    "group": "Điều trị",
+    "description": "Nếu xác định MRSA: dùng Vancomycin 7–14 ngày.",
+    "logic": "AND",
+    "if": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "SSSS" },
+      { "concept": "LABORATORY_ASSESSMENT", "attribute": "other_myco_tests", "operator": "=", "value": "MRSA" }
+    ],
+    "then": [
+      { "concept": "TREATMENT_PLAN", "attribute": "systemic_antibiotic", "value": "Vancomycin" },
+      { "concept": "TREATMENT_PLAN", "attribute": "treatment_duration", "value": "7–14 ngày" }
+    ],
+    "explanation": "MRSA kháng methicillin nên Oxacillin thất bại; Vancomycin là lựa chọn phù hợp theo nội dung bạn cung cấp."
+  },
+  {
+    "id": "SSSS_14",
+    "group": "Điều trị hỗ trợ",
+    "description": "Hỗ trợ phục hồi da bằng kem dưỡng ẩm khi đã chẩn đoán SSSS.",
+    "logic": "AND",
+    "if": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "SSSS" }
+    ],
+    "then": [
+      { "concept": "TREATMENT_PLAN", "attribute": "antipruritic", "value": "Kem dưỡng ẩm hỗ trợ phục hồi da" }
+    ],
+    "explanation": "Sau bong da, thượng bì mỏng dễ kích ứng; dưỡng ẩm giúp phục hồi và giảm khó chịu."
+  },
+  {
+    "id": "SSSS_15",
+    "group": "Tiên lượng",
+    "description": "Tiên lượng tốt nếu đã được điều trị kháng sinh toàn thân (có phác đồ).",
+    "logic": "AND",
+    "if": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "SSSS" },
+      { "concept": "TREATMENT_PLAN", "attribute": "systemic_antibiotic", "operator": "IS_NOT_NULL", "value": true }
+    ],
+    "then": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "complication_flag", "value": false }
+    ],
+    "explanation": "Theo mô tả của bạn: điều trị sớm đúng kháng sinh và hồi sức giúp đa số hồi phục nhanh, ít biến chứng."
+  },
+  {
+    "id": "SSSS_16",
+    "group": "Biến chứng",
+    "description": "Cảnh báo biến chứng khi SSSS mức độ nặng.",
+    "logic": "AND",
+    "if": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "SSSS" },
+      { "concept": "SEVERITY_ASSESSMENT", "attribute": "overall_severity", "operator": "=", "value": "Nặng" }
+    ],
+    "then": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "complication_flag", "value": true },
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "complication_type", "value": "Nhiễm khuẩn huyết hoặc viêm phổi" }
+    ],
+    "explanation": "SSSS nặng có nguy cơ biến chứng (nhiễm khuẩn huyết/viêm phổi); luật này bật cờ cảnh báo để ưu tiên theo dõi."
+  },
+  {
+    "id": "SSSS_17",
+    "group": "Phòng bệnh",
+    "description": "Tư vấn phòng bệnh sau khi chẩn đoán SSSS.",
+    "logic": "AND",
+    "if": [
+      { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "SSSS" }
+    ],
+    "then": [
+      { "concept": "TREATMENT_PLAN", "attribute": "prevention_advice", "value": "Giữ vệ sinh cho trẻ, tránh lây nhiễm tụ cầu, điều trị sớm các ổ nhiễm khuẩn" }
+    ],
+    "explanation": "SSSS có thể bùng phát theo cụm (đặc biệt khoa sơ sinh) nếu kiểm soát vệ sinh kém; phòng bệnh tập trung vào vệ sinh tay/da và xử trí sớm ổ tụ cầu."
+  }
+]
+}

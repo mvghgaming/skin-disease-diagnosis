@@ -6,10 +6,10 @@ export default function Home() {
       <div className="max-w-4xl w-full space-y-8">
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold tracking-tight">
-            Medical Expert System
+            Hệ Thống Chẩn Đoán Bệnh Da
           </h1>
           <p className="text-xl text-muted-foreground">
-            Rule-Based Disease Diagnosis
+            Chẩn đoán dựa trên hệ thống luật chuyên gia
           </p>
         </div>
 
@@ -19,10 +19,10 @@ export default function Home() {
             className="group block p-8 border-2 border-border rounded-lg hover:border-primary hover:shadow-lg transition-all"
           >
             <h2 className="text-2xl font-semibold mb-2 group-hover:text-primary">
-              Get Diagnosis →
+              Chẩn đoán →
             </h2>
             <p className="text-muted-foreground">
-              Enter your symptoms to receive a preliminary diagnosis and treatment recommendations
+              Nhập triệu chứng để nhận chẩn đoán sơ bộ và đề xuất điều trị
             </p>
           </Link>
 
@@ -31,19 +31,19 @@ export default function Home() {
             className="group block p-8 border-2 border-border rounded-lg hover:border-primary hover:shadow-lg transition-all"
           >
             <h2 className="text-2xl font-semibold mb-2 group-hover:text-primary">
-              Manage Rules →
+              Quản lý luật →
             </h2>
             <p className="text-muted-foreground">
-              Knowledge engineer interface for adding and updating diagnostic rules
+              Giao diện quản lý và cập nhật các luật chẩn đoán
             </p>
           </Link>
         </div>
 
         <div className="mt-12 p-6 bg-muted rounded-lg">
-          <h3 className="font-semibold mb-2">About This System</h3>
+          <h3 className="font-semibold mb-2">Về hệ thống</h3>
           <p className="text-sm text-muted-foreground">
-            This expert system uses forward-chaining inference to diagnose diseases based on symptoms.
-            Currently supports diagnosis for Chốc (Impetigo) with 10 clinical rules.
+            Hệ thống chuyên gia sử dụng suy diễn tiến để chẩn đoán bệnh dựa trên triệu chứng.
+            Hiện hỗ trợ chẩn đoán 7 bệnh da với 99 luật lâm sàng: Chốc, Nhọt, Viêm nang lông, Trứng cá, Lao da, SSSS và Bệnh phong.
           </p>
         </div>
       </div>

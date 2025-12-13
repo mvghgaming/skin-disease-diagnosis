@@ -4,12 +4,12 @@ Rule-based expert system for diagnosing skin diseases using forward-chaining inf
 
 ## Features
 
-- 🏥 **3 Skin Diseases**: Chốc (Impetigo), Nhọt (Boils), Viêm Nang Lông (Folliculitis)
-- 📋 **35 Clinical Rules**: Diagnosis, risk assessment, and treatment recommendations
-- 🧠 **Forward-Chaining Engine**: Processes AND/OR logic for intelligent inference
-- 🇻🇳 **Vietnamese Support**: Full medical terminology in Vietnamese
+- 🏥 **7 Skin Diseases**: Chốc (Impetigo), Nhọt (Boils), Viêm Nang Lông (Folliculitis), Trứng Cá (Acne), Lao Da (TB), SSSS, Bệnh Phong (Leprosy)
+- 📋 **99 Clinical Rules**: Diagnosis, risk assessment, treatment recommendations, and complications
+- 🧠 **Forward-Chaining Engine**: Processes AND/OR logic with nested conditions
+- 🇻🇳 **Vietnamese Support**: Full medical terminology in Vietnamese based on MOH guidelines
 - 📊 **Admin Dashboard**: View and manage diagnostic rules
-- 🧪 **15 Test Cases**: Comprehensive validation scenarios
+- 🔬 **Advanced Operators**: Support for CONTAINS_ANY, IS_NOT_NULL, LIKE patterns
 
 ## Tech Stack
 
@@ -35,7 +35,7 @@ DATABASE_URL=postgresql://user:pass@host.neon.tech/db?sslmode=require
 # 3. Run migrations
 pnpm run migrate
 
-# 4. Seed database (loads 3 diseases, 35 rules)
+# 4. Seed database (loads 7 diseases, 99 rules)
 pnpm run seed
 
 # 5. Start development server
@@ -57,9 +57,13 @@ cs217/
 │   │   └── seed/              # Seeding utilities
 │   └── types/                 # TypeScript definitions
 ├── rules/                     # Disease rule files (JSON)
-│   ├── 1-choc.json           # Chốc (10 rules)
-│   ├── 2-nhot.json           # Nhọt (10 rules)
-│   └── 3-viem-nang-long.json # Viêm Nang Lông (15 rules)
+│   ├── rules_choc.json       # Chốc / Impetigo (10 rules)
+│   ├── rule_nhot.json        # Nhọt / Boils (10 rules)
+│   ├── rule_viemnanglong.json # Viêm Nang Lông / Folliculitis (15 rules)
+│   ├── rule_trungca.json     # Trứng Cá / Acne (10 rules)
+│   ├── RULE_laoda.json       # Lao Da / Cutaneous TB (16 rules)
+│   ├── rule_SSSS.json        # SSSS (17 rules)
+│   └── rule_phong.json       # Bệnh Phong / Leprosy (21 rules)
 ├── chuong1-pdf/              # Source clinical PDFs
 ├── scripts/                  # Migration & seed scripts
 └── TEST_CASES.md             # 15 test scenarios
@@ -69,11 +73,15 @@ cs217/
 
 | Disease | Vietnamese | Rules | Key Features |
 |---------|-----------|-------|--------------|
-| Impetigo | Chốc | 10 | Honey-colored crusts, localized/widespread |
+| Impetigo | Chốc | 10 | Honey-colored crusts, complications tracking |
 | Boils | Nhọt | 10 | Facial danger zone, diabetes risk |
 | Folliculitis | Viêm Nang Lông | 15 | 4 subtypes, scarring variants |
+| Acne | Trứng Cá | 10 | Drug safety, age restrictions |
+| Cutaneous TB | Lao Da | 16 | 7 TB types, treatment regimens |
+| SSSS | SSSS | 17 | Differential diagnosis, severity grading |
+| Leprosy | Bệnh Phong | 21 | WHO classification, MDT protocols |
 
-**Total**: 35 rules, 82 conditions, 58 conclusions
+**Total**: 99 rules covering comprehensive diagnosis, treatment, and safety protocols
 
 ## Usage
 
@@ -111,7 +119,7 @@ cs217/
 4. Apply conclusions if satisfied
 5. Repeat until no new rules fire
 
-**Operators**: `=`, `!=`, `IN`, `NOT_IN`, `>`, `<`, `>=`, `<=`
+**Operators**: `=`, `!=`, `IN`, `NOT_IN`, `>`, `<`, `>=`, `<=`, `CONTAINS_ANY`, `IS_NOT_NULL`, `LIKE`
 
 ## API Endpoints
 
@@ -164,13 +172,7 @@ const diseases = [
 
 ## Test Cases
 
-See **`TEST_CASES.md`** for 15 comprehensive scenarios:
-
-| Cases | Disease | Coverage |
-|-------|---------|----------|
-| TC 1-7 | Chốc | Typical, widespread, complications |
-| TC 8-10 | Nhọt | Mild, facial, diabetic |
-| TC 11-15 | Viêm Nang Lông | Common, pseudo, eosinophilic, decalvans |
+The system includes comprehensive test scenarios covering all 7 diseases with various presentations, complications, and treatment pathways.
 
 ## Scripts
 
@@ -191,7 +193,7 @@ pnpm run seed     # Seed database from JSON
 
 **No Rules Showing**
 - Run `pnpm run seed`
-- Verify all 3 JSON files exist in `rules/`
+- Verify all 7 JSON files exist in `rules/`
 - Check admin dashboard for seeding status
 
 **Diagnosis Errors**
@@ -216,20 +218,21 @@ pnpm run seed     # Seed database from JSON
 
 ## Project Info
 
-- **Version**: 0.1.0
-- **Diseases**: 3
-- **Rules**: 35 (82 conditions, 58 conclusions)
-- **Test Cases**: 15
+- **Version**: 0.2.0
+- **Diseases**: 7
+- **Rules**: 99
 - **Language**: Vietnamese + English
 - **Source**: Vietnamese Ministry of Health Guidelines
+- **Database**: Neon PostgreSQL (serverless)
+- **Operators**: 11 comparison operators including pattern matching
 
 ## Contributing
 
-1. Add PDF documentation to `chuong1-pdf/`
-2. Convert to JSON in `rules/`
-3. Add test cases to `TEST_CASES.md`
-4. Update seed script
-5. Test with inference engine
+1. Add clinical documentation to `chuong1-pdf/`
+2. Convert to JSON format in `rules/` (use concept/attribute structure)
+3. Update seed script with new disease
+4. Test rules with inference engine
+5. Validate all operators work correctly
 
 ## License
 
@@ -237,7 +240,8 @@ Educational purposes only.
 
 ## Support
 
-- Review `TEST_CASES.md` for examples
 - Check admin dashboard for status
-- Verify all 3 JSON files are valid
+- Verify all 7 JSON files are valid
 - Test API endpoints: `/api/diagnosis`, `/api/rules`
+- Review ER_Diagram.md for database structure
+- See concepts.json for all available attributes

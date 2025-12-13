@@ -14,12 +14,7 @@ interface SymptomFormProps {
 
 export function SymptomForm({ onSubmit, isLoading = false }: SymptomFormProps) {
   const namespaces = getInputNamespaces();
-  const [currentStep, setCurrentStep] = useState(0);
   const [symptoms, setSymptoms] = useState<WorkingMemory>({});
-
-  const currentNamespace = namespaces[currentStep];
-  const isLastStep = currentStep === namespaces.length - 1;
-  const isFirstStep = currentStep === 0;
 
   const handleVariableChange = (variable: string, value: any) => {
     setSymptoms((prev) => ({
@@ -28,80 +23,73 @@ export function SymptomForm({ onSubmit, isLoading = false }: SymptomFormProps) {
     }));
   };
 
-  const handleNext = () => {
-    if (!isLastStep) {
-      setCurrentStep((prev) => prev + 1);
-    } else {
-      // Submit the form
-      onSubmit(symptoms);
-    }
-  };
-
-  const handlePrevious = () => {
-    if (!isFirstStep) {
-      setCurrentStep((prev) => prev - 1);
-    }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSubmit(symptoms);
   };
 
   const handleReset = () => {
     setSymptoms({});
-    setCurrentStep(0);
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <Card>
-        <CardHeader>
-          <CardTitle>{currentNamespace.label_vi}</CardTitle>
-          <CardDescription>
-            {currentNamespace.label_en} (Bước {currentStep + 1} / {namespaces.length})
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          {/* Progress indicator */}
-          <div className="w-full bg-secondary rounded-full h-2">
-            <div
-              className="bg-primary h-2 rounded-full transition-all"
-              style={{ width: `${((currentStep + 1) / namespaces.length) * 100}%` }}
-            />
-          </div>
+    <form onSubmit={handleSubmit} className="max-w-5xl mx-auto">
+      <div className="space-y-6">
+        {/* All sections on one page */}
+        {namespaces.map((namespace, index) => (
+          <Card key={namespace.namespace}>
+            <CardHeader>
+              <CardTitle className="text-xl">{namespace.label_vi}</CardTitle>
+              <CardDescription className="text-sm">
+                {namespace.label_en}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {Object.entries(namespace.variables).map(([fieldName, definition]) => {
+                  const variable = `${namespace.namespace}.${fieldName}`;
+                  return (
+                    <VariableInput
+                      key={variable}
+                      variable={variable}
+                      definition={definition}
+                      value={symptoms[variable]}
+                      onChange={(value) => handleVariableChange(variable, value)}
+                    />
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
+        ))}
 
-          {/* Variable inputs for current namespace */}
-          <div className="space-y-4">
-            {Object.entries(currentNamespace.variables).map(([fieldName, definition]) => {
-              const variable = `${currentNamespace.namespace}.${fieldName}`;
-              return (
-                <VariableInput
-                  key={variable}
-                  variable={variable}
-                  definition={definition}
-                  value={symptoms[variable]}
-                  onChange={(value) => handleVariableChange(variable, value)}
-                />
-              );
-            })}
-          </div>
-
-          {/* Navigation buttons */}
-          <div className="flex justify-between items-center pt-4">
-            <div>
-              {!isFirstStep && (
-                <Button variant="outline" onClick={handlePrevious} disabled={isLoading}>
-                  ← Quay lại
+        {/* Submit buttons - sticky at bottom */}
+        <div className="sticky bottom-0 bg-background border-t pt-4 pb-4">
+          <Card>
+            <CardContent className="pt-6">
+              <div className="flex justify-end gap-3">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleReset}
+                  disabled={isLoading}
+                  size="lg"
+                >
+                  Đặt lại
                 </Button>
-              )}
-            </div>
-            <div className="flex gap-2">
-              <Button variant="ghost" onClick={handleReset} disabled={isLoading}>
-                Đặt lại
-              </Button>
-              <Button onClick={handleNext} disabled={isLoading}>
-                {isLoading ? 'Đang xử lý...' : isLastStep ? 'Chẩn đoán' : 'Tiếp theo →'}
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+                <Button
+                  type="submit"
+                  disabled={isLoading}
+                  size="lg"
+                  className="min-w-[150px]"
+                >
+                  {isLoading ? 'Đang xử lý...' : 'Chẩn đoán'}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </form>
   );
 }
