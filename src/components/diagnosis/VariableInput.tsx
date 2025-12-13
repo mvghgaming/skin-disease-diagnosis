@@ -43,30 +43,14 @@ export function VariableInput({ variable, definition, value, onChange }: Variabl
       );
     }
 
-    // String type without enum - render as text input
+    // String type without enum - should not happen with updated schema
     if (definition.type === 'string') {
-      return (
-        <Input
-          type="text"
-          value={value || ''}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder={definition.label_vi}
-        />
-      );
+      return <div className="text-sm text-muted-foreground">No options available</div>;
     }
 
-    // Number type
+    // Number type without enum - should not happen with updated schema
     if (definition.type === 'number') {
-      return (
-        <Input
-          type="number"
-          value={value || ''}
-          onChange={(e) => onChange(Number(e.target.value))}
-          placeholder={definition.label_vi}
-          min={definition.validation?.min}
-          max={definition.validation?.max}
-        />
-      );
+      return <div className="text-sm text-muted-foreground">No options available</div>;
     }
 
     // Array type with enum - render as checkboxes
@@ -100,7 +84,8 @@ export function VariableInput({ variable, definition, value, onChange }: Variabl
       return <div className="text-sm text-muted-foreground">No options available</div>;
     }
 
-    return <Input type="text" value={value || ''} onChange={(e) => onChange(e.target.value)} />;
+    // Fallback - should never reach here with proper schema
+    return <div className="text-sm text-muted-foreground">Invalid field type</div>;
   };
 
   return (
