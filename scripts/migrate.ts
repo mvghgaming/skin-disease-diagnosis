@@ -25,43 +25,58 @@ async function runMigrations() {
 
   const sql = neon(DATABASE_URL);
 
+  // List of migration files in order
+  const migrationFiles = [
+    '001_initial.sql',
+    '002_add_rule_group.sql',
+  ];
+
   try {
-    // Read the migration file
-    const migrationPath = join(process.cwd(), 'src', 'lib', 'db', 'migrations', '001_initial.sql');
-    const migrationSQL = readFileSync(migrationPath, 'utf-8');
+    for (const migrationFile of migrationFiles) {
+      // Read the migration file
+      const migrationPath = join(process.cwd(), 'src', 'lib', 'db', 'migrations', migrationFile);
+      let migrationSQL: string;
 
-    console.log('📄 Running migration: 001_initial.sql');
+      try {
+        migrationSQL = readFileSync(migrationPath, 'utf-8');
+      } catch (e) {
+        console.log(`⊳ Skipping ${migrationFile} (file not found)`);
+        continue;
+      }
 
-    // Split SQL into individual statements and execute them one by one
-    // Remove comments and split by semicolons
-    const statements = migrationSQL
-      .split('\n')
-      .filter(line => !line.trim().startsWith('--')) // Remove comment lines
-      .join('\n')
-      .split(';')
-      .map(stmt => stmt.trim())
-      .filter(stmt => stmt.length > 0);
+      console.log(`📄 Running migration: ${migrationFile}`);
 
-    console.log(`📝 Executing ${statements.length} SQL statements...\n`);
+      // Split SQL into individual statements and execute them one by one
+      // Remove comments and split by semicolons
+      const statements = migrationSQL
+        .split('\n')
+        .filter(line => !line.trim().startsWith('--')) // Remove comment lines
+        .join('\n')
+        .split(';')
+        .map(stmt => stmt.trim())
+        .filter(stmt => stmt.length > 0);
 
-    for (let i = 0; i < statements.length; i++) {
-      const statement = statements[i];
-      if (statement) {
-        try {
-          await sql(statement);
-          console.log(`✓ Statement ${i + 1}/${statements.length} executed`);
-        } catch (error: any) {
-          // Ignore "already exists" errors
-          if (error.message?.includes('already exists')) {
-            console.log(`⊳ Statement ${i + 1}/${statements.length} skipped (already exists)`);
-          } else {
-            throw error;
+      console.log(`📝 Executing ${statements.length} SQL statements...`);
+
+      for (let i = 0; i < statements.length; i++) {
+        const statement = statements[i];
+        if (statement) {
+          try {
+            await sql(statement);
+            console.log(`  ✓ Statement ${i + 1}/${statements.length} executed`);
+          } catch (error: any) {
+            // Ignore "already exists" errors
+            if (error.message?.includes('already exists')) {
+              console.log(`  ⊳ Statement ${i + 1}/${statements.length} skipped (already exists)`);
+            } else {
+              throw error;
+            }
           }
         }
       }
-    }
 
-    console.log('\n✅ Migration completed successfully\n');
+      console.log(`✅ ${migrationFile} completed\n`);
+    }
 
     // Verify tables were created
     console.log('🔍 Verifying tables...');

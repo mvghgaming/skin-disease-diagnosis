@@ -223,7 +223,8 @@ function transformRuleNew(jsonRule: JSONRuleNew, diseaseId: string): Rule {
     explanation: jsonRule.explanation,
     status: 'active',
     disease_id: diseaseId,
-    priority: 0
+    priority: 0,
+    group: jsonRule.group  // Keep original Vietnamese group name
   };
 }
 

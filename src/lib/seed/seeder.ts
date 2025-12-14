@@ -40,11 +40,11 @@ export async function seedRulesFromJSON(
     for (const rule of rules) {
       // Insert rule
       await db.query(
-        `INSERT INTO rules (id, disease_id, name, category, logic, explanation, status, priority)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+        `INSERT INTO rules (id, disease_id, name, category, logic, explanation, status, priority, rule_group)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
          ON CONFLICT (id) DO UPDATE
          SET disease_id = $2, name = $3, category = $4, logic = $5,
-             explanation = $6, status = $7, priority = $8`,
+             explanation = $6, status = $7, priority = $8, rule_group = $9`,
         [
           rule.id,
           diseaseId,
@@ -54,6 +54,7 @@ export async function seedRulesFromJSON(
           rule.explanation,
           rule.status || 'active',
           rule.priority || 0,
+          rule.group || null,
         ]
       );
       rulesInserted++;

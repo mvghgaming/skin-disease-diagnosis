@@ -35,6 +35,7 @@ export interface Rule {
   status: RuleStatus;
   disease_id?: string;
   priority?: number;
+  group?: string;  // Original group name from JSON (Vietnamese)
 }
 
 // Database types (for internal use)

@@ -1,0 +1,85 @@
+{
+  "testCases": [
+    {
+      "name": "Test Case 1: Chốc (Impetigo)",
+      "description": "Trẻ em 5 tuổi với bọng nước và vảy màu vàng mật ở mặt",
+      "expectedDiagnosis": "Chốc",
+      "symptoms": {
+        "PATIENT_INFO.age": "0-5",
+        "PATIENT_INFO.sex": "Nam",
+        "PATIENT_INFO.residence_area": "Nông thôn",
+        "PATIENT_INFO.onset_duration": "< 1 tuần",
+        "SKIN_LESION_MORPHOLOGY.vesicle_or_bulla": true,
+        "SKIN_LESION_MORPHOLOGY.crust_presence": true,
+        "SKIN_LESION_MORPHOLOGY.crust_color": "Vàng mật",
+        "SKIN_LESION_MORPHOLOGY.primary_lesion": "Bọng nước",
+        "LESION_DISTRIBUTION.main_location": "Mặt",
+        "LESION_DISTRIBUTION.number_of_lesions": "Nhiều (6-20)",
+        "RISK_FACTOR_ASSESSMENT.hygiene_level": "Kém",
+        "RISK_FACTOR_ASSESSMENT.skin_trauma": true,
+        "RISK_FACTOR_ASSESSMENT.hot_humid_environment": true,
+        "SYSTEMIC_AND_NEURO_SIGNS.fever": false,
+        "SYSTEMIC_AND_NEURO_SIGNS.pruritus": true,
+        "SEVERITY_ASSESSMENT.extent_of_lesions": "Khu trú",
+        "SEVERITY_ASSESSMENT.overall_severity": "Nhẹ"
+      }
+    },
+    {
+      "name": "Test Case 2: Trứng cá (Acne)",
+      "description": "Thiếu niên 16 tuổi với mụn đầu đen, mụn mủ ở mặt và ngực",
+      "expectedDiagnosis": "Trứng cá",
+      "symptoms": {
+        "PATIENT_INFO.age": "13-18",
+        "PATIENT_INFO.sex": "Nam",
+        "PATIENT_INFO.occupation": "Học sinh/Sinh viên",
+        "PATIENT_INFO.onset_duration": "1-3 tháng",
+        "SKIN_LESION_MORPHOLOGY.comedones_present": true,
+        "SKIN_LESION_MORPHOLOGY.pustule": true,
+        "SKIN_LESION_MORPHOLOGY.primary_lesion": "Mụn mủ",
+        "LESION_DISTRIBUTION.main_location": "Mặt",
+        "LESION_DISTRIBUTION.seborrheic_area": true,
+        "LESION_DISTRIBUTION.follicular_area": true,
+        "LESION_DISTRIBUTION.number_of_lesions": "Nhiều (6-20)",
+        "RISK_FACTOR_ASSESSMENT.oily_skin": true,
+        "RISK_FACTOR_ASSESSMENT.acne_inducing_drug_history": "Không",
+        "SYSTEMIC_AND_NEURO_SIGNS.pain": false,
+        "SYSTEMIC_AND_NEURO_SIGNS.pruritus": false,
+        "SEVERITY_ASSESSMENT.noninflammatory_lesion_count": "11-20",
+        "SEVERITY_ASSESSMENT.inflammatory_lesion_count": "6-10",
+        "SEVERITY_ASSESSMENT.nodule_cyst_count": "0",
+        "SEVERITY_ASSESSMENT.overall_severity": "Trung bình"
+      }
+    },
+    {
+      "name": "Test Case 3: Bệnh phong (Leprosy)",
+      "description": "Người lớn 45 tuổi với dát nhạt màu, mất cảm giác và dây thần kinh phì đại",
+      "expectedDiagnosis": "Bệnh phong",
+      "symptoms": {
+        "PATIENT_INFO.age": "31-50",
+        "PATIENT_INFO.sex": "Nam",
+        "PATIENT_INFO.residence_area": "Vùng sâu vùng xa",
+        "PATIENT_INFO.onset_duration": "> 6 tháng",
+        "SKIN_LESION_MORPHOLOGY.leprosy_patch": true,
+        "SKIN_LESION_MORPHOLOGY.sensory_loss_on_lesion": true,
+        "SKIN_LESION_MORPHOLOGY.patch_type": true,
+        "SKIN_LESION_MORPHOLOGY.patch_color": "Nhạt màu",
+        "SKIN_LESION_MORPHOLOGY.primary_lesion": "Dát nhạt màu",
+        "LESION_DISTRIBUTION.main_location": "Tay",
+        "LESION_DISTRIBUTION.extremities_involved": true,
+        "LESION_DISTRIBUTION.number_of_lesions": "Ít (2-5)",
+        "LESION_DISTRIBUTION.border_clarity": "Rõ",
+        "LESION_DISTRIBUTION.symmetry": "Không đối xứng",
+        "RISK_FACTOR_ASSESSMENT.close_contact_tb_leprosy": true,
+        "RISK_FACTOR_ASSESSMENT.leprosy_risk_group": "Nguy cơ cao",
+        "SYSTEMIC_AND_NEURO_SIGNS.center_sensation": "Mất hoàn toàn",
+        "SYSTEMIC_AND_NEURO_SIGNS.temperature_or_pain_sensation_loss_on_lesion": true,
+        "SYSTEMIC_AND_NEURO_SIGNS.enlarged_painful_nerves": true,
+        "LABORATORY_ASSESSMENT.smear_afb_leprosy": false,
+        "LABORATORY_ASSESSMENT.leprosy_bacilloscopy_result": "Âm tính",
+        "SEVERITY_ASSESSMENT.extent_of_lesions": "Khu trú",
+        "SEVERITY_ASSESSMENT.deformity_or_disability": false,
+        "SEVERITY_ASSESSMENT.overall_severity": "Trung bình"
+      }
+    }
+  ]
+}

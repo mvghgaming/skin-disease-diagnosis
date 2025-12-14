@@ -9,6 +9,8 @@ export interface FiredRule {
   ruleName: string;
   explanation: string;
   conclusions: Conclusion[];
+  group?: string;  // Rule group from JSON (e.g., "Chẩn đoán", "Điều trị")
+  category?: string; // Rule category in DB
 }
 
 export interface DiagnosisResult {

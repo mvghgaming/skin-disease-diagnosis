@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     // Fetch all active rules with conditions and conclusions
     const rulesResult = await db.query(`
       SELECT
-        r.id, r.name, r.category, r.logic, r.explanation, r.status, r.priority,
+        r.id, r.name, r.category, r.logic, r.explanation, r.status, r.priority, r.rule_group,
         COALESCE(
           json_agg(
             DISTINCT jsonb_build_object(
@@ -85,6 +85,7 @@ export async function POST(request: NextRequest) {
       explanation: row.explanation,
       status: row.status,
       priority: row.priority,
+      group: row.rule_group,
       conditions: row.conditions || [],
       conclusions: row.conclusions || [],
     }));
@@ -122,25 +123,34 @@ export async function POST(request: NextRequest) {
       ['completed', currentSessionId]
     );
 
-    // Format diagnosis result
+    // Format diagnosis result (using correct CONCEPT.attribute format)
     const result = {
       sessionId: currentSessionId,
       diagnosis: {
-        main_diagnosis: workingMemory['DiagnosisAssessment.main_diagnosis'],
-        differential_list: workingMemory['DiagnosisAssessment.differential_list'],
-        complication_flag: workingMemory['DiagnosisAssessment.complication_flag'],
-        complication_type: workingMemory['DiagnosisAssessment.complication_type'],
+        main_diagnosis: workingMemory['DIAGNOSIS_ASSESSMENT.main_diagnosis'],
+        differential_list: workingMemory['DIAGNOSIS_ASSESSMENT.differential_list'],
+        complication_flag: workingMemory['DIAGNOSIS_ASSESSMENT.complication_flag'],
+        complication_type: workingMemory['DIAGNOSIS_ASSESSMENT.complication_type'],
+        diagnostic_certainty: workingMemory['DIAGNOSIS_ASSESSMENT.diagnostic_certainty'],
+        subtype: workingMemory['DIAGNOSIS_ASSESSMENT.subtype'],
       },
       treatment: {
-        local_antiseptic: workingMemory['TreatmentPlan.local_antiseptic'],
-        topical_antibiotic: workingMemory['TreatmentPlan.topical_antibiotic'],
-        systemic_antibiotic: workingMemory['TreatmentPlan.systemic_antibiotic'],
-        treatment_duration: workingMemory['TreatmentPlan.treatment_duration'],
-        antipruritic: workingMemory['TreatmentPlan.antipruritic'],
-        pain_relief: workingMemory['TreatmentPlan.pain_relief'],
+        local_antiseptic: workingMemory['TREATMENT_PLAN.local_antiseptic'],
+        topical_antibiotic: workingMemory['TREATMENT_PLAN.topical_antibiotic'],
+        systemic_antibiotic: workingMemory['TREATMENT_PLAN.systemic_antibiotic'],
+        treatment_duration: workingMemory['TREATMENT_PLAN.treatment_duration'],
+        antipruritic: workingMemory['TREATMENT_PLAN.antipruritic'],
+        pain_relief: workingMemory['TREATMENT_PLAN.pain_relief'],
+        regimen: workingMemory['TREATMENT_PLAN.regimen'],
+        prevention_advice: workingMemory['TREATMENT_PLAN.prevention_advice'],
+      },
+      severity: {
+        overall_severity: workingMemory['SEVERITY_ASSESSMENT.overall_severity'],
+        extent_of_lesions: workingMemory['SEVERITY_ASSESSMENT.extent_of_lesions'],
+        systemic_involvement: workingMemory['SEVERITY_ASSESSMENT.systemic_involvement'],
       },
       risk: {
-        overall_infection_risk: workingMemory['RiskFactorAssessment.overall_infection_risk'],
+        overall_infection_risk: workingMemory['RISK_FACTOR_ASSESSMENT.overall_infection_risk'],
       },
       firedRules,
       workingMemory,

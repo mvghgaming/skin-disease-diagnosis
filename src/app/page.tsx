@@ -40,11 +40,46 @@ export default function Home() {
         </div>
 
         <div className="mt-12 p-6 bg-muted rounded-lg">
-          <h3 className="font-semibold mb-2">Về hệ thống</h3>
-          <p className="text-sm text-muted-foreground">
+          <h3 className="font-semibold mb-3">Về hệ thống</h3>
+          <p className="text-sm text-muted-foreground mb-4">
             Hệ thống chuyên gia sử dụng suy diễn tiến để chẩn đoán bệnh dựa trên triệu chứng.
-            Hiện hỗ trợ chẩn đoán 7 bệnh da với 99 luật lâm sàng: Chốc, Nhọt, Viêm nang lông, Trứng cá, Lao da, SSSS và Bệnh phong.
+            Hiện hỗ trợ chẩn đoán 7 bệnh da với 99 luật lâm sàng.
           </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+            <span className="px-2 py-1 bg-background rounded">Chốc (Impetigo)</span>
+            <span className="px-2 py-1 bg-background rounded">Nhọt (Furuncle)</span>
+            <span className="px-2 py-1 bg-background rounded">Viêm nang lông</span>
+            <span className="px-2 py-1 bg-background rounded">Trứng cá (Acne)</span>
+            <span className="px-2 py-1 bg-background rounded">Lao da</span>
+            <span className="px-2 py-1 bg-background rounded">SSSS</span>
+            <span className="px-2 py-1 bg-background rounded">Bệnh phong</span>
+          </div>
+        </div>
+
+        <div className="mt-6 p-6 bg-primary/5 border border-primary/20 rounded-lg">
+          <h3 className="font-semibold mb-3">Quy trình chẩn đoán</h3>
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 text-sm">
+            <div className="text-center">
+              <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center mx-auto mb-2">1</div>
+              <p>Thông tin bệnh nhân</p>
+            </div>
+            <div className="text-center">
+              <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center mx-auto mb-2">2</div>
+              <p>Triệu chứng</p>
+            </div>
+            <div className="text-center">
+              <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center mx-auto mb-2">3</div>
+              <p>Yếu tố nguy cơ</p>
+            </div>
+            <div className="text-center">
+              <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center mx-auto mb-2">4</div>
+              <p>Xét nghiệm</p>
+            </div>
+            <div className="text-center">
+              <div className="w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center mx-auto mb-2">5</div>
+              <p>Kết quả</p>
+            </div>
+          </div>
         </div>
       </div>
     </main>

@@ -68,6 +68,8 @@ export function runInference(
           ruleName: rule.name,
           explanation: rule.explanation,
           conclusions: rule.conclusions,
+          group: rule.group,
+          category: rule.category,
         });
         firedRuleIds.add(rule.id);
 
