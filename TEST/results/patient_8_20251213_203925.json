@@ -1,0 +1,30 @@
+{
+    "meta_data": {
+        "patient_id": 8,
+        "created_at": "20251213_203925",
+        "system_version": "1.0"
+    },
+    "diagnosis_result": {
+        "main_diagnosis": "Chốc điển hình",
+        "subtype": null,
+        "diagnostic_certainty": null,
+        "WHO_group": null,
+        "treatment_plan": [
+            "Kháng sinh uống: Cloxacillin, Cephalexin, Amoxicillin/Clavulanate",
+            "Thời gian: 7–10 ngày",
+            "Giảm ngứa: Kháng histamin",
+            "Giảm đau/Hồi sức: Paracetamol"
+        ],
+        "prevention_advice": [],
+        "warnings": [
+            "Chẩn đoán phân biệt: Chốc bong nước lớn"
+        ],
+        "rules_triggered": [
+            "CHOC_1",
+            "CHOC_2",
+            "CHOC_7",
+            "CHOC_9",
+            "SSSS_5"
+        ]
+    }
+}

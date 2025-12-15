@@ -1,0 +1,32 @@
+{
+    "meta_data": {
+        "patient_id": 9,
+        "created_at": "20251213_203932",
+        "system_version": "1.0"
+    },
+    "diagnosis_result": {
+        "main_diagnosis": "Trứng cá thông thường",
+        "subtype": null,
+        "diagnostic_certainty": null,
+        "WHO_group": "MB (nhiều vi khuẩn)",
+        "treatment_plan": [
+            "Giảm ngứa: Kháng histamin",
+            "Giảm đau/Hồi sức: Paracetamol",
+            "Phác đồ đặc hiệu: Rifampicin 600mg/tháng + Clofazimin 300mg/tháng + Clofazimin 50mg/ngày + DDS 100mg/ngày, trong 12 tháng",
+            "Phác đồ trứng cá: Retinoid bôi hoặc Benzoyl Peroxid hoặc Acid Azelaic hoặc kháng sinh bôi"
+        ],
+        "prevention_advice": [
+            "Rửa mặt bằng sữa rửa phù hợp, không chà xát mạnh, không tự nặn mụn, hạn chế dùng mỹ phẩm hoặc thuốc bôi chứa halogen/corticoid trên mặt"
+        ],
+        "warnings": [],
+        "rules_triggered": [
+            "CHOC_2",
+            "CHOC_9",
+            "LEP_14",
+            "LEP_16",
+            "ACNE_1",
+            "ACNE_10",
+            "ACNE_17"
+        ]
+    }
+}
