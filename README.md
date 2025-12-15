@@ -1,27 +1,15 @@
 # Medical Expert System - Skin Disease Diagnosis
 
-Rule-based expert system for diagnosing skin diseases using forward-chaining inference. Built with Next.js, TypeScript, and Neon PostgreSQL based on Vietnamese Ministry of Health guidelines.
+Rule-based expert system for diagnosing skin diseases using forward-chaining inference. Built with Next.js, TypeScript, and Neon PostgreSQL.
 
 ## Features
 
 - 🏥 **7 Skin Diseases**: Chốc (Impetigo), Nhọt (Boils), Viêm Nang Lông (Folliculitis), Trứng Cá (Acne), Lao Da (TB), SSSS, Bệnh Phong (Leprosy)
-- 📋 **99 Clinical Rules**: Diagnosis, risk assessment, treatment recommendations, and complications
+- 📋 **99+ Clinical Rules**: Diagnosis, risk assessment, treatment, and complications
 - 🧠 **Forward-Chaining Engine**: Processes AND/OR logic with nested conditions
-- 🇻🇳 **Vietnamese Support**: Full medical terminology in Vietnamese based on MOH guidelines
-- 📊 **Admin Dashboard**: View and manage diagnostic rules
-- 🔬 **Advanced Operators**: Support for CONTAINS_ANY, IS_NOT_NULL, LIKE patterns
-
-## Tech Stack
-
-**Frontend**: Next.js 14, React 18, TypeScript, Tailwind CSS
-**Backend**: Next.js API Routes, Neon PostgreSQL (serverless)
-**UI**: Radix UI components
+- 🇻🇳 **Vietnamese Support**: Based on Vietnamese Ministry of Health guidelines
 
 ## Quick Start
-
-### Prerequisites
-- Node.js 18+
-- Neon PostgreSQL database ([neon.tech](https://neon.tech))
 
 ### Installation
 
@@ -35,213 +23,148 @@ DATABASE_URL=postgresql://user:pass@host.neon.tech/db?sslmode=require
 # 3. Run migrations
 pnpm run migrate
 
-# 4. Seed database (loads 7 diseases, 99 rules)
+# 4. Seed database
 pnpm run seed
 
-# 5. Start development server
+# 5. Start development
 pnpm run dev
 ```
 
 Visit http://localhost:3000
 
+## How to Use
+
+### 1. Get Diagnosis
+
+1. Go to homepage → Click "Get Diagnosis"
+2. Fill in patient symptoms (age, sex, skin lesions, etc.)
+3. View diagnosis results with:
+   - Main diagnosis & differential diagnoses
+   - Treatment recommendations
+   - Explanation of fired rules
+
+### 2. View Test Cases
+
+- Navigate to `/test` page to see all predefined test cases
+- Each test case includes:
+  - Patient information (age, sex)
+  - Symptoms based on rule attributes
+  - Expected diagnosis
+- Test cases only use attributes defined in the rules
+
+### 3. Admin Dashboard (Optional)
+
+- Go to "Manage Rules" to view all rules and diseases
+- See rule conditions, conclusions, and explanations
+- Check diagnosis statistics
+
 ## Project Structure
 
 ```
 cs217/
+├── rules/                      # Disease rule files (JSON)
+│   ├── rules_choc.json        # Chốc (10 rules)
+│   ├── rule_nhot.json         # Nhọt (10 rules)
+│   ├── rule_viemnanglong.json # Viêm Nang Lông (15 rules)
+│   ├── rule_trungca.json      # Trứng Cá (10 rules)
+│   ├── rule_laoda.json        # Lao Da (16 rules)
+│   ├── rule_SSSS.json         # SSSS (17 rules)
+│   └── rule_phong.json        # Bệnh Phong (21 rules)
+├── testcases.json             # Test cases (20 scenarios)
+├── concepts.json              # All available attributes
 ├── src/
-│   ├── app/                    # Next.js pages & API routes
-│   ├── components/             # React components
-│   ├── lib/
-│   │   ├── db/                # Database & migrations
-│   │   ├── inference/         # Forward-chaining engine
-│   │   └── seed/              # Seeding utilities
-│   └── types/                 # TypeScript definitions
-├── rules/                     # Disease rule files (JSON)
-│   ├── rules_choc.json       # Chốc / Impetigo (10 rules)
-│   ├── rule_nhot.json        # Nhọt / Boils (10 rules)
-│   ├── rule_viemnanglong.json # Viêm Nang Lông / Folliculitis (15 rules)
-│   ├── rule_trungca.json     # Trứng Cá / Acne (10 rules)
-│   ├── RULE_laoda.json       # Lao Da / Cutaneous TB (16 rules)
-│   ├── rule_SSSS.json        # SSSS (17 rules)
-│   └── rule_phong.json       # Bệnh Phong / Leprosy (21 rules)
-├── chuong1-pdf/              # Source clinical PDFs
-├── scripts/                  # Migration & seed scripts
-└── TEST_CASES.md             # 15 test scenarios
+│   ├── app/                   # Next.js pages & API routes
+│   ├── components/            # React components
+│   └── lib/                   # Database & inference engine
+└── scripts/                   # Migration & seed scripts
 ```
 
-## Diseases Coverage
+## Test Cases Format
 
-| Disease | Vietnamese | Rules | Key Features |
-|---------|-----------|-------|--------------|
-| Impetigo | Chốc | 10 | Honey-colored crusts, complications tracking |
-| Boils | Nhọt | 10 | Facial danger zone, diabetes risk |
-| Folliculitis | Viêm Nang Lông | 15 | 4 subtypes, scarring variants |
-| Acne | Trứng Cá | 10 | Drug safety, age restrictions |
-| Cutaneous TB | Lao Da | 16 | 7 TB types, treatment regimens |
-| SSSS | SSSS | 17 | Differential diagnosis, severity grading |
-| Leprosy | Bệnh Phong | 21 | WHO classification, MDT protocols |
+Test cases in `testcases.json` use this structure:
 
-**Total**: 99 rules covering comprehensive diagnosis, treatment, and safety protocols
-
-## Usage
-
-### Diagnosis Flow
-1. Navigate to homepage → "Get Diagnosis"
-2. Complete 5-step symptom form
-3. Receive diagnosis with:
-   - Main diagnosis & differential list
-   - Risk assessment
-   - Treatment recommendations
-   - Fired rules with explanations
-
-### Admin Dashboard
-1. Homepage → "Manage Rules"
-2. View statistics and all rules
-3. Inspect conditions, conclusions, explanations
-
-## Database Schema
-
-**Core Tables**:
-- `diseases` - Disease information
-- `rules` - Rule metadata (name, category, logic)
-- `conditions` - Rule IF conditions (variable, operator, value)
-- `conclusions` - Rule THEN actions (variable, value)
-- `diagnosis_sessions` - User diagnosis tracking
-- `session_facts` - Working memory
-- `fired_rules` - Audit trail
-
-## Inference Engine
-
-**Forward-Chaining Algorithm**:
-1. Initialize working memory with symptoms
-2. Sort rules by priority (diagnosis → risk → treatment)
-3. Evaluate conditions (AND/OR logic)
-4. Apply conclusions if satisfied
-5. Repeat until no new rules fire
-
-**Operators**: `=`, `!=`, `IN`, `NOT_IN`, `>`, `<`, `>=`, `<=`, `CONTAINS_ANY`, `IS_NOT_NULL`, `LIKE`
-
-## API Endpoints
-
-### Diagnosis
-- `POST /api/diagnosis` - Submit symptoms, get diagnosis
-- `GET /api/sessions` - List diagnosis sessions
-
-### Rules Management
-- `GET /api/rules` - List all rules
-- `GET /api/rules/[id]` - Get specific rule
-- `POST /api/rules` - Create rule
-- `PUT /api/rules/[id]` - Update rule
-- `DELETE /api/rules/[id]` - Delete rule
-
-### Diseases
-- `GET /api/diseases` - List diseases
-- `POST /api/diseases` - Create disease
-
-## Adding New Diseases
-
-1. **Create JSON** in `rules/` directory:
 ```json
 {
-  "disease": "Disease Name",
-  "description": "Description",
-  "rules": [
-    {
-      "rule_id": "DISEASE_1",
-      "rule_name": "Rule name",
-      "category": "Chẩn đoán",
-      "conditions": { "Variable.name": "value" },
-      "actions": { "DiagnosisAssessment.result": "value" },
-      "explanation": "Clinical explanation"
-    }
-  ]
+  "name": "Test Case 1: Chốc",
+  "description": "Trẻ em 5 tuổi với bọng nước...",
+  "expectedDiagnosis": "Chốc",
+  "symptoms": {
+    "PATIENT_INFO.age (Tuổi)": "0-5",
+    "PATIENT_INFO.sex (Giới tính)": "Nam",
+    "SKIN_LESION_MORPHOLOGY.vesicle_or_bulla (Bọng nước/bóng nước nông)": true,
+    ...
+  }
 }
 ```
 
-2. **Update seed script** (`scripts/seed.ts`):
-```typescript
-const diseases = [
-  { file: '1-choc.json', id: 'CHOC' },
-  { file: '2-nhot.json', id: 'NHOT' },
-  { file: '3-viem-nang-long.json', id: 'FOL' },
-  { file: '4-new-disease.json', id: 'NEW' } // Add here
-];
+**Important**:
+- Only use attributes defined in `rules/*.json` files
+- Include Vietnamese labels next to attribute names
+- Custom patient attributes: age, sex, diabetes, immunosuppressed, HIV_status, pregnant, breastfeeding
+
+## Adding New Rules
+
+1. **Edit rule file** in `rules/` directory (e.g., `rule_nhot.json`)
+2. **Follow this format**:
+```json
+{
+  "id": "NHOT_11",
+  "group": "Chẩn đoán",
+  "description": "Rule description",
+  "logic": "AND",
+  "if": [
+    {
+      "concept": "SKIN_LESION_MORPHOLOGY",
+      "attribute": "pustule",
+      "operator": "=",
+      "value": true
+    }
+  ],
+  "then": [
+    {
+      "concept": "DIAGNOSIS_ASSESSMENT",
+      "attribute": "main_diagnosis",
+      "value": "Nhọt"
+    }
+  ],
+  "explanation": "Clinical explanation in Vietnamese"
+}
 ```
+3. **Re-seed database**: `pnpm run seed`
 
-3. **Run seed**: `pnpm run seed`
+## Available Operators
 
-## Test Cases
-
-The system includes comprehensive test scenarios covering all 7 diseases with various presentations, complications, and treatment pathways.
+`=`, `!=`, `IN`, `NOT_IN`, `>`, `<`, `>=`, `<=`, `CONTAINS_ANY`, `IS_NOT_NULL`, `LIKE`
 
 ## Scripts
 
 ```bash
-pnpm run dev      # Start development server
+pnpm run dev      # Start development
 pnpm run build    # Build for production
-pnpm run start    # Start production server
 pnpm run migrate  # Run database migrations
-pnpm run seed     # Seed database from JSON
+pnpm run seed     # Seed database from JSON files
 ```
 
 ## Troubleshooting
 
-**Database Issues**
-- Verify `DATABASE_URL` in `.env.local`
-- Ensure `?sslmode=require` in connection string
-- Check Neon dashboard for connectivity
-
-**No Rules Showing**
+**No rules showing?**
 - Run `pnpm run seed`
-- Verify all 7 JSON files exist in `rules/`
-- Check admin dashboard for seeding status
+- Check `DATABASE_URL` in `.env.local`
 
-**Diagnosis Errors**
-- Ensure rules are seeded successfully
-- Check browser console for API errors
-- Verify all required symptom fields filled
+**Diagnosis errors?**
+- Verify all symptom fields are filled
+- Check browser console for errors
 
-## Example Test
+**Database connection issues?**
+- Ensure `?sslmode=require` in connection string
+- Verify Neon database is active
 
-**Input** (Typical Impetigo):
-- Vesicle/Bulla: Yes
-- Crust Color: Vàng nâu (honey-yellow)
-- Location: Mặt (face)
-- Hygiene: Kém (poor)
-- Fever: No, Itching: Yes
+## Tech Stack
 
-**Expected Output**:
-- Diagnosis: "Chốc điển hình"
-- Treatment: Local antiseptic + topical antibiotic
-- Duration: 5-7 days
-- Rules fired: CHOC_1, CHOC_2, CHOC_3, CHOC_4, CHOC_6, CHOC_9
-
-## Project Info
-
-- **Version**: 0.2.0
-- **Diseases**: 7
-- **Rules**: 99
-- **Language**: Vietnamese + English
-- **Source**: Vietnamese Ministry of Health Guidelines
-- **Database**: Neon PostgreSQL (serverless)
-- **Operators**: 11 comparison operators including pattern matching
-
-## Contributing
-
-1. Add clinical documentation to `chuong1-pdf/`
-2. Convert to JSON format in `rules/` (use concept/attribute structure)
-3. Update seed script with new disease
-4. Test rules with inference engine
-5. Validate all operators work correctly
+- **Frontend**: Next.js 14, React 18, TypeScript, Tailwind CSS
+- **Backend**: Next.js API Routes, Neon PostgreSQL
+- **UI**: Radix UI components
 
 ## License
 
 Educational purposes only.
-
-## Support
-
-- Check admin dashboard for status
-- Verify all 7 JSON files are valid
-- Test API endpoints: `/api/diagnosis`, `/api/rules`
-- Review ER_Diagram.md for database structure
-- See concepts.json for all available attributes

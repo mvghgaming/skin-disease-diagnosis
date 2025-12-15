@@ -13,7 +13,7 @@
           "concept": "SKIN_LESION_MORPHOLOGY",
           "attribute": "chronic_inflammation_features",
           "operator": "CONTAINS_ANY",
-          "value": ["bờ nham nhở", "áp xe lạnh", "vỡ rò dịch", "hoại tử ở giữa"]
+          "value": ["Bờ nham nhở", "Áp xe lạnh", "Vỡ rò", "Hoại tử ở giữa"]
         },
         { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "lymph_node", "operator": "=", "value": "Hạch vùng" },
         { "concept": "LABORATORY_ASSESSMENT", "attribute": "bacteria_test", "operator": "=", "value": "Dương tính" },
@@ -30,12 +30,12 @@
       "description": "Chẩn đoán Lupus lao dựa trên củ lao + dấu hiệu màu 'thạch táo' + vị trí vùng mặt + mô bệnh học nang điển hình + tuberculin dương tính.",
       "logic": "AND",
       "if": [
-        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "primary_lesion", "operator": "IN", "value": ["củ lao"] },
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "primary_lesion", "operator": "IN", "value": ["Củ lao"] },
         {
           "concept": "SKIN_LESION_MORPHOLOGY",
           "attribute": "visual_features",
           "operator": "CONTAINS_ANY",
-          "value": ["màu vàng đỏ", "ấn kính xếp màu vàng nâu"]
+          "value": ["Màu vàng đỏ", "Ấn kính vàng nâu"]
         },
         {
           "concept": "LESION_DISTRIBUTION",
@@ -61,7 +61,7 @@
           "concept": "SKIN_LESION_MORPHOLOGY",
           "attribute": "primary_lesion",
           "operator": "IN",
-          "value": ["mảng sùi", "sẩn dày sưng nứt nẻ"]
+          "value": ["Mảng sùi", "Sẩn"]
         },
         {
           "concept": "LESION_DISTRIBUTION",
@@ -88,7 +88,7 @@
           "concept": "SKIN_LESION_MORPHOLOGY",
           "attribute": "chronic_inflammation_features",
           "operator": "CONTAINS_ANY",
-          "value": ["bờ nham nhở", "đau", "mủ nhầy thối"]
+          "value": ["Bờ nham nhở", "Đau", "Mủ nhầy thối"]
         },
         {
           "concept": "LESION_DISTRIBUTION",
@@ -113,13 +113,13 @@
           "concept": "SKIN_LESION_MORPHOLOGY",
           "attribute": "primary_lesion",
           "operator": "IN",
-          "value": ["nốt dưới da", "áp xe lạnh"]
+          "value": ["Nốt dưới da", "Áp xe lạnh"]
         },
         {
           "concept": "SKIN_LESION_MORPHOLOGY",
           "attribute": "visual_features",
           "operator": "CONTAINS_ANY",
-          "value": ["vỡ rò dịch", "tạo đường hầm"]
+          "value": ["Vỡ rò dịch", "Tạo đường hầm"]
         },
         {
           "concept": "LESION_DISTRIBUTION",
@@ -140,12 +140,12 @@
       "description": "Chẩn đoán Á lao sẩn (Papulonecrotic tuberculid) dựa trên sẩn + hoại tử giữa/sẹo lõm + vị trí mặt hoặc mông.",
       "logic": "AND",
       "if": [
-        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "primary_lesion", "operator": "=", "value": "sẩn" },
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "primary_lesion", "operator": "=", "value": "Sẩn" },
         {
           "concept": "SKIN_LESION_MORPHOLOGY",
           "attribute": "visual_features",
           "operator": "CONTAINS_ANY",
-          "value": ["hoại tử ở giữa", "sẹo lõm"]
+          "value": ["Hoại tử ở giữa", "Sẹo lõm"]
         },
         { "concept": "LESION_DISTRIBUTION", "attribute": "main_location", "operator": "IN", "value": ["Mặt", "Mông"] }
       ],
@@ -160,12 +160,12 @@
       "description": "Chẩn đoán Hồng ban rắn Bazin dựa trên cục dưới da + đỏ tím/đau/loét giữa + vị trí cẳng chân.",
       "logic": "AND",
       "if": [
-        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "primary_lesion", "operator": "=", "value": "cục nhỏ dưới da" },
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "primary_lesion", "operator": "=", "value": "Cục dưới da" },
         {
           "concept": "SKIN_LESION_MORPHOLOGY",
           "attribute": "visual_features",
           "operator": "CONTAINS_ANY",
-          "value": ["màu đỏ tím", "đau khi sờ nắn", "mềm ở giữa"]
+          "value": ["Đỏ tím", "Đau khi sờ nắn", "Mềm ở giữa"]
         },
         { "concept": "LESION_DISTRIBUTION", "attribute": "main_location", "operator": "=", "value": "Cẳng chân" }
       ],

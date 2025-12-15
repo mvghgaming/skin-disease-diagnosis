@@ -2,83 +2,357 @@
   "testCases": [
     {
       "name": "Test Case 1: Chốc (Impetigo)",
-      "description": "Trẻ em 5 tuổi với bọng nước và vảy màu vàng mật ở mặt",
+      "description": "Trẻ em 5 tuổi với bọng nước và vảy màu vàng nâu ở mặt",
       "expectedDiagnosis": "Chốc",
       "symptoms": {
-        "PATIENT_INFO.age": "0-5",
-        "PATIENT_INFO.sex": "Nam",
-        "PATIENT_INFO.residence_area": "Nông thôn",
-        "PATIENT_INFO.onset_duration": "< 1 tuần",
-        "SKIN_LESION_MORPHOLOGY.vesicle_or_bulla": true,
-        "SKIN_LESION_MORPHOLOGY.crust_presence": true,
-        "SKIN_LESION_MORPHOLOGY.crust_color": "Vàng mật",
-        "SKIN_LESION_MORPHOLOGY.primary_lesion": "Bọng nước",
-        "LESION_DISTRIBUTION.main_location": "Mặt",
-        "LESION_DISTRIBUTION.number_of_lesions": "Nhiều (6-20)",
-        "RISK_FACTOR_ASSESSMENT.hygiene_level": "Kém",
-        "RISK_FACTOR_ASSESSMENT.skin_trauma": true,
-        "RISK_FACTOR_ASSESSMENT.hot_humid_environment": true,
-        "SYSTEMIC_AND_NEURO_SIGNS.fever": false,
-        "SYSTEMIC_AND_NEURO_SIGNS.pruritus": true,
-        "SEVERITY_ASSESSMENT.extent_of_lesions": "Khu trú",
-        "SEVERITY_ASSESSMENT.overall_severity": "Nhẹ"
+        "PATIENT_INFO.age (Tuổi)": "0-5",
+        "PATIENT_INFO.sex (Giới tính)": "Nam",
+        "SKIN_LESION_MORPHOLOGY.vesicle_or_bulla (Bọng nước/bóng nước nông)": true,
+        "SKIN_LESION_MORPHOLOGY.crust_presence (Có vảy, đóng mày)": true,
+        "SKIN_LESION_MORPHOLOGY.crust_color (Màu vảy)": "Vàng nâu",
+        "LESION_DISTRIBUTION.main_location (Vị trí chính)": "Mặt",
+        "SYSTEMIC_AND_NEURO_SIGNS.fever (Có sốt)": false,
+        "SYSTEMIC_AND_NEURO_SIGNS.pruritus (Ngứa)": true,
+        "RISK_FACTOR_ASSESSMENT.hygiene_level (Mức độ vệ sinh da)": "Kém",
+        "RISK_FACTOR_ASSESSMENT.skin_trauma (Tổn thương da sẵn)": true,
+        "RISK_FACTOR_ASSESSMENT.hot_humid_environment (Sống/làm việc nơi nóng ẩm)": true,
+        "SEVERITY_ASSESSMENT.extent_of_lesions (Phạm vi tổn thương)": "Khu trú"
       }
     },
     {
-      "name": "Test Case 2: Trứng cá (Acne)",
-      "description": "Thiếu niên 16 tuổi với mụn đầu đen, mụn mủ ở mặt và ngực",
-      "expectedDiagnosis": "Trứng cá",
+      "name": "Test Case 2: Chốc nặng (Severe Impetigo)",
+      "description": "Trẻ nữ 4 tuổi với chốc lan rộng, sốt",
+      "expectedDiagnosis": "Chốc",
       "symptoms": {
-        "PATIENT_INFO.age": "13-18",
-        "PATIENT_INFO.sex": "Nam",
-        "PATIENT_INFO.occupation": "Học sinh/Sinh viên",
-        "PATIENT_INFO.onset_duration": "1-3 tháng",
-        "SKIN_LESION_MORPHOLOGY.comedones_present": true,
-        "SKIN_LESION_MORPHOLOGY.pustule": true,
-        "SKIN_LESION_MORPHOLOGY.primary_lesion": "Mụn mủ",
-        "LESION_DISTRIBUTION.main_location": "Mặt",
-        "LESION_DISTRIBUTION.seborrheic_area": true,
-        "LESION_DISTRIBUTION.follicular_area": true,
-        "LESION_DISTRIBUTION.number_of_lesions": "Nhiều (6-20)",
-        "RISK_FACTOR_ASSESSMENT.oily_skin": true,
-        "RISK_FACTOR_ASSESSMENT.acne_inducing_drug_history": "Không",
-        "SYSTEMIC_AND_NEURO_SIGNS.pain": false,
-        "SYSTEMIC_AND_NEURO_SIGNS.pruritus": false,
-        "SEVERITY_ASSESSMENT.noninflammatory_lesion_count": "11-20",
-        "SEVERITY_ASSESSMENT.inflammatory_lesion_count": "6-10",
-        "SEVERITY_ASSESSMENT.nodule_cyst_count": "0",
-        "SEVERITY_ASSESSMENT.overall_severity": "Trung bình"
+        "PATIENT_INFO.age (Tuổi)": "0-5",
+        "PATIENT_INFO.sex (Giới tính)": "Nữ",
+        "SKIN_LESION_MORPHOLOGY.vesicle_or_bulla (Bọng nước/bóng nước nông)": true,
+        "SKIN_LESION_MORPHOLOGY.crust_presence (Có vảy, đóng mày)": true,
+        "SKIN_LESION_MORPHOLOGY.crust_color (Màu vảy)": "Vàng nâu",
+        "LESION_DISTRIBUTION.main_location (Vị trí chính)": "Mặt",
+        "SYSTEMIC_AND_NEURO_SIGNS.fever (Có sốt)": true,
+        "SYSTEMIC_AND_NEURO_SIGNS.pruritus (Ngứa)": true,
+        "SYSTEMIC_AND_NEURO_SIGNS.malaise (Mệt mỏi, suy nhược)": true,
+        "RISK_FACTOR_ASSESSMENT.hygiene_level (Mức độ vệ sinh da)": "Kém",
+        "RISK_FACTOR_ASSESSMENT.skin_trauma (Tổn thương da sẵn)": true,
+        "RISK_FACTOR_ASSESSMENT.hot_humid_environment (Sống/làm việc nơi nóng ẩm)": true,
+        "SEVERITY_ASSESSMENT.extent_of_lesions (Phạm vi tổn thương)": "Lan rộng",
+        "SEVERITY_ASSESSMENT.systemic_involvement (Có biểu hiện toàn thân)": true
       }
     },
     {
-      "name": "Test Case 3: Bệnh phong (Leprosy)",
-      "description": "Người lớn 45 tuổi với dát nhạt màu, mất cảm giác và dây thần kinh phì đại",
+      "name": "Test Case 3: Nhọt (Furuncle)",
+      "description": "Nam 28 tuổi với nốt viêm đau ở vùng nang lông",
+      "expectedDiagnosis": "Nhọt",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "19-30",
+        "PATIENT_INFO.sex (Giới tính)": "Nam",
+        "PATIENT_INFO.diabetes (Có đái tháo đường)": false,
+        "PATIENT_INFO.immunosuppressed (Suy giảm miễn dịch)": false,
+        "SKIN_LESION_MORPHOLOGY.nodule_or_abscess (Nốt viêm, ổ mủ sâu)": true,
+        "SKIN_LESION_MORPHOLOGY.pustule (Mụn mủ)": true,
+        "LESION_DISTRIBUTION.follicular_area (Vùng quanh nang lông)": true,
+        "LESION_DISTRIBUTION.main_location (Vị trí chính)": "Cổ",
+        "LESION_DISTRIBUTION.number_of_lesions (Số lượng tổn thương)": "Đơn độc",
+        "SYSTEMIC_AND_NEURO_SIGNS.pain (Đau vùng tổn thương)": true,
+        "RISK_FACTOR_ASSESSMENT.hygiene_level (Mức độ vệ sinh da)": "Trung bình",
+        "RISK_FACTOR_ASSESSMENT.occlusive_clothing (Quần áo bó, không thoáng)": false,
+        "RISK_FACTOR_ASSESSMENT.hyperhidrosis (Tăng tiết mồ hôi)": false,
+        "SEVERITY_ASSESSMENT.overall_severity (Mức độ chung)": "Nhẹ"
+      }
+    },
+    {
+      "name": "Test Case 4: Nhọt nặng trên nền đái tháo đường",
+      "description": "Nam 50 tuổi có đái tháo đường với nhiều nhọt",
+      "expectedDiagnosis": "Nhọt",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "31-50",
+        "PATIENT_INFO.sex (Giới tính)": "Nam",
+        "PATIENT_INFO.diabetes (Có đái tháo đường)": true,
+        "PATIENT_INFO.immunosuppressed (Suy giảm miễn dịch)": false,
+        "SKIN_LESION_MORPHOLOGY.nodule_or_abscess (Nốt viêm, ổ mủ sâu)": true,
+        "SKIN_LESION_MORPHOLOGY.pustule (Mụn mủ)": true,
+        "LESION_DISTRIBUTION.follicular_area (Vùng quanh nang lông)": true,
+        "LESION_DISTRIBUTION.main_location (Vị trí chính)": "Lưng",
+        "LESION_DISTRIBUTION.number_of_lesions (Số lượng tổn thương)": "Nhiều",
+        "SYSTEMIC_AND_NEURO_SIGNS.pain (Đau vùng tổn thương)": true,
+        "RISK_FACTOR_ASSESSMENT.hygiene_level (Mức độ vệ sinh da)": "Kém",
+        "RISK_FACTOR_ASSESSMENT.hyperhidrosis (Tăng tiết mồ hôi)": true,
+        "SEVERITY_ASSESSMENT.overall_severity (Mức độ chung)": "Nặng",
+        "SEVERITY_ASSESSMENT.systemic_involvement (Có biểu hiện toàn thân)": true
+      }
+    },
+    {
+      "name": "Test Case 5: Viêm nang lông thường",
+      "description": "Nữ 25 tuổi với mụn mủ ngứa ở vùng nang lông",
+      "expectedDiagnosis": "Viêm nang lông",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "19-30",
+        "PATIENT_INFO.sex (Giới tính)": "Nữ",
+        "PATIENT_INFO.immunosuppressed (Suy giảm miễn dịch)": false,
+        "SKIN_LESION_MORPHOLOGY.pustule (Mụn mủ)": true,
+        "SKIN_LESION_MORPHOLOGY.scar (Sẹo)": false,
+        "SKIN_LESION_MORPHOLOGY.nodule_or_abscess (Nốt viêm, ổ mủ sâu)": false,
+        "LESION_DISTRIBUTION.follicular_area (Vùng quanh nang lông)": true,
+        "LESION_DISTRIBUTION.main_location (Vị trí chính)": "Đùi",
+        "SYSTEMIC_AND_NEURO_SIGNS.pruritus (Ngứa)": true,
+        "SYSTEMIC_AND_NEURO_SIGNS.pain (Đau vùng tổn thương)": false,
+        "RISK_FACTOR_ASSESSMENT.skin_trauma (Tổn thương da sẵn)": false,
+        "SEVERITY_ASSESSMENT.overall_severity (Mức độ chung)": "Nhẹ"
+      }
+    },
+    {
+      "name": "Test Case 6: Viêm nang lông Decalvans",
+      "description": "Nam 35 tuổi với viêm nang lông ở da đầu có sẹo",
+      "expectedDiagnosis": "Viêm nang lông Decalvans",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "31-50",
+        "PATIENT_INFO.sex (Giới tính)": "Nam",
+        "PATIENT_INFO.immunosuppressed (Suy giảm miễn dịch)": false,
+        "SKIN_LESION_MORPHOLOGY.pustule (Mụn mủ)": true,
+        "SKIN_LESION_MORPHOLOGY.scar (Sẹo)": true,
+        "LESION_DISTRIBUTION.follicular_area (Vùng quanh nang lông)": true,
+        "LESION_DISTRIBUTION.main_location (Vị trí chính)": "Da đầu",
+        "SYSTEMIC_AND_NEURO_SIGNS.pruritus (Ngứa)": true,
+        "SEVERITY_ASSESSMENT.overall_severity (Mức độ chung)": "Nặng",
+        "SEVERITY_ASSESSMENT.deformity_or_disability (Biến dạng/tàn tật)": true
+      }
+    },
+    {
+      "name": "Test Case 7: Trứng cá thông thường",
+      "description": "Nam 16 tuổi với nhân mụn và mụn mủ ở mặt",
+      "expectedDiagnosis": "Trứng cá thông thường",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "13-18",
+        "PATIENT_INFO.sex (Giới tính)": "Nam",
+        "PATIENT_INFO.pregnant (Đang mang thai)": false,
+        "PATIENT_INFO.breastfeeding (Đang cho con bú)": false,
+        "SKIN_LESION_MORPHOLOGY.comedones_present (Có mụn đầu đen/đầu trắng/mụn cám)": true,
+        "SKIN_LESION_MORPHOLOGY.pustule (Mụn mủ)": true,
+        "SKIN_LESION_MORPHOLOGY.nodule_or_abscess (Nốt viêm, ổ mủ sâu)": false,
+        "SKIN_LESION_MORPHOLOGY.scar (Sẹo)": false,
+        "SKIN_LESION_MORPHOLOGY.ulceration (Có loét)": false,
+        "LESION_DISTRIBUTION.main_location (Vị trí chính)": "Mặt",
+        "SYSTEMIC_AND_NEURO_SIGNS.fever (Có sốt)": false,
+        "SYSTEMIC_AND_NEURO_SIGNS.malaise (Mệt mỏi, suy nhược)": false,
+        "RISK_FACTOR_ASSESSMENT.acne_inducing_drug_history (Tiền sử dùng thuốc gây trứng cá)": "Không",
+        "SEVERITY_ASSESSMENT.overall_severity (Mức độ chung)": "Nhẹ"
+      }
+    },
+    {
+      "name": "Test Case 8: Trứng cá sơ sinh",
+      "description": "Trẻ sơ sinh với nhân mụn ở má",
+      "expectedDiagnosis": "Trứng cá sơ sinh",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "0-5",
+        "PATIENT_INFO.sex (Giới tính)": "Nam",
+        "SKIN_LESION_MORPHOLOGY.comedones_present (Có mụn đầu đen/đầu trắng/mụn cám)": true,
+        "LESION_DISTRIBUTION.main_location (Vị trí chính)": "Má",
+        "SEVERITY_ASSESSMENT.overall_severity (Mức độ chung)": "Nhẹ"
+      }
+    },
+    {
+      "name": "Test Case 9: Bệnh phong thể củ (PB)",
+      "description": "Nam 45 tuổi với mảng ranh giới rõ, mất cảm giác",
       "expectedDiagnosis": "Bệnh phong",
       "symptoms": {
-        "PATIENT_INFO.age": "31-50",
-        "PATIENT_INFO.sex": "Nam",
-        "PATIENT_INFO.residence_area": "Vùng sâu vùng xa",
-        "PATIENT_INFO.onset_duration": "> 6 tháng",
-        "SKIN_LESION_MORPHOLOGY.leprosy_patch": true,
-        "SKIN_LESION_MORPHOLOGY.sensory_loss_on_lesion": true,
-        "SKIN_LESION_MORPHOLOGY.patch_type": true,
-        "SKIN_LESION_MORPHOLOGY.patch_color": "Nhạt màu",
-        "SKIN_LESION_MORPHOLOGY.primary_lesion": "Dát nhạt màu",
-        "LESION_DISTRIBUTION.main_location": "Tay",
-        "LESION_DISTRIBUTION.extremities_involved": true,
-        "LESION_DISTRIBUTION.number_of_lesions": "Ít (2-5)",
-        "LESION_DISTRIBUTION.border_clarity": "Rõ",
-        "LESION_DISTRIBUTION.symmetry": "Không đối xứng",
-        "RISK_FACTOR_ASSESSMENT.close_contact_tb_leprosy": true,
-        "RISK_FACTOR_ASSESSMENT.leprosy_risk_group": "Nguy cơ cao",
-        "SYSTEMIC_AND_NEURO_SIGNS.center_sensation": "Mất hoàn toàn",
-        "SYSTEMIC_AND_NEURO_SIGNS.temperature_or_pain_sensation_loss_on_lesion": true,
-        "SYSTEMIC_AND_NEURO_SIGNS.enlarged_painful_nerves": true,
-        "LABORATORY_ASSESSMENT.smear_afb_leprosy": false,
-        "LABORATORY_ASSESSMENT.leprosy_bacilloscopy_result": "Âm tính",
-        "SEVERITY_ASSESSMENT.extent_of_lesions": "Khu trú",
-        "SEVERITY_ASSESSMENT.deformity_or_disability": false,
-        "SEVERITY_ASSESSMENT.overall_severity": "Trung bình"
+        "PATIENT_INFO.age (Tuổi)": "31-50",
+        "PATIENT_INFO.sex (Giới tính)": "Nam",
+        "SKIN_LESION_MORPHOLOGY.plaque_type (Có mảng/củ ranh giới rõ)": true,
+        "SKIN_LESION_MORPHOLOGY.patch_type (Có dát nhạt màu)": false,
+        "SKIN_LESION_MORPHOLOGY.diffuse_infiltration (Thâm nhiễm lan tỏa đối xứng hai bên)": false,
+        "LESION_DISTRIBUTION.border_clarity (Ranh giới tổn thương)": "Rõ",
+        "LESION_DISTRIBUTION.symmetry (Kiểu phân bố)": "Không đối xứng",
+        "SYSTEMIC_AND_NEURO_SIGNS.center_sensation (Cảm giác tại trung tâm tổn thương)": "Mất",
+        "SYSTEMIC_AND_NEURO_SIGNS.temperature_or_pain_sensation_loss_on_lesion (Mất cảm giác nóng/lạnh/đau tại tổn thương)": true,
+        "SYSTEMIC_AND_NEURO_SIGNS.enlarged_painful_nerves (Dây thần kinh ngoại biên phì đại/ấn đau)": true,
+        "RISK_FACTOR_ASSESSMENT.close_contact_tb_leprosy (Tiếp xúc gần với bệnh nhân lao da/phong)": true,
+        "SEVERITY_ASSESSMENT.total_lesion_count (Tổng mọi loại tổn thương)": "1-5",
+        "LABORATORY_ASSESSMENT.leprosy_Ziehl_Neelsen_smear (Nhuộm Ziehl–Neelsen tìm M. leprae)": "Âm tính",
+        "LABORATORY_ASSESSMENT.bacteriological_index (Chỉ số BI)": "0"
+      }
+    },
+    {
+      "name": "Test Case 10: Bệnh phong thể u (MB)",
+      "description": "Nam 60 tuổi với thâm nhiễm lan tỏa đối xứng",
+      "expectedDiagnosis": "Bệnh phong",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "51-70",
+        "PATIENT_INFO.sex (Giới tính)": "Nam",
+        "SKIN_LESION_MORPHOLOGY.diffuse_infiltration (Thâm nhiễm lan tỏa đối xứng hai bên)": true,
+        "SKIN_LESION_MORPHOLOGY.plaque_type (Có mảng/củ ranh giới rõ)": false,
+        "SKIN_LESION_MORPHOLOGY.patch_type (Có dát nhạt màu)": false,
+        "LESION_DISTRIBUTION.border_clarity (Ranh giới tổn thương)": "Không rõ",
+        "LESION_DISTRIBUTION.symmetry (Kiểu phân bố)": "Đối xứng 2 bên",
+        "SYSTEMIC_AND_NEURO_SIGNS.center_sensation (Cảm giác tại trung tâm tổn thương)": "Giảm",
+        "SYSTEMIC_AND_NEURO_SIGNS.temperature_or_pain_sensation_loss_on_lesion (Mất cảm giác nóng/lạnh/đau tại tổn thương)": true,
+        "SYSTEMIC_AND_NEURO_SIGNS.enlarged_painful_nerves (Dây thần kinh ngoại biên phì đại/ấn đau)": true,
+        "RISK_FACTOR_ASSESSMENT.close_contact_tb_leprosy (Tiếp xúc gần với bệnh nhân lao da/phong)": true,
+        "SEVERITY_ASSESSMENT.total_lesion_count (Tổng mọi loại tổn thương)": ">50",
+        "SEVERITY_ASSESSMENT.muscle_atrophy_or_deformity_of_limbs (Teo cơ hoặc biến dạng chi do phong)": true,
+        "LABORATORY_ASSESSMENT.leprosy_Ziehl_Neelsen_smear (Nhuộm Ziehl–Neelsen tìm M. leprae)": "Dương tính",
+        "LABORATORY_ASSESSMENT.bacteriological_index (Chỉ số BI)": "5"
+      }
+    },
+    {
+      "name": "Test Case 11: Lao da - Lupus lao",
+      "description": "Nữ 40 tuổi với củ lao ở mặt, ấn kính vàng nâu",
+      "expectedDiagnosis": "Lupus lao",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "31-50",
+        "PATIENT_INFO.sex (Giới tính)": "Nữ",
+        "PATIENT_INFO.HIV_status (Có HIV hay không)": false,
+        "SKIN_LESION_MORPHOLOGY.primary_lesion (Loại tổn thương chính)": "Củ lao",
+        "SKIN_LESION_MORPHOLOGY.visual_features (Hình ảnh gợi ý)": ["Ấn kính vàng nâu"],
+        "SKIN_LESION_MORPHOLOGY.ulceration (Có loét)": false,
+        "LESION_DISTRIBUTION.main_location (Vị trí chính)": "Mặt",
+        "LABORATORY_ASSESSMENT.histopathology (Mô bệnh học)": "Nang điển hình",
+        "LABORATORY_ASSESSMENT.tuberculin_test (Kết quả test Tuberculin/Mantoux)": "Dương tính"
+      }
+    },
+    {
+      "name": "Test Case 12: Lao da - Săng lao",
+      "description": "Nam 35 tuổi với loét có bờ nham nhở, hạch vùng",
+      "expectedDiagnosis": "Săng lao (Tuberculosis Chancre)",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "31-50",
+        "PATIENT_INFO.sex (Giới tính)": "Nam",
+        "PATIENT_INFO.HIV_status (Có HIV hay không)": false,
+        "SKIN_LESION_MORPHOLOGY.ulceration (Có loét)": true,
+        "SKIN_LESION_MORPHOLOGY.chronic_inflammation_features (Đặc điểm viêm mạn)": ["Bờ nham nhở"],
+        "SKIN_LESION_MORPHOLOGY.lymph_node (Hạch)": "Hạch vùng",
+        "LESION_DISTRIBUTION.main_location (Vị trí chính)": "Tay",
+        "LABORATORY_ASSESSMENT.bacteria_test (Test vi khuẩn lao/bệnh phẩm khác)": "Dương tính",
+        "LABORATORY_ASSESSMENT.tuberculin_test (Kết quả test Tuberculin/Mantoux)": "Dương tính"
+      }
+    },
+    {
+      "name": "Test Case 13: SSSS ở trẻ em",
+      "description": "Trẻ 3 tuổi với ban đỏ bong vảy lan tỏa, bọng nước, không có mài",
+      "expectedDiagnosis": "SSSS",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "0-5",
+        "PATIENT_INFO.sex (Giới tính)": "Nam",
+        "SKIN_LESION_MORPHOLOGY.exfoliative_erythema (Ban đỏ bong vảy lan tỏa)": true,
+        "SKIN_LESION_MORPHOLOGY.vesicle_or_bulla (Bọng nước/bóng nước nông)": true,
+        "SKIN_LESION_MORPHOLOGY.crust_presence (Có vảy, đóng mày)": false,
+        "SKIN_LESION_MORPHOLOGY.erythema (Có ban đỏ)": true,
+        "SEVERITY_ASSESSMENT.systemic_involvement (Có biểu hiện toàn thân)": true,
+        "SEVERITY_ASSESSMENT.overall_severity (Mức độ chung)": "Trung bình"
+      }
+    },
+    {
+      "name": "Test Case 14: SSSS nặng",
+      "description": "Trẻ sơ sinh với SSSS mức độ nặng",
+      "expectedDiagnosis": "SSSS",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "0-5",
+        "PATIENT_INFO.sex (Giới tính)": "Nữ",
+        "SKIN_LESION_MORPHOLOGY.exfoliative_erythema (Ban đỏ bong vảy lan tỏa)": true,
+        "SKIN_LESION_MORPHOLOGY.vesicle_or_bulla (Bọng nước/bóng nước nông)": true,
+        "SKIN_LESION_MORPHOLOGY.crust_presence (Có vảy, đóng mày)": false,
+        "SEVERITY_ASSESSMENT.systemic_involvement (Có biểu hiện toàn thân)": true,
+        "SEVERITY_ASSESSMENT.overall_severity (Mức độ chung)": "Nặng",
+        "LABORATORY_ASSESSMENT.other_myco_tests (Các xét nghiệm khác về vi khuẩn)": "Tụ cầu vàng",
+        "LABORATORY_ASSESSMENT.inflammatory_markers (Chỉ số viêm)": "Độc tố ETA/ETB"
+      }
+    },
+    {
+      "name": "Test Case 15: Giả viêm nang lông",
+      "description": "Nam 30 tuổi với viêm nang lông ở cằm sau cạo râu",
+      "expectedDiagnosis": "Giả viêm nang lông (Pseudo-folliculitis)",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "19-30",
+        "PATIENT_INFO.sex (Giới tính)": "Nam",
+        "SKIN_LESION_MORPHOLOGY.pustule (Mụn mủ)": true,
+        "SKIN_LESION_MORPHOLOGY.scar (Sẹo)": false,
+        "LESION_DISTRIBUTION.follicular_area (Vùng quanh nang lông)": true,
+        "LESION_DISTRIBUTION.main_location (Vị trí chính)": "Cằm",
+        "SYSTEMIC_AND_NEURO_SIGNS.pruritus (Ngứa)": true,
+        "RISK_FACTOR_ASSESSMENT.skin_trauma (Tổn thương da sẵn)": true,
+        "SEVERITY_ASSESSMENT.overall_severity (Mức độ chung)": "Nhẹ"
+      }
+    },
+    {
+      "name": "Test Case 16: Bệnh phong thể bất định",
+      "description": "Nam 25 tuổi với dát nhạt màu, ranh giới không rõ",
+      "expectedDiagnosis": "Bệnh phong - Thể bất định (I)",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "19-30",
+        "PATIENT_INFO.sex (Giới tính)": "Nam",
+        "SKIN_LESION_MORPHOLOGY.patch_type (Có dát nhạt màu)": true,
+        "SKIN_LESION_MORPHOLOGY.patch_color (Màu dát)": "Trắng",
+        "SKIN_LESION_MORPHOLOGY.plaque_type (Có mảng/củ ranh giới rõ)": false,
+        "SKIN_LESION_MORPHOLOGY.diffuse_infiltration (Thâm nhiễm lan tỏa đối xứng hai bên)": false,
+        "LESION_DISTRIBUTION.border_clarity (Ranh giới tổn thương)": "Không rõ",
+        "SYSTEMIC_AND_NEURO_SIGNS.temperature_or_pain_sensation_loss_on_lesion (Mất cảm giác nóng/lạnh/đau tại tổn thương)": false,
+        "RISK_FACTOR_ASSESSMENT.close_contact_tb_leprosy (Tiếp xúc gần với bệnh nhân lao da/phong)": true,
+        "SEVERITY_ASSESSMENT.total_lesion_count (Tổng mọi loại tổn thương)": "1-5",
+        "LABORATORY_ASSESSMENT.bacteriological_index (Chỉ số BI)": "0"
+      }
+    },
+    {
+      "name": "Test Case 17: Nhọt ở mặt (vùng nguy hiểm)",
+      "description": "Nam 22 tuổi với nhọt ở vùng mặt",
+      "expectedDiagnosis": "Nhọt",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "19-30",
+        "PATIENT_INFO.sex (Giới tính)": "Nam",
+        "PATIENT_INFO.diabetes (Có đái tháo đường)": false,
+        "PATIENT_INFO.immunosuppressed (Suy giảm miễn dịch)": false,
+        "SKIN_LESION_MORPHOLOGY.nodule_or_abscess (Nốt viêm, ổ mủ sâu)": true,
+        "SKIN_LESION_MORPHOLOGY.pustule (Mụn mủ)": true,
+        "LESION_DISTRIBUTION.follicular_area (Vùng quanh nang lông)": true,
+        "LESION_DISTRIBUTION.main_location (Vị trí chính)": "Mặt",
+        "LESION_DISTRIBUTION.number_of_lesions (Số lượng tổn thương)": "Đơn độc",
+        "SYSTEMIC_AND_NEURO_SIGNS.pain (Đau vùng tổn thương)": true,
+        "SEVERITY_ASSESSMENT.overall_severity (Mức độ chung)": "Nặng",
+        "SEVERITY_ASSESSMENT.systemic_involvement (Có biểu hiện toàn thân)": true
+      }
+    },
+    {
+      "name": "Test Case 18: Lao da - Hồng ban rắn Bazin",
+      "description": "Nữ 45 tuổi với cục dưới da đỏ tím ở cẳng chân",
+      "expectedDiagnosis": "Hồng ban rắn Bazin",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "31-50",
+        "PATIENT_INFO.sex (Giới tính)": "Nữ",
+        "PATIENT_INFO.HIV_status (Có HIV hay không)": false,
+        "SKIN_LESION_MORPHOLOGY.primary_lesion (Loại tổn thương chính)": "Cục dưới da",
+        "SKIN_LESION_MORPHOLOGY.visual_features (Hình ảnh gợi ý)": ["Đỏ tím", "Đau khi sờ nắn"],
+        "SKIN_LESION_MORPHOLOGY.ulceration (Có loét)": false,
+        "LESION_DISTRIBUTION.main_location (Vị trí chính)": "Cẳng chân"
+      }
+    },
+    {
+      "name": "Test Case 19: Viêm nang lông tăng bạch cầu ái toan",
+      "description": "Nam 35 tuổi suy giảm miễn dịch với viêm nang lông ngứa nhiều",
+      "expectedDiagnosis": "Viêm nang lông tăng bạch cầu ái toan",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "31-50",
+        "PATIENT_INFO.sex (Giới tính)": "Nam",
+        "PATIENT_INFO.immunosuppressed (Suy giảm miễn dịch)": true,
+        "SKIN_LESION_MORPHOLOGY.pustule (Mụn mủ)": true,
+        "SKIN_LESION_MORPHOLOGY.scar (Sẹo)": false,
+        "LESION_DISTRIBUTION.follicular_area (Vùng quanh nang lông)": true,
+        "LESION_DISTRIBUTION.main_location (Vị trí chính)": "Thân mình",
+        "SYSTEMIC_AND_NEURO_SIGNS.pruritus (Ngứa)": true,
+        "SEVERITY_ASSESSMENT.overall_severity (Mức độ chung)": "Trung bình"
+      }
+    },
+    {
+      "name": "Test Case 20: Trứng cá do thuốc",
+      "description": "Nam 25 tuổi với mụn viêm không có nhân mụn sau dùng corticoid",
+      "expectedDiagnosis": "Trứng cá do thuốc",
+      "symptoms": {
+        "PATIENT_INFO.age (Tuổi)": "19-30",
+        "PATIENT_INFO.sex (Giới tính)": "Nam",
+        "SKIN_LESION_MORPHOLOGY.comedones_present (Có mụn đầu đen/đầu trắng/mụn cám)": false,
+        "SKIN_LESION_MORPHOLOGY.pustule (Mụn mủ)": true,
+        "SKIN_LESION_MORPHOLOGY.nodule_or_abscess (Nốt viêm, ổ mủ sâu)": false,
+        "LESION_DISTRIBUTION.main_location (Vị trí chính)": "Lưng trên",
+        "RISK_FACTOR_ASSESSMENT.acne_inducing_drug_history (Tiền sử dùng thuốc gây trứng cá)": "Corticoid",
+        "SEVERITY_ASSESSMENT.overall_severity (Mức độ chung)": "Trung bình"
       }
     }
   ]

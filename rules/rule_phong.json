@@ -83,8 +83,8 @@
         {
           "concept": "RISK_FACTOR_ASSESSMENT",
           "attribute": "time_from_exposure_to_symptoms_in_years",
-          "operator": ">=",
-          "value": 3
+          "operator": "IN",
+          "value": ["2-5 năm", "5-10 năm", "> 10 năm"]
         }
       ],
       "then": [
@@ -114,8 +114,8 @@
         {
           "concept": "SEVERITY_ASSESSMENT",
           "attribute": "total_lesion_count",
-          "operator": "<=",
-          "value": 10
+          "operator": "IN",
+          "value": ["0", "1-5", "6-10"]
         }
       ],
       "then": [
@@ -258,8 +258,8 @@
       "description": "Phân nhóm WHO PB khi số tổn thương ít (<=5) và BI = 0.",
       "logic": "AND",
       "if": [
-        { "concept": "SEVERITY_ASSESSMENT", "attribute": "total_lesion_count", "operator": "<=", "value": 5 },
-        { "concept": "LABORATORY_ASSESSMENT", "attribute": "bacteriological_index", "operator": "=", "value": 0 }
+        { "concept": "SEVERITY_ASSESSMENT", "attribute": "total_lesion_count", "operator": "IN", "value": ["0", "1-5"] },
+        { "concept": "LABORATORY_ASSESSMENT", "attribute": "bacteriological_index", "operator": "=", "value": "0" }
       ],
       "then": [
         { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "WHO_group", "value": "PB (ít vi khuẩn)" }
@@ -272,8 +272,8 @@
       "description": "Phân nhóm WHO MB khi số tổn thương >5 hoặc BI > 0.",
       "logic": "OR",
       "if": [
-        { "concept": "SEVERITY_ASSESSMENT", "attribute": "total_lesion_count", "operator": ">", "value": 5 },
-        { "concept": "LABORATORY_ASSESSMENT", "attribute": "bacteriological_index", "operator": ">", "value": 0 }
+        { "concept": "SEVERITY_ASSESSMENT", "attribute": "total_lesion_count", "operator": "IN", "value": ["6-10", "11-20", "21-50", ">50"] },
+        { "concept": "LABORATORY_ASSESSMENT", "attribute": "bacteriological_index", "operator": "IN", "value": ["1", "2", "3", "4", "5", "6"] }
       ],
       "then": [
         { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "WHO_group", "value": "MB (nhiều vi khuẩn)" }
@@ -288,7 +288,7 @@
       "logic": "AND",
       "if": [
         { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "WHO_group", "operator": "=", "value": "PB (ít vi khuẩn)" },
-        { "concept": "PATIENT_INFO", "attribute": "age", "operator": ">=", "value": 15 }
+        { "concept": "PATIENT_INFO", "attribute": "age", "operator": "IN", "value": ["13-18", "19-30", "31-50", "51-70", "71+"] }
       ],
       "then": [
         {
@@ -306,7 +306,7 @@
       "logic": "AND",
       "if": [
         { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "WHO_group", "operator": "=", "value": "MB (nhiều vi khuẩn)" },
-        { "concept": "PATIENT_INFO", "attribute": "age", "operator": ">=", "value": 15 }
+        { "concept": "PATIENT_INFO", "attribute": "age", "operator": "IN", "value": ["13-18", "19-30", "31-50", "51-70", "71+"] }
       ],
       "then": [
         {
@@ -324,7 +324,7 @@
       "logic": "AND",
       "if": [
         { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "WHO_group", "operator": "=", "value": "PB (ít vi khuẩn)" },
-        { "concept": "PATIENT_INFO", "attribute": "age", "operator": "<", "value": 15 }
+        { "concept": "PATIENT_INFO", "attribute": "age", "operator": "IN", "value": ["0-5", "6-12"] }
       ],
       "then": [
         {
@@ -342,7 +342,7 @@
       "logic": "AND",
       "if": [
         { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "WHO_group", "operator": "=", "value": "MB (nhiều vi khuẩn)" },
-        { "concept": "PATIENT_INFO", "attribute": "age", "operator": "<", "value": 15 }
+        { "concept": "PATIENT_INFO", "attribute": "age", "operator": "IN", "value": ["0-5", "6-12"] }
       ],
       "then": [
         {

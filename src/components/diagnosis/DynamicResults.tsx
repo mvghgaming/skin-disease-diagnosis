@@ -90,17 +90,17 @@ const GROUP_CATEGORIES: Record<string, string> = {
 };
 
 const CATEGORY_COLORS: Record<string, { bg: string; border: string; text: string; icon: string }> = {
-  diagnosis: { bg: 'bg-blue-50 dark:bg-blue-950/30', border: 'border-blue-200 dark:border-blue-800', text: 'text-blue-800 dark:text-blue-300', icon: 'text-blue-600' },
-  differential: { bg: 'bg-purple-50 dark:bg-purple-950/30', border: 'border-purple-200 dark:border-purple-800', text: 'text-purple-800 dark:text-purple-300', icon: 'text-purple-600' },
-  severity: { bg: 'bg-orange-50 dark:bg-orange-950/30', border: 'border-orange-200 dark:border-orange-800', text: 'text-orange-800 dark:text-orange-300', icon: 'text-orange-600' },
-  risk: { bg: 'bg-yellow-50 dark:bg-yellow-950/30', border: 'border-yellow-200 dark:border-yellow-800', text: 'text-yellow-800 dark:text-yellow-300', icon: 'text-yellow-600' },
-  complication: { bg: 'bg-red-50 dark:bg-red-950/30', border: 'border-red-200 dark:border-red-800', text: 'text-red-800 dark:text-red-300', icon: 'text-red-600' },
-  treatment: { bg: 'bg-green-50 dark:bg-green-950/30', border: 'border-green-200 dark:border-green-800', text: 'text-green-800 dark:text-green-300', icon: 'text-green-600' },
-  warning: { bg: 'bg-amber-50 dark:bg-amber-950/30', border: 'border-amber-200 dark:border-amber-800', text: 'text-amber-800 dark:text-amber-300', icon: 'text-amber-600' },
-  advice: { bg: 'bg-cyan-50 dark:bg-cyan-950/30', border: 'border-cyan-200 dark:border-cyan-800', text: 'text-cyan-800 dark:text-cyan-300', icon: 'text-cyan-600' },
-  prevention: { bg: 'bg-teal-50 dark:bg-teal-950/30', border: 'border-teal-200 dark:border-teal-800', text: 'text-teal-800 dark:text-teal-300', icon: 'text-teal-600' },
-  prognosis: { bg: 'bg-indigo-50 dark:bg-indigo-950/30', border: 'border-indigo-200 dark:border-indigo-800', text: 'text-indigo-800 dark:text-indigo-300', icon: 'text-indigo-600' },
-  default: { bg: 'bg-gray-50 dark:bg-gray-950/30', border: 'border-gray-200 dark:border-gray-800', text: 'text-gray-800 dark:text-gray-300', icon: 'text-gray-600' },
+  diagnosis: { bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-800', icon: 'text-blue-600' },
+  differential: { bg: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-800', icon: 'text-purple-600' },
+  severity: { bg: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-800', icon: 'text-orange-600' },
+  risk: { bg: 'bg-yellow-50', border: 'border-yellow-200', text: 'text-yellow-800', icon: 'text-yellow-600' },
+  complication: { bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-800', icon: 'text-red-600' },
+  treatment: { bg: 'bg-green-50', border: 'border-green-200', text: 'text-green-800', icon: 'text-green-600' },
+  warning: { bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-800', icon: 'text-amber-600' },
+  advice: { bg: 'bg-cyan-50', border: 'border-cyan-200', text: 'text-cyan-800', icon: 'text-cyan-600' },
+  prevention: { bg: 'bg-teal-50', border: 'border-teal-200', text: 'text-teal-800', icon: 'text-teal-600' },
+  prognosis: { bg: 'bg-indigo-50', border: 'border-indigo-200', text: 'text-indigo-800', icon: 'text-indigo-600' },
+  default: { bg: 'bg-gray-50', border: 'border-gray-200', text: 'text-gray-800', icon: 'text-gray-600' },
 };
 
 export function DynamicResults({ result, isLoading }: DynamicResultsProps) {
@@ -177,15 +177,15 @@ export function DynamicResults({ result, isLoading }: DynamicResultsProps) {
   return (
     <div className="space-y-6">
       {/* Main Diagnosis Summary */}
-      <Card className={mainDiagnosis ? 'border-green-300 dark:border-green-700' : ''}>
+      <Card className={mainDiagnosis ? 'border-green-300 bg-white' : 'bg-white'}>
         <CardContent className="pt-6">
           {mainDiagnosis ? (
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 mb-4">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
                 <CheckCircle className="h-8 w-8 text-green-600" />
               </div>
-              <h2 className="text-sm font-medium text-muted-foreground mb-1">Chẩn đoán chính</h2>
-              <p className="text-3xl font-bold text-green-700 dark:text-green-400 mb-2">
+              <h2 className="text-sm font-medium text-gray-600 mb-1">Chẩn đoán chính</h2>
+              <p className="text-3xl font-bold text-green-700 mb-2">
                 {mainDiagnosis}
               </p>
               <div className="flex items-center justify-center gap-2 flex-wrap">
@@ -252,7 +252,7 @@ export function DynamicResults({ result, isLoading }: DynamicResultsProps) {
                   className={`w-full flex items-center justify-between p-4 text-left transition-colors hover:bg-muted/50 ${colors.bg}`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg bg-white dark:bg-gray-800 shadow-sm`}>
+                    <div className={`p-2 rounded-lg bg-white shadow-sm`}>
                       <Stethoscope className={`h-5 w-5 ${colors.icon}`} />
                     </div>
                     <div>
@@ -273,16 +273,16 @@ export function DynamicResults({ result, isLoading }: DynamicResultsProps) {
                 </button>
 
                 {isExpanded && (
-                  <div className="border-t divide-y">
+                  <div className="border-t divide-y bg-white">
                     {rules.map((rule, index) => (
-                      <div key={`${rule.ruleId}-${index}`} className="p-4 bg-white dark:bg-gray-900">
+                      <div key={`${rule.ruleId}-${index}`} className="p-4 bg-white">
                         <div className="flex items-start justify-between gap-2 mb-2">
-                          <h4 className="font-medium text-sm">{rule.ruleName}</h4>
+                          <h4 className="font-medium text-sm text-gray-900">{rule.ruleName}</h4>
                           <Badge variant="outline" className="text-xs shrink-0">
                             {rule.ruleId}
                           </Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
+                        <p className="text-sm text-gray-600 leading-relaxed">
                           {rule.explanation}
                         </p>
                         {rule.conclusions && rule.conclusions.length > 0 && (
@@ -318,9 +318,9 @@ export function DynamicResults({ result, isLoading }: DynamicResultsProps) {
 
       {/* Treatment Summary */}
       {result.treatment && Object.values(result.treatment).some((v) => v) && (
-        <Card className="border-green-200 dark:border-green-800">
+        <Card className="border-green-200 bg-white">
           <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2 text-green-700 dark:text-green-400">
+            <CardTitle className="flex items-center gap-2 text-green-700">
               <Pill className="h-5 w-5" />
               Tóm tắt điều trị
             </CardTitle>

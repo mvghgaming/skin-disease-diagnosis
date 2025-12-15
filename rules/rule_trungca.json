@@ -63,7 +63,7 @@
       "description": "Trứng cá sơ sinh lành tính.",
       "logic": "AND",
       "if": [
-        { "concept": "PATIENT_INFO", "attribute": "age", "operator": "<=", "value": 1 },
+        { "concept": "PATIENT_INFO", "attribute": "age", "operator": "=", "value": "0-5" },
         { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "comedones_present", "operator": "=", "value": true },
         {
           "concept": "LESION_DISTRIBUTION",
@@ -157,7 +157,7 @@
       "logic": "AND",
       "if": [
         { "concept": "TREATMENT_PLAN", "attribute": "acne_regimen", "operator": "LIKE", "value": "%Isotretinoin%" },
-        { "concept": "PATIENT_INFO", "attribute": "age", "operator": "<", "value": 16 }
+        { "concept": "PATIENT_INFO", "attribute": "age", "operator": "IN", "value": ["0-5", "6-12"] }
       ],
       "then": [
         {

@@ -9,7 +9,7 @@
     "description": "Chẩn đoán SSSS ở trẻ nhỏ dựa trên nguy cơ tuổi + có liên quan toàn thân + ban đỏ bong vảy lan tỏa và bọng nước, không có mài.",
     "logic": "AND",
     "if": [
-      { "concept": "PATIENT_INFO", "attribute": "age", "operator": "<", "value": 5 },
+      { "concept": "PATIENT_INFO", "attribute": "age", "operator": "=", "value": "0-5" },
       { "concept": "SEVERITY_ASSESSMENT", "attribute": "systemic_involvement", "operator": "=", "value": true },
       { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "exfoliative_erythema", "operator": "=", "value": true },
       { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "crust_presence", "operator": "=", "value": false },
@@ -98,7 +98,7 @@
     "logic": "AND",
     "if": [
       { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "vesicle_or_bulla", "operator": "=", "value": true },
-      { "concept": "PATIENT_INFO", "attribute": "age", "operator": ">", "value": 15 }
+      { "concept": "PATIENT_INFO", "attribute": "age", "operator": "IN", "value": ["13-18", "19-30", "31-50", "51-70", "71+"] }
     ],
     "then": [
       { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "differential_list", "value": "Pemphigus" }
@@ -154,7 +154,7 @@
     "logic": "AND",
     "if": [
       { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "=", "value": "SSSS" },
-      { "concept": "PATIENT_INFO", "attribute": "age", "operator": "<", "value": 12 }
+      { "concept": "PATIENT_INFO", "attribute": "age", "operator": "IN", "value": ["0-5", "6-12"] }
     ],
     "then": [
       { "concept": "TREATMENT_PLAN", "attribute": "systemic_antibiotic", "value": "Amoxicillin/Clavulanate" },

@@ -36,19 +36,7 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_vi: 'Giới tính',
         label_en: 'sex',
         type: 'string'
-        ,enum: ["Nam","Nữ","Khác"]
-      },
-      'occupation': {
-        label_vi: 'Nghề nghiệp',
-        label_en: 'occupation',
-        type: 'string'
-        ,enum: ["Học sinh/Sinh viên","Công nhân","Nông dân","Văn phòng","Y tế","Giáo viên","Kinh doanh","Nghỉ hưu","Khác"]
-      },
-      'residence_area': {
-        label_vi: 'Khu vực sinh sống',
-        label_en: 'residence area',
-        type: 'string'
-        ,enum: ["Thành phố","Nông thôn","Vùng sâu vùng xa"]
+        ,enum: ["Nam","Nữ"]
       },
       'diabetes': {
         label_vi: 'Có đái tháo đường',
@@ -64,7 +52,7 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_vi: 'Thời gian tiến triển tổn thương',
         label_en: 'onset duration',
         type: 'string'
-        ,enum: ["< 1 tuần","1-2 tuần","2-4 tuần","1-3 tháng","3-6 tháng","> 6 tháng"]
+        ,enum: ["< 1 tuần","1-2 tuần","2-4 tuần","1-3 tháng","3-6 tháng","> 6 tháng","Khởi phát nhanh sau tiếp xúc nhiệt"]
       },
       'pregnant': {
         label_vi: 'Đang mang thai',
@@ -114,11 +102,6 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_en: 'hyperhidrosis',
         type: 'boolean'
       },
-      'oily_skin': {
-        label_vi: 'Da dầu, tăng tiết bã',
-        label_en: 'oily skin',
-        type: 'boolean'
-      },
       'close_contact_tb_leprosy': {
         label_vi: 'Tiếp xúc gần, kéo dài với bệnh nhân lao da/phong',
         label_en: 'close contact tb leprosy',
@@ -129,29 +112,11 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_en: 'mycobacteria cross immunity',
         type: 'boolean'
       },
-      'overall_infection_risk': {
-        label_vi: 'Đánh giá nguy cơ mắc chung',
-        label_en: 'overall infection risk',
-        type: 'string'
-        ,enum: ["Thấp","Trung bình","Cao","Rất cao","Tăng"]
-      },
       'acne_inducing_drug_history': {
         label_vi: 'Tiền sử dùng thuốc gây trứng cá',
         label_en: 'acne inducing drug history',
         type: 'string'
-        ,enum: ["Không","Corticoid","Androgen","Lithium","Isoniazid","Khác"]
-      },
-      'chemical_exposure': {
-        label_vi: 'Tiếp xúc dầu mỡ, mỹ phẩm, hóa chất',
-        label_en: 'chemical exposure',
-        type: 'string'
-        ,enum: ["Không","Dầu mỡ công nghiệp","Mỹ phẩm","Hóa chất nông nghiệp","Khác"]
-      },
-      'leprosy_risk_group': {
-        label_vi: 'Nhóm nguy cơ phong (Bình thường/Nguy cơ cao…)',
-        label_en: 'leprosy risk group',
-        type: 'string'
-        ,enum: ["Bình thường","Nguy cơ cao","Rất cao"]
+        ,enum: ["Không","Corticoid","Androgen","Lithium","Isoniazid","Halogen","Khác"]
       },
       'time_from_exposure_to_symptoms_in_years': {
         label_vi: 'Thời gian (năm) từ lúc phơi nhiễm đến khi xuất hiện triệu chứng',
@@ -180,7 +145,7 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_vi: 'Màu vảy',
         label_en: 'crust color',
         type: 'string'
-        ,enum: ["Vàng mật","Vàng nâu","Nâu đen","Đỏ","Trắng","Xanh lục"]
+        ,enum: ["Vàng nâu","Nâu đen","Đỏ","Trắng","Xanh lục"]
       },
       'pustule': {
         label_vi: 'Mụn mủ (viêm nang lông, trứng cá, nhọt…)',
@@ -195,21 +160,6 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
       'exfoliative_erythema': {
         label_vi: 'Ban đỏ bong vảy lan tỏa',
         label_en: 'exfoliative erythema',
-        type: 'boolean'
-      },
-      'tuberculous_plaque': {
-        label_vi: 'Mảng/củ thâm nhiễm – lao da',
-        label_en: 'tuberculous plaque',
-        type: 'boolean'
-      },
-      'leprosy_patch': {
-        label_vi: 'Mảng/củ phong',
-        label_en: 'leprosy patch',
-        type: 'boolean'
-      },
-      'sensory_loss_on_lesion': {
-        label_vi: 'Mất cảm giác trên tổn thương',
-        label_en: 'sensory loss on lesion',
         type: 'boolean'
       },
       'scar': {
@@ -231,25 +181,13 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_vi: 'Loại tổn thương chính (vết loét, củ lao, mảng sùi…)',
         label_en: 'primary lesion',
         type: 'string'
-        ,enum: ["Vết loét","Củ lao","Mảng sùi","Nốt","Bọng nước","Mụn mủ","Ban đỏ","Dát nhạt màu"]
-      },
-      'chronic_inflamation_features': {
-        label_vi: 'Đặc điểm viêm mạn: bờ nham nhở, áp xe lạnh, vỡ rò, đường hầm, sẹo lõm…',
-        label_en: 'chronic inflamation features',
-        type: 'array'
-        ,enum: ["Bờ nham nhở","Áp xe lạnh","Vỡ rò","Đường hầm","Sẹo lõm","Thâm nhiễm mạn tính"]
+        ,enum: ["Vết loét","Củ lao","Mảng sùi","Nốt","Nốt dưới da","Áp xe lạnh","Sẩn","Cục dưới da","Bọng nước","Mụn mủ","Ban đỏ","Dát nhạt màu"]
       },
       'visual_features': {
         label_vi: 'Hình ảnh gợi ý: màu vàng đỏ, ấn kính vàng nâu, đỏ tím, mủ nhầy thối…',
         label_en: 'visual features',
         type: 'array'
-        ,enum: ["Màu vàng đỏ","Ấn kính vàng nâu","Đỏ tím","Mủ nhầy thối","Bề mặt bóng","Viền đỏ"]
-      },
-      'lymph_node': {
-        label_vi: 'Mức độ hạch: không/hạch vùng/hạch toàn thân',
-        label_en: 'lymph node',
-        type: 'string'
-        ,enum: ["Không","Hạch vùng","Hạch toàn thân"]
+        ,enum: ["Màu vàng đỏ","Ấn kính vàng nâu","Đỏ tím","Mủ nhầy thối","Bề mặt bóng","Viền đỏ","Vỡ rò dịch","Tạo đường hầm","Hoại tử ở giữa","Sẹo lõm","Đau khi sờ nắn","Mềm ở giữa"]
       },
       'patch_type': {
         label_vi: 'Có dát nhạt màu (thể I – phong)',
@@ -260,7 +198,7 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_vi: 'Màu dát',
         label_en: 'patch color',
         type: 'string'
-        ,enum: ["Nhạt màu","Đỏ","Nâu","Trắng"]
+        ,enum: ["Nhạt màu","Đỏ","Nâu","Trắng","Thâm","Hồng nhạt"]
       },
       'plaque_type': {
         label_vi: 'Có mảng/củ ranh giới rõ (thể T)',
@@ -277,6 +215,11 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_en: 'borderline features between T and L',
         type: 'boolean'
       },
+      'erythema': {
+        label_vi: 'Có ban đỏ',
+        label_en: 'erythema',
+        type: 'boolean'
+      },
     }
   },
   {
@@ -288,7 +231,7 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_vi: 'Vị trí chính (mặt, tay, chân…)',
         label_en: 'main location',
         type: 'string'
-        ,enum: ["Mặt","Trán","Má","Cằm","Ngực","Lưng","Bụng","Tay","Chân","Mông","Cổ","Da đầu","Toàn thân"]
+        ,enum: ["Mặt","Trán","Má","Cằm","Ngực","Lưng","Lưng trên","Bụng","Tay","Cánh tay","Chân","Cẳng chân","Mông","Cổ","Da đầu","Toàn thân","Mũi","Tai","Môi trên","Miệng","Hậu môn","Sinh dục","Mu bàn tay","Mu bàn chân","Cẳng tay","Vai","Cổ dưới hàm","Xương đòn","Tháp mũi"]
       },
       'typical_for_disease': {
         label_vi: 'Vị trí có điển hình cho bệnh đó không',
@@ -300,21 +243,11 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_en: 'follicular area',
         type: 'boolean'
       },
-      'seborrheic_area': {
-        label_vi: 'Vùng tiết bã (mặt, ngực…)',
-        label_en: 'seborrheic area',
-        type: 'boolean'
-      },
-      'extremities_involved': {
-        label_vi: 'Chi trên/chi dưới có tổn thương',
-        label_en: 'extremities involved',
-        type: 'boolean'
-      },
       'number_of_lesions': {
         label_vi: 'Ít/nhiều/rải rác/lan tỏa',
         label_en: 'number of lesions',
         type: 'string'
-        ,enum: ["Đơn độc","Ít (2-5)","Nhiều (6-20)","Rải rác (>20)","Lan tỏa"]
+        ,enum: ["Đơn độc","Ít (2-5)","Nhiều","Nhiều (6-20)","Rải rác (>20)","Lan tỏa"]
       },
       'border_clarity': {
         label_vi: 'Ranh giới tổn thương (rõ/không rõ)',
@@ -326,7 +259,7 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_vi: 'Kiểu phân bố (đối xứng, lệch bên…)',
         label_en: 'symmetry',
         type: 'string'
-        ,enum: ["Đối xứng","Lệch bên trái","Lệch bên phải","Không đối xứng"]
+        ,enum: ["Đối xứng","Đối xứng 2 bên","Lệch bên trái","Lệch bên phải","Không đối xứng"]
       },
     }
   },
@@ -355,16 +288,11 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_en: 'malaise',
         type: 'boolean'
       },
-      'hair_loss': {
-        label_vi: 'Rụng tóc kèm theo',
-        label_en: 'hair loss',
-        type: 'boolean'
-      },
       'center_sensation': {
         label_vi: 'Cảm giác tại trung tâm tổn thương',
         label_en: 'center sensation',
         type: 'string'
-        ,enum: ["Bình thường","Giảm","Mất hoàn toàn","Tăng"]
+        ,enum: ["Bình thường","Giảm","Mất","Mất hoàn toàn","Mất hoặc giảm","Tăng"]
       },
       'temperature_or_pain_sensation_loss_on_lesion': {
         label_vi: 'Mất cảm giác nóng/lạnh/đau tại tổn thương',
@@ -383,22 +311,17 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
     label_vi: 'Kết quả cận lâm sàng, xét nghiệm',
     label_en: 'LABORATORY ASSESSMENT',
     variables: {
-      'smear_afb_leprosy': {
-        label_vi: 'Soi AFB trực khuẩn phong (âm/dương)',
-        label_en: 'smear afb leprosy',
-        type: 'boolean'
-      },
       'other_myco_tests': {
-        label_vi: 'Các xét nghiệm khác về Mycobacterium',
+        label_vi: 'Các xét nghiệm khác về vi khuẩn',
         label_en: 'other myco tests',
         type: 'string'
-        ,enum: ["Không","PCR","Cấy vi khuẩn","Xét nghiệm phân tử","Khác"]
+        ,enum: ["Không","PCR","Cấy vi khuẩn","Xét nghiệm phân tử","Tụ cầu vàng","MSSA","MRSA","Khác"]
       },
       'inflammatory_markers': {
         label_vi: 'Chỉ số viêm (bạch cầu, CRP…)',
         label_en: 'inflammatory markers',
         type: 'string'
-        ,enum: ["Bình thường","Tăng nhẹ","Tăng trung bình","Tăng cao"]
+        ,enum: ["Bình thường","Tăng nhẹ","Tăng trung bình","Tăng cao","Nghi nhiễm khuẩn tụ cầu","Độc tố ETA/ETB","Không có vi khuẩn"]
       },
       'bacteria_test': {
         label_vi: 'Test vi khuẩn lao/bệnh phẩm khác',
@@ -410,19 +333,19 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_vi: 'Kết quả test Tuberculin/Mantoux',
         label_en: 'tuberculin test',
         type: 'string'
-        ,enum: ["Âm tính","Dương tính yếu","Dương tính mạnh","Chưa làm"]
+        ,enum: ["Âm tính","Dương tính","Dương tính yếu","Dương tính mạnh","Chưa làm"]
       },
       'histopathology': {
         label_vi: 'Mô bệnh học: nang lao điển hình/không điển hình…',
         label_en: 'histopathology',
         type: 'string'
-        ,enum: ["Bình thường","Nang lao điển hình","Nang lao không điển hình","Viêm mạn tính","Chưa làm"]
+        ,enum: ["Bình thường","Nang điển hình","Nang lao điển hình","Nang lao không điển hình","Viêm mạn tính","Chưa làm"]
       },
       'leprosy_bacilloscopy_result': {
         label_vi: 'Kết quả soi trực khuẩn phong',
         label_en: 'leprosy bacilloscopy result',
         type: 'string'
-        ,enum: ["Âm tính","Dương tính (+)","Dương tính (++)","Dương tính (+++)","Chưa làm"]
+        ,enum: ["Âm tính","Dương tính","Dương tính (+)","Dương tính (++)","Dương tính (+++)","Chưa làm"]
       },
       'leprosy_Ziehl_Neelsen_smear': {
         label_vi: 'Nhuộm Ziehl–Neelsen tìm M. leprae',
@@ -454,34 +377,11 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_en: 'systemic involvement',
         type: 'boolean'
       },
-      'deformity_or_disability': {
-        label_vi: 'Có tàn tật/biến dạng chi',
-        label_en: 'deformity or disability',
-        type: 'boolean'
-      },
       'overall_severity': {
         label_vi: 'Mức độ chung: nhẹ/trung bình/nặng',
         label_en: 'overall severity',
         type: 'string'
         ,enum: ["Nhẹ","Trung bình","Nặng"]
-      },
-      'noninflammatory_lesion_count': {
-        label_vi: 'Số tổn thương không viêm',
-        label_en: 'noninflammatory lesion count',
-        type: 'string'
-        ,enum: ["0","1-5","6-10","11-20",">20"]
-      },
-      'inflammatory_lesion_count': {
-        label_vi: 'Số tổn thương viêm',
-        label_en: 'inflammatory lesion count',
-        type: 'string'
-        ,enum: ["0","1-5","6-10","11-20",">20"]
-      },
-      'nodule_cyst_count': {
-        label_vi: 'Số nang/cục',
-        label_en: 'nodule cyst count',
-        type: 'string'
-        ,enum: ["0","1-5","6-10","11-20",">20"]
       },
       'total_lesion_count': {
         label_vi: 'Tổng mọi loại tổn thương',
@@ -498,13 +398,7 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_vi: 'Tốc độ nhân đôi của M. leprae',
         label_en: 'M leprae doubling time',
         type: 'string'
-        ,enum: ["Chậm","Trung bình","Nhanh"]
-      },
-      'infectivity': {
-        label_vi: 'Mức độ lây nhiễm (Thấp/Trung bình/Cao)',
-        label_en: 'infectivity',
-        type: 'string'
-        ,enum: ["Thấp","Trung bình","Cao","Rất cao"]
+        ,enum: ["Rất chậm","Chậm","Trung bình","Nhanh"]
       },
       'muscle_atrophy_or_deformity_of_limbs': {
         label_vi: 'Teo cơ hoặc biến dạng chi do phong',

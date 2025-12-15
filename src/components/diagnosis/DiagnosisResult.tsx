@@ -177,14 +177,14 @@ export function DiagnosisResult({ result, onNewDiagnosis }: DiagnosisResultProps
             <CardContent>
               <div className="space-y-3">
                 {result.firedRules.map((rule, index) => (
-                  <div key={index} className="p-3 border rounded-md">
+                  <div key={index} className="p-3 border rounded-md bg-white">
                     <div className="flex items-start justify-between mb-2">
-                      <h4 className="font-semibold">{rule.ruleName}</h4>
+                      <h4 className="font-semibold text-gray-900">{rule.ruleName}</h4>
                       <Badge variant="secondary" className="text-xs">
                         {rule.ruleId}
                       </Badge>
                     </div>
-                    <p className="text-sm text-muted-foreground">{rule.explanation}</p>
+                    <p className="text-sm text-gray-600">{rule.explanation}</p>
                   </div>
                 ))}
               </div>
