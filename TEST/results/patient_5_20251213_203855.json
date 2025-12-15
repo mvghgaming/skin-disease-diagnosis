@@ -1,0 +1,27 @@
+{
+    "meta_data": {
+        "patient_id": 5,
+        "created_at": "20251213_203855",
+        "system_version": "1.0"
+    },
+    "diagnosis_result": {
+        "main_diagnosis": "Nhọt",
+        "subtype": null,
+        "diagnostic_certainty": null,
+        "WHO_group": null,
+        "treatment_plan": [
+            "Giảm đau/Hồi sức: Paracetamol",
+            "Giảm ngứa: Kháng histamin",
+            "Giảm đau/Hồi sức: Paracetamol"
+        ],
+        "prevention_advice": [],
+        "warnings": [],
+        "rules_triggered": [
+            "NHOT_1",
+            "NHOT_4",
+            "NHOT_9",
+            "CHOC_2",
+            "CHOC_9"
+        ]
+    }
+}
