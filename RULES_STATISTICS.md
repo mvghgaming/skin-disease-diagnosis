@@ -8,7 +8,7 @@
 |--------|---------|
 | Tổng số bệnh | **7** |
 | Tổng số luật | **99** |
-| Tổng số điều kiện | **224** |
+| Tổng số điều kiện | **215** |
 | Tổng số kết luận | **130** |
 
 ---
@@ -17,51 +17,19 @@
 
 | Bệnh | Mã | File | Số luật |
 |------|-----|------|---------|
-| Chốc (Impetigo) | CHOC | rules_choc.json | 10 |
-| Lao da (Cutaneous TB) | LAO_DA | rule_laoda.json | 16 |
-| Nhọt (Furuncle) | NHOT | rule_nhot.json | 10 |
-| Bệnh phong (Leprosy) | LEPROSY | rule_phong.json | 21 |
-| SSSS | SSSS | rule_SSSS.json | 17 |
-| Trứng cá (Acne) | ACNE | rule_trungca.json | 10 |
-| Viêm nang lông (Folliculitis) | FOL | rule_viemnanglong.json | 15 |
+| Bệnh phong | LEPROSY | rule_phong.json | 21 |
+| Hội chứng bong vảy da do tụ cầu | SSSS | rule_SSSS.json | 17 |
+| Lao da | LAO_DA | rule_laoda.json | 16 |
+| Viêm nang lông | FOL | rule_viemnanglong.json | 15 |
+| Chốc | CHOC | rules_choc.json | 10 |
+| Nhọt | NHOT | rule_nhot.json | 10 |
+| Trứng cá | ACNE | rule_trungca.json | 10 |
 
 ---
 
 ## Chi tiết từng bệnh (Disease Details)
 
-### 1. Chốc (Impetigo) - 10 luật
-
-| Nhóm luật | Số lượng |
-|-----------|----------|
-| Chẩn đoán | 3 |
-| Điều trị | 3 |
-| Yếu tố nguy cơ | 1 |
-| Chẩn đoán phân biệt | 1 |
-| Điều trị triệu chứng | 1 |
-| Biến chứng | 1 |
-
-### 2. Lao da (Cutaneous Tuberculosis) - 16 luật
-
-| Nhóm luật | Số lượng |
-|-----------|----------|
-| Chẩn đoán | 7 |
-| Điều trị | 5 |
-| Tư vấn | 3 |
-| Cảnh báo | 1 |
-
-### 3. Nhọt (Furuncle/Boils) - 10 luật
-
-| Nhóm luật | Số lượng |
-|-----------|----------|
-| Đánh giá mức độ | 3 |
-| Điều trị | 2 |
-| Chẩn đoán | 1 |
-| Yếu tố nguy cơ | 1 |
-| Thủ thuật | 1 |
-| Điều trị triệu chứng | 1 |
-| Phòng ngừa/tái phát | 1 |
-
-### 4. Bệnh phong (Leprosy) - 21 luật
+### 1. Bệnh phong - 21 luật
 
 | Nhóm luật | Số lượng |
 |-----------|----------|
@@ -72,7 +40,7 @@
 | Xác định chẩn đoán – WHO | 3 |
 | Tiên lượng – phòng bệnh | 3 |
 
-### 5. SSSS (Staphylococcal Scalded Skin Syndrome) - 17 luật
+### 2. Hội chứng bong vảy da do tụ cầu - 17 luật
 
 | Nhóm luật | Số lượng |
 |-----------|----------|
@@ -85,19 +53,16 @@
 | Biến chứng | 1 |
 | Phòng bệnh | 1 |
 
-### 6. Trứng cá (Acne) - 10 luật
+### 3. Lao da - 16 luật
 
 | Nhóm luật | Số lượng |
 |-----------|----------|
-| Chẩn đoán | 3 |
-| Cảnh báo an toàn | 2 |
-| Điều trị | 1 |
+| Chẩn đoán | 7 |
+| Điều trị | 5 |
+| Tư vấn | 3 |
 | Cảnh báo | 1 |
-| Cảnh báo tương tác thuốc | 1 |
-| Cảnh báo tác dụng phụ | 1 |
-| Tư vấn chăm sóc | 1 |
 
-### 7. Viêm nang lông (Folliculitis) - 15 luật
+### 4. Viêm nang lông - 15 luật
 
 | Nhóm luật | Số lượng |
 |-----------|----------|
@@ -109,6 +74,41 @@
 | Điều trị triệu chứng | 1 |
 | Nguyên nhân khác | 1 |
 | Phòng bệnh | 1 |
+
+### 5. Chốc - 10 luật
+
+| Nhóm luật | Số lượng |
+|-----------|----------|
+| Chẩn đoán | 3 |
+| Điều trị | 3 |
+| Yếu tố nguy cơ | 1 |
+| Chẩn đoán phân biệt | 1 |
+| Điều trị triệu chứng | 1 |
+| Biến chứng | 1 |
+
+### 6. Nhọt - 10 luật
+
+| Nhóm luật | Số lượng |
+|-----------|----------|
+| Đánh giá mức độ | 3 |
+| Điều trị | 2 |
+| Chẩn đoán | 1 |
+| Yếu tố nguy cơ | 1 |
+| Thủ thuật | 1 |
+| Điều trị triệu chứng | 1 |
+| Phòng ngừa/tái phát | 1 |
+
+### 7. Trứng cá - 10 luật
+
+| Nhóm luật | Số lượng |
+|-----------|----------|
+| Chẩn đoán | 3 |
+| Cảnh báo an toàn | 2 |
+| Cảnh báo | 1 |
+| Điều trị | 1 |
+| Cảnh báo tương tác thuốc | 1 |
+| Cảnh báo tác dụng phụ | 1 |
+| Tư vấn chăm sóc | 1 |
 
 ---
 
@@ -122,9 +122,9 @@
 | Nguyên nhân – nguy cơ – cơ chế lây | 4 | 4.0% |
 | Nhận diện thương tổn – phân thể | 4 | 4.0% |
 | Điều trị MDT | 4 | 4.0% |
-| Đánh giá mức độ | 3 | 3.0% |
 | Điều trị triệu chứng | 3 | 3.0% |
 | Tư vấn | 3 | 3.0% |
+| Đánh giá mức độ | 3 | 3.0% |
 | Thần kinh – biến chứng | 3 | 3.0% |
 | Xác định chẩn đoán – WHO | 3 | 3.0% |
 | Tiên lượng – phòng bệnh | 3 | 3.0% |
@@ -151,14 +151,10 @@
 
 | Toán tử | Số lượng | Mô tả |
 |---------|----------|-------|
-| `=` | 168 | Bằng |
-| `IN` | 25 | Thuộc tập hợp |
+| `=` | 161 | Bằng |
+| `IN` | 37 | Thuộc tập hợp |
 | `LIKE` | 7 | Pattern matching |
 | `CONTAINS_ANY` | 6 | Chứa bất kỳ |
-| `<` | 5 | Nhỏ hơn |
-| `>=` | 3 | Lớn hơn hoặc bằng |
-| `<=` | 3 | Nhỏ hơn hoặc bằng |
-| `>` | 3 | Lớn hơn |
 | `IS_NOT_NULL` | 2 | Không null |
 | `!=` | 1 | Khác |
 | `IS_NULL` | 1 | Là null |
@@ -169,15 +165,15 @@
 
 | Concept | Số lần sử dụng | Mô tả |
 |---------|----------------|-------|
-| SKIN_LESION_MORPHOLOGY | 52 | Hình thái tổn thương da |
-| DIAGNOSIS_ASSESSMENT | 48 | Đánh giá chẩn đoán |
-| LESION_DISTRIBUTION | 23 | Phân bố tổn thương |
-| TREATMENT_PLAN | 20 | Kế hoạch điều trị |
-| SEVERITY_ASSESSMENT | 19 | Đánh giá mức độ nặng |
+| DIAGNOSIS_ASSESSMENT | 99 | Đánh giá chẩn đoán |
+| TREATMENT_PLAN | 82 | Kế hoạch điều trị |
+| SKIN_LESION_MORPHOLOGY | 49 | Hình thái tổn thương da |
+| SEVERITY_ASSESSMENT | 31 | Đánh giá mức độ nặng |
+| LESION_DISTRIBUTION | 24 | Phân bố tổn thương |
 | LABORATORY_ASSESSMENT | 18 | Xét nghiệm |
-| PATIENT_INFO | 17 | Thông tin bệnh nhân |
-| SYSTEMIC_AND_NEURO_SIGNS | 16 | Triệu chứng toàn thân & thần kinh |
-| RISK_FACTOR_ASSESSMENT | 11 | Đánh giá yếu tố nguy cơ |
+| RISK_FACTOR_ASSESSMENT | 15 | Đánh giá yếu tố nguy cơ |
+| SYSTEMIC_AND_NEURO_SIGNS | 14 | Triệu chứng toàn thân & thần kinh |
+| PATIENT_INFO | 13 | Thông tin bệnh nhân |
 
 ---
 
@@ -226,26 +222,26 @@
 
 ### Luật theo bệnh
 ```
-Bệnh phong     ████████████████████ 21 (21.2%)
-SSSS           █████████████████ 17 (17.2%)
-Lao da         ████████████████ 16 (16.2%)
-Viêm nang lông ███████████████ 15 (15.2%)
-Chốc           ██████████ 10 (10.1%)
-Trứng cá       ██████████ 10 (10.1%)
-Nhọt           ██████████ 10 (10.1%)
+Bệnh phong      ████████████████████ 21 (21.2%)
+Hội chứng bong vảy da do tụ cầu ████████████████ 17 (17.2%)
+Lao da          ███████████████ 16 (16.2%)
+Viêm nang lông  ██████████████ 15 (15.2%)
+Chốc            ██████████ 10 (10.1%)
+Nhọt            ██████████ 10 (10.1%)
+Trứng cá        ██████████ 10 (10.1%)
 ```
 
 ### Concept sử dụng nhiều nhất
 ```
-SKIN_LESION_MORPHOLOGY  █████████████████████████ 52
-DIAGNOSIS_ASSESSMENT    ████████████████████████ 48
-LESION_DISTRIBUTION     ███████████ 23
-TREATMENT_PLAN          ██████████ 20
-SEVERITY_ASSESSMENT     █████████ 19
-LABORATORY_ASSESSMENT   █████████ 18
-PATIENT_INFO            ████████ 17
-SYSTEMIC_NEURO_SIGNS    ████████ 16
-RISK_FACTOR_ASSESSMENT  █████ 11
+DIAGNOSIS_ASSESSMENT     ████████████████████ 99
+TREATMENT_PLAN           █████████████████ 82
+SKIN_LESION_MORPHOLOGY   ██████████ 49
+SEVERITY_ASSESSMENT      ██████ 31
+LESION_DISTRIBUTION      █████ 24
+LABORATORY_ASSESSMENT    ████ 18
+RISK_FACTOR_ASSESSMENT   ███ 15
+SYSTEMIC_AND_NEURO_SIGNS ███ 14
+PATIENT_INFO             ███ 13
 ```
 
 ---

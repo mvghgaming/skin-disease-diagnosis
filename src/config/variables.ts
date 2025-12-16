@@ -145,7 +145,7 @@ export const VARIABLE_SCHEMAS: VariableNamespace[] = [
         label_vi: 'Màu vảy',
         label_en: 'crust color',
         type: 'string'
-        ,enum: ["Vàng nâu","Nâu đen","Đỏ","Trắng","Xanh lục"]
+        ,enum: ["Vàng mật","Vàng nâu","Nâu đen","Đỏ","Trắng","Xanh lục"]
       },
       'pustule': {
         label_vi: 'Mụn mủ (viêm nang lông, trứng cá, nhọt…)',

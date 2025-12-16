@@ -1,0 +1,221 @@
+{
+  "concepts": {
+    "PATIENT_INFO": {
+      "description": "Thông tin nền của bệnh nhân",
+      "attributes": {
+        "patient_id":      { "type": "INT",     "pk": true,  "description": "Mã định danh bệnh nhân" },
+        "age":             { "type": "ENUM",     "description": "Tuổi", "options": ["0-5", "6-12", "13-18", "19-30", "31-50", "51-70", "71+"] },
+        "sex":             { "type": "ENUM", "description": "Giới tính", "options": ["Nam", "Nữ", "Khác"] },
+        "occupation":      { "type": "ENUM", "description": "Nghề nghiệp", "options": ["Học sinh/Sinh viên", "Công nhân", "Nông dân", "Văn phòng", "Y tế", "Giáo viên", "Kinh doanh", "Nghỉ hưu", "Khác"] },
+        "residence_area":  { "type": "ENUM", "description": "Khu vực sinh sống", "options": ["Thành phố", "Nông thôn", "Vùng sâu vùng xa"] },
+        "diabetes":        { "type": "BOOLEAN", "description": "Có đái tháo đường" },
+        "immunosuppressed":{ "type": "BOOLEAN", "description": "Suy giảm miễn dịch" },
+        "onset_duration":  { "type": "ENUM", "description": "Thời gian tiến triển tổn thương", "options": ["< 1 tuần", "1-2 tuần", "2-4 tuần", "1-3 tháng", "3-6 tháng", "> 6 tháng"] },
+        "pregnant":        { "type": "BOOLEAN", "description": "Đang mang thai" },
+        "breastfeeding":   { "type": "BOOLEAN", "description": "Đang cho con bú" },
+        "HIV_status":      { "type": "BOOLEAN", "description": "Có HIV hay không" }
+      }
+    },
+
+    "RISK_FACTOR_ASSESSMENT": {
+      "description": "Đánh giá yếu tố nguy cơ",
+      "attributes": {
+        "id":                                   { "type": "INT",     "pk": true },
+        "patient_id":                           { "type": "INT",     "fk": "PATIENT_INFO.patient_id" },
+        "hygiene_level":                        { "type": "ENUM", "description": "Mức độ vệ sinh da", "options": ["Tốt", "Trung bình", "Kém"] },
+        "skin_trauma":                          { "type": "BOOLEAN", "description": "Tổn thương da sẵn (trầy xước, cào gãi…)" },
+        "hot_humid_environment":               { "type": "BOOLEAN", "description": "Sống/làm việc nơi nóng ẩm" },
+        "occlusive_clothing":                  { "type": "BOOLEAN", "description": "Quần áo bó, không thoáng" },
+        "hyperhidrosis":                        { "type": "BOOLEAN", "description": "Tăng tiết mồ hôi" },
+        "oily_skin":                            { "type": "BOOLEAN", "description": "Da dầu, tăng tiết bã" },
+        "close_contact_tb_leprosy":            { "type": "BOOLEAN", "description": "Tiếp xúc gần, kéo dài với bệnh nhân lao da/phong" },
+        "mycobacteria_cross_immunity":         { "type": "BOOLEAN", "description": "Miễn dịch chéo với Mycobacterium khác" },
+        "overall_infection_risk":              { "type": "ENUM", "description": "Đánh giá nguy cơ mắc chung", "options": ["Thấp", "Trung bình", "Cao", "Rất cao", "Tăng"] },
+        "acne_inducing_drug_history":          { "type": "ENUM", "description": "Tiền sử dùng thuốc gây trứng cá", "options": ["Không", "Corticoid", "Androgen", "Lithium", "Isoniazid", "Khác"] },
+        "chemical_exposure":                   { "type": "ENUM", "description": "Tiếp xúc dầu mỡ, mỹ phẩm, hóa chất", "options": ["Không", "Dầu mỡ công nghiệp", "Mỹ phẩm", "Hóa chất nông nghiệp", "Khác"] },
+        "leprosy_risk_group":                  { "type": "ENUM",    "description": "Nhóm nguy cơ phong (Bình thường/Nguy cơ cao…)", "options": ["Bình thường", "Nguy cơ cao", "Rất cao"] },
+        "time_from_exposure_to_symptoms_in_years": {
+          "type": "ENUM",
+          "description": "Thời gian (năm) từ lúc phơi nhiễm đến khi xuất hiện triệu chứng",
+          "options": ["< 1 năm", "1-2 năm", "2-5 năm", "5-10 năm", "> 10 năm"]
+        }
+      }
+    },
+
+    "SKIN_LESION_MORPHOLOGY": {
+      "description": "Hình thái tổn thương da chi tiết",
+      "attributes": {
+        "id":                         { "type": "INT",     "pk": true },
+        "patient_id":                 { "type": "INT",     "fk": "PATIENT_INFO.patient_id" },
+        "vesicle_or_bulla":          { "type": "BOOLEAN", "description": "Bọng nước/bóng nước nông" },
+        "crust_presence":            { "type": "BOOLEAN", "description": "Có vảy, đóng mày" },
+        "crust_color":               { "type": "ENUM", "description": "Màu vảy", "options": ["Vàng mật", "Nâu đen", "Đỏ", "Trắng", "Xanh lục"] },
+        "pustule":                   { "type": "BOOLEAN", "description": "Mụn mủ (viêm nang lông, trứng cá, nhọt…)" },
+        "nodule_or_abscess":         { "type": "BOOLEAN", "description": "Nốt viêm, ổ mủ sâu" },
+        "exfoliative_erythema":      { "type": "BOOLEAN", "description": "Ban đỏ bong vảy lan tỏa" },
+        "tuberculous_plaque":        { "type": "BOOLEAN", "description": "Mảng/củ thâm nhiễm – lao da" },
+        "leprosy_patch":             { "type": "BOOLEAN", "description": "Mảng/củ phong" },
+        "sensory_loss_on_lesion":    { "type": "BOOLEAN", "description": "Mất cảm giác trên tổn thương" },
+        "scar":                      { "type": "BOOLEAN", "description": "Sẹo" },
+        "comedones_present":         { "type": "BOOLEAN", "description": "Có mụn đầu đen/đầu trắng/mụn cám" },
+        "ulceration":                { "type": "BOOLEAN", "description": "Có loét" },
+        "primary_lesion":            { "type": "ENUM",    "description": "Loại tổn thương chính (vết loét, củ lao, mảng sùi…)", "options": ["Vết loét", "Củ lao", "Mảng sùi", "Nốt", "Bọng nước", "Mụn mủ", "Ban đỏ", "Dát nhạt màu"] },
+        "chronic_inflamation_features": {
+          "type": "SET",
+          "description": "Đặc điểm viêm mạn: bờ nham nhở, áp xe lạnh, vỡ rò, đường hầm, sẹo lõm…",
+          "options": ["Bờ nham nhở", "Áp xe lạnh", "Vỡ rò", "Đường hầm", "Sẹo lõm", "Thâm nhiễm mạn tính"]
+        },
+        "visual_features": {
+          "type": "SET",
+          "description": "Hình ảnh gợi ý: màu vàng đỏ, ấn kính vàng nâu, đỏ tím, mủ nhầy thối…",
+          "options": ["Màu vàng đỏ", "Ấn kính vàng nâu", "Đỏ tím", "Mủ nhầy thối", "Bề mặt bóng", "Viền đỏ"]
+        },
+        "lymph_node":               { "type": "ENUM",    "description": "Mức độ hạch: không/hạch vùng/hạch toàn thân", "options": ["Không", "Hạch vùng", "Hạch toàn thân"] },
+        "patch_type":               { "type": "BOOLEAN", "description": "Có dát nhạt màu (thể I – phong)" },
+        "patch_color":              { "type": "ENUM", "description": "Màu dát", "options": ["Nhạt màu", "Đỏ", "Nâu", "Trắng"] },
+        "plaque_type":              { "type": "BOOLEAN", "description": "Có mảng/củ ranh giới rõ (thể T)" },
+        "diffuse_infiltration":     { "type": "BOOLEAN", "description": "Thâm nhiễm lan tỏa đối xứng hai bên (thể L)" },
+        "borderline_features_between_T_and_L": {
+          "type": "BOOLEAN",
+          "description": "Đặc điểm trung gian giữa thể T và L"
+        }
+      }
+    },
+
+    "LESION_DISTRIBUTION": {
+      "description": "Vị trí và phân bố tổn thương da",
+      "attributes": {
+        "id":                     { "type": "INT",     "pk": true },
+        "patient_id":             { "type": "INT",     "fk": "PATIENT_INFO.patient_id" },
+        "main_location":          { "type": "ENUM", "description": "Vị trí chính (mặt, tay, chân…)", "options": ["Mặt", "Trán", "Má", "Cằm", "Ngực", "Lưng", "Bụng", "Tay", "Chân", "Mông", "Cổ", "Da đầu", "Toàn thân"] },
+        "typical_for_disease":    { "type": "BOOLEAN", "description": "Vị trí có điển hình cho bệnh đó không" },
+        "follicular_area":        { "type": "BOOLEAN", "description": "Vùng quanh nang lông" },
+        "seborrheic_area":        { "type": "BOOLEAN", "description": "Vùng tiết bã (mặt, ngực…)" },
+        "extremities_involved":   { "type": "BOOLEAN", "description": "Chi trên/chi dưới có tổn thương" },
+        "number_of_lesions":      { "type": "ENUM", "description": "Ít/nhiều/rải rác/lan tỏa", "options": ["Đơn độc", "Ít (2-5)", "Nhiều (6-20)", "Rải rác (>20)", "Lan tỏa"] },
+        "border_clarity":         { "type": "ENUM", "description": "Ranh giới tổn thương (rõ/không rõ)", "options": ["Rõ", "Không rõ", "Một phần rõ"] },
+        "symmetry":               { "type": "ENUM", "description": "Kiểu phân bố (đối xứng, lệch bên…)", "options": ["Đối xứng", "Lệch bên trái", "Lệch bên phải", "Không đối xứng"] }
+      }
+    },
+
+    "SYSTEMIC_AND_NEURO_SIGNS": {
+      "description": "Triệu chứng toàn thân và thần kinh",
+      "attributes": {
+        "id":                                  { "type": "INT",     "pk": true },
+        "patient_id":                          { "type": "INT",     "fk": "PATIENT_INFO.patient_id" },
+        "fever":                               { "type": "BOOLEAN", "description": "Có sốt" },
+        "pain":                                { "type": "BOOLEAN", "description": "Đau vùng tổn thương" },
+        "pruritus":                            { "type": "BOOLEAN", "description": "Ngứa" },
+        "malaise":                             { "type": "BOOLEAN", "description": "Mệt mỏi, suy nhược" },
+        "hair_loss":                           { "type": "BOOLEAN", "description": "Rụng tóc kèm theo" },
+        "center_sensation":                    { "type": "ENUM",    "description": "Cảm giác tại trung tâm tổn thương", "options": ["Bình thường", "Giảm", "Mất hoàn toàn", "Tăng"] },
+        "temperature_or_pain_sensation_loss_on_lesion": {
+          "type": "BOOLEAN",
+          "description": "Mất cảm giác nóng/lạnh/đau tại tổn thương"
+        },
+        "enlarged_painful_nerves":             { "type": "BOOLEAN", "description": "Dây thần kinh ngoại biên phì đại/ấn đau" }
+      }
+    },
+
+    "LABORATORY_ASSESSMENT": {
+      "description": "Kết quả cận lâm sàng, xét nghiệm",
+      "attributes": {
+        "id":                          { "type": "INT",     "pk": true },
+        "patient_id":                  { "type": "INT",     "fk": "PATIENT_INFO.patient_id" },
+        "smear_afb_leprosy":           { "type": "BOOLEAN", "description": "Soi AFB trực khuẩn phong (âm/dương)" },
+        "other_myco_tests":            { "type": "ENUM", "description": "Các xét nghiệm khác về Mycobacterium", "options": ["Không", "PCR", "Cấy vi khuẩn", "Xét nghiệm phân tử", "Khác"] },
+        "inflammatory_markers":        { "type": "ENUM", "description": "Chỉ số viêm (bạch cầu, CRP…)", "options": ["Bình thường", "Tăng nhẹ", "Tăng trung bình", "Tăng cao"] },
+        "bacteria_test":               { "type": "ENUM",    "description": "Test vi khuẩn lao/bệnh phẩm khác", "options": ["Âm tính", "Dương tính", "Chưa làm"] },
+        "tuberculin_test":             { "type": "ENUM",    "description": "Kết quả test Tuberculin/Mantoux", "options": ["Âm tính", "Dương tính yếu", "Dương tính mạnh", "Chưa làm"] },
+        "histopathology":              { "type": "ENUM",    "description": "Mô bệnh học: nang lao điển hình/không điển hình…", "options": ["Bình thường", "Nang lao điển hình", "Nang lao không điển hình", "Viêm mạn tính", "Chưa làm"] },
+        "leprosy_bacilloscopy_result": { "type": "ENUM",    "description": "Kết quả soi trực khuẩn phong", "options": ["Âm tính", "Dương tính (+)", "Dương tính (++)", "Dương tính (+++)", "Chưa làm"] },
+        "leprosy_Ziehl_Neelsen_smear": { "type": "ENUM",    "description": "Nhuộm Ziehl–Neelsen tìm M. leprae", "options": ["Âm tính", "Dương tính", "Chưa làm"] },
+        "bacteriological_index":       { "type": "ENUM",     "description": "Chỉ số BI (0–6)", "options": ["0", "1", "2", "3", "4", "5", "6"] }
+      }
+    },
+
+    "DIAGNOSIS_ASSESSMENT": {
+      "description": "Thông tin chẩn đoán",
+      "attributes": {
+        "id":                           { "type": "INT",     "pk": true },
+        "patient_id":                   { "type": "INT",     "fk": "PATIENT_INFO.patient_id" },
+        "main_diagnosis":               { "type": "VARCHAR", "description": "Chẩn đoán chính" },
+        "diagnostic_certainty":         { "type": "VARCHAR", "description": "Mức độ tin cậy chẩn đoán" },
+        "differential_list":            { "type": "VARCHAR", "description": "Các chẩn đoán phân biệt" },
+        "complication_flag":            { "type": "BOOLEAN", "description": "Có biến chứng" },
+        "complication_type":            { "type": "VARCHAR", "description": "Loại biến chứng" },
+        "cross_immunity_other_mycobacteria": {
+          "type": "BOOLEAN",
+          "description": "Có miễn dịch chéo với Mycobacteria khác"
+        },
+        "early_detection":              { "type": "BOOLEAN", "description": "Bệnh phong phát hiện sớm" },
+        "etiologic_agent":              { "type": "VARCHAR", "description": "Tác nhân gây bệnh" },
+        "leprosy_suspicion":            { "type": "BOOLEAN", "description": "Nghi ngờ bệnh phong" },
+        "subtype":                      { "type": "VARCHAR", "description": "Thể bệnh phong: I/T/B/L" },
+        "confirmation_status":          { "type": "VARCHAR", "description": "Tình trạng chẩn đoán xác định/chưa xác định" },
+        "WHO_group":                    { "type": "VARCHAR", "description": "Nhóm WHO PB/MB" },
+        "prognosis":                    { "type": "VARCHAR", "description": "Tiên lượng" }
+      }
+    },
+
+    "SEVERITY_ASSESSMENT": {
+      "description": "Đánh giá mức độ nặng",
+      "attributes": {
+        "id":                           { "type": "INT",     "pk": true },
+        "patient_id":                   { "type": "INT",     "fk": "PATIENT_INFO.patient_id" },
+        "extent_of_lesions":            { "type": "ENUM", "description": "Phạm vi tổn thương", "options": ["Khu trú", "Lan rộng", "Toàn thân"] },
+        "systemic_involvement":         { "type": "BOOLEAN", "description": "Có biểu hiện toàn thân" },
+        "deformity_or_disability":      { "type": "BOOLEAN", "description": "Có tàn tật/biến dạng chi" },
+        "overall_severity":             { "type": "ENUM", "description": "Mức độ chung: nhẹ/trung bình/nặng", "options": ["Nhẹ", "Trung bình", "Nặng"] },
+        "noninflammatory_lesion_count": { "type": "ENUM",     "description": "Số tổn thương không viêm", "options": ["0", "1-5", "6-10", "11-20", ">20"] },
+        "inflammatory_lesion_count":    { "type": "ENUM",     "description": "Số tổn thương viêm", "options": ["0", "1-5", "6-10", "11-20", ">20"] },
+        "nodule_cyst_count":            { "type": "ENUM",     "description": "Số nang/cục", "options": ["0", "1-5", "6-10", "11-20", ">20"] },
+        "total_lesion_count":           { "type": "ENUM",     "description": "Tổng mọi loại tổn thương", "options": ["0", "1-5", "6-10", "11-20", "21-50", ">50"] },
+        "recurrent_infections":         { "type": "BOOLEAN", "description": "Nhiễm trùng tái phát nhiều lần" },
+        "M_leprae_doubling_time":       { "type": "ENUM",    "description": "Tốc độ nhân đôi của M. leprae", "options": ["Chậm", "Trung bình", "Nhanh"] },
+        "infectivity":                  { "type": "ENUM",    "description": "Mức độ lây nhiễm (Thấp/Trung bình/Cao)", "options": ["Thấp", "Trung bình", "Cao", "Rất cao"] },
+        "muscle_atrophy_or_deformity_of_limbs": {
+          "type": "BOOLEAN",
+          "description": "Teo cơ hoặc biến dạng chi do phong"
+        }
+      }
+    },
+
+    "TREATMENT_PLAN": {
+      "description": "Kế hoạch điều trị",
+      "attributes": {
+        "id":                              { "type": "INT",     "pk": true },
+        "patient_id":                      { "type": "INT",     "fk": "PATIENT_INFO.patient_id" },
+        "local_antiseptic":                { "type": "VARCHAR", "description": "Thuốc sát khuẩn tại chỗ" },
+        "topical_antibiotic":              { "type": "VARCHAR", "description": "Kháng sinh bôi" },
+        "systemic_antibiotic":             { "type": "VARCHAR", "description": "Kháng sinh toàn thân" },
+        "drainage_performed":             { "type": "BOOLEAN", "description": "Đã rạch tháo mủ hay chưa" },
+        "pain_relief":                     { "type": "VARCHAR", "description": "Thuốc giảm đau" },
+        "antipruritic":                    { "type": "VARCHAR", "description": "Thuốc giảm ngứa" },
+        "acne_regimen":                    { "type": "VARCHAR", "description": "Phác đồ điều trị trứng cá" },
+        "treatment_duration":              { "type": "VARCHAR", "description": "Thời gian điều trị" },
+        "follow_up_schedule":              { "type": "VARCHAR", "description": "Kế hoạch tái khám" },
+        "prevention_advice":               { "type": "VARCHAR", "description": "Lời khuyên phòng bệnh" },
+        "regimen_choice":                  { "type": "INT",     "description": "Chọn phác đồ 1/2/3…" },
+        "regimen":                         { "type": "VARCHAR", "description": "Chi tiết phác đồ MDT/khác" },
+        "local_treatment":                 { "type": "VARCHAR", "description": "Đốt điện, laser, áp lạnh…" },
+        "MDT_completed_as_recommended":    { "type": "BOOLEAN", "description": "Đã dùng đủ liệu trình MDT" },
+        "leprosy_screening_and_contact_exam": {
+          "type": "ENUM",
+          "description": "Trạng thái chương trình phát hiện/phong khám người tiếp xúc"
+        }
+      }
+    }
+  },
+
+  "relations": [
+    { "from": "PATIENT_INFO", "to": "RISK_FACTOR_ASSESSMENT",     "cardinality": "1-N", "foreign_key": "patient_id" },
+    { "from": "PATIENT_INFO", "to": "SKIN_LESION_MORPHOLOGY",     "cardinality": "1-N", "foreign_key": "patient_id" },
+    { "from": "PATIENT_INFO", "to": "LESION_DISTRIBUTION",        "cardinality": "1-N", "foreign_key": "patient_id" },
+    { "from": "PATIENT_INFO", "to": "SYSTEMIC_AND_NEURO_SIGNS",   "cardinality": "1-N", "foreign_key": "patient_id" },
+    { "from": "PATIENT_INFO", "to": "LABORATORY_ASSESSMENT",      "cardinality": "1-N", "foreign_key": "patient_id" },
+    { "from": "PATIENT_INFO", "to": "DIAGNOSIS_ASSESSMENT",       "cardinality": "1-N", "foreign_key": "patient_id" },
+    { "from": "PATIENT_INFO", "to": "SEVERITY_ASSESSMENT",        "cardinality": "1-N", "foreign_key": "patient_id" },
+    { "from": "PATIENT_INFO", "to": "TREATMENT_PLAN",             "cardinality": "1-N", "foreign_key": "patient_id" }
+  ]
+}
