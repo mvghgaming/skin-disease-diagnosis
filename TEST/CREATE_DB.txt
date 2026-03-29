@@ -1,0 +1,192 @@
+-- =========================================================
+-- BƯỚC 0: XÓA CÁC BẢNG CŨ (NẾU CÓ) ĐỂ LÀM SẠCH DATABASE
+-- =========================================================
+DROP TABLE IF EXISTS TREATMENT_PLAN CASCADE;
+DROP TABLE IF EXISTS SEVERITY_ASSESSMENT CASCADE;
+DROP TABLE IF EXISTS DIAGNOSIS_ASSESSMENT CASCADE;
+DROP TABLE IF EXISTS LABORATORY_ASSESSMENT CASCADE;
+DROP TABLE IF EXISTS SYSTEMIC_AND_NEURO_SIGNS CASCADE;
+DROP TABLE IF EXISTS LESION_DISTRIBUTION CASCADE;
+DROP TABLE IF EXISTS SKIN_LESION_MORPHOLOGY CASCADE;
+DROP TABLE IF EXISTS RISK_FACTOR_ASSESSMENT CASCADE;
+DROP TABLE IF EXISTS PATIENT_INFO CASCADE;
+
+-- =========================================================
+-- 1. Bảng Thông tin bệnh nhân (PATIENT_INFO)
+-- =========================================================
+CREATE TABLE PATIENT_INFO (
+    patient_id SERIAL PRIMARY KEY,
+    age INTEGER,
+    sex TEXT,
+    occupation TEXT,
+    residence_area TEXT,
+    diabetes BOOLEAN DEFAULT FALSE,
+    immunosuppressed BOOLEAN DEFAULT FALSE,
+    onset_duration TEXT,
+    pregnant BOOLEAN DEFAULT FALSE,
+    breastfeeding BOOLEAN DEFAULT FALSE,
+    HIV_status BOOLEAN DEFAULT FALSE
+);
+
+-- =========================================================
+-- 2. Bảng Đánh giá yếu tố nguy cơ (RISK_FACTOR_ASSESSMENT)
+-- =========================================================
+CREATE TABLE RISK_FACTOR_ASSESSMENT (
+    id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES PATIENT_INFO(patient_id) ON DELETE CASCADE,
+    hygiene_level TEXT,
+    skin_trauma BOOLEAN,
+    hot_humid_environment BOOLEAN,
+    occlusive_clothing BOOLEAN,
+    hyperhidrosis BOOLEAN,
+    oily_skin BOOLEAN,
+    close_contact_tb_leprosy BOOLEAN,
+    mycobacteria_cross_immunity BOOLEAN,
+    overall_infection_risk TEXT,
+    acne_inducing_drug_history TEXT,
+    chemical_exposure TEXT,
+    leprosy_risk_group TEXT, 
+    time_from_exposure_to_symptoms_in_years INTEGER
+);
+
+-- =========================================================
+-- 3. Bảng Hình thái tổn thương da (SKIN_LESION_MORPHOLOGY)
+-- =========================================================
+CREATE TABLE SKIN_LESION_MORPHOLOGY (
+    id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES PATIENT_INFO(patient_id) ON DELETE CASCADE,
+    vesicle_or_bulla BOOLEAN,
+    crust_presence BOOLEAN,
+    crust_color TEXT,
+    pustule BOOLEAN,
+    nodule_or_abscess BOOLEAN,
+    exfoliative_erythema BOOLEAN,
+    tuberculous_plaque BOOLEAN,
+    leprosy_patch BOOLEAN,
+    sensory_loss_on_lesion BOOLEAN,
+    scar BOOLEAN,
+    comedones_present BOOLEAN,
+    ulceration BOOLEAN,
+    primary_lesion TEXT, 
+    chronic_inflamation_features TEXT[], 
+    visual_features TEXT[],
+    lymph_node TEXT, 
+    patch_type BOOLEAN,
+    patch_color TEXT,
+    plaque_type BOOLEAN,
+    diffuse_infiltration BOOLEAN,
+    borderline_features_between_T_and_L BOOLEAN
+);
+
+-- =========================================================
+-- 4. Bảng Phân bố tổn thương (LESION_DISTRIBUTION)
+-- =========================================================
+CREATE TABLE LESION_DISTRIBUTION (
+    id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES PATIENT_INFO(patient_id) ON DELETE CASCADE,
+    main_location TEXT,
+    typical_for_disease BOOLEAN,
+    follicular_area BOOLEAN,
+    seborrheic_area BOOLEAN,
+    extremities_involved BOOLEAN,
+    number_of_lesions TEXT,
+    border_clarity TEXT,
+    symmetry TEXT
+);
+
+-- =========================================================
+-- 5. Bảng Triệu chứng toàn thân & Thần kinh (SYSTEMIC_AND_NEURO_SIGNS)
+-- =========================================================
+CREATE TABLE SYSTEMIC_AND_NEURO_SIGNS (
+    id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES PATIENT_INFO(patient_id) ON DELETE CASCADE,
+    fever BOOLEAN,
+    pain BOOLEAN,
+    pruritus BOOLEAN,
+    malaise BOOLEAN,
+    hair_loss BOOLEAN,
+    center_sensation TEXT, 
+    temperature_or_pain_sensation_loss_on_lesion BOOLEAN,
+    enlarged_painful_nerves BOOLEAN
+);
+
+-- =========================================================
+-- 6. Bảng Cận lâm sàng (LABORATORY_ASSESSMENT)
+-- =========================================================
+CREATE TABLE LABORATORY_ASSESSMENT (
+    id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES PATIENT_INFO(patient_id) ON DELETE CASCADE,
+    smear_afb_leprosy BOOLEAN,
+    other_myco_tests TEXT,
+    inflammatory_markers TEXT,
+    bacteria_test TEXT, 
+    tuberculin_test TEXT, 
+    histopathology TEXT, 
+    leprosy_bacilloscopy_result TEXT, 
+    leprosy_Ziehl_Neelsen_smear TEXT, 
+    bacteriological_index INTEGER
+);
+
+-- =========================================================
+-- 7. Bảng Chẩn đoán (DIAGNOSIS_ASSESSMENT)
+-- =========================================================
+CREATE TABLE DIAGNOSIS_ASSESSMENT (
+    id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES PATIENT_INFO(patient_id) ON DELETE CASCADE,
+    main_diagnosis TEXT,
+    diagnostic_certainty TEXT,
+    differential_list TEXT,
+    complication_flag BOOLEAN,
+    complication_type TEXT,
+    cross_immunity_other_mycobacteria BOOLEAN,
+    early_detection BOOLEAN,
+    etiologic_agent TEXT,
+    leprosy_suspicion BOOLEAN,
+    subtype TEXT,
+    confirmation_status TEXT,
+    WHO_group TEXT,
+    prognosis TEXT
+);
+
+-- =========================================================
+-- 8. Bảng Đánh giá mức độ nặng (SEVERITY_ASSESSMENT)
+-- =========================================================
+CREATE TABLE SEVERITY_ASSESSMENT (
+    id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES PATIENT_INFO(patient_id) ON DELETE CASCADE,
+    extent_of_lesions TEXT,
+    systemic_involvement BOOLEAN,
+    deformity_or_disability BOOLEAN,
+    overall_severity TEXT,
+    noninflammatory_lesion_count INTEGER,
+    inflammatory_lesion_count INTEGER,
+    nodule_cyst_count INTEGER,
+    total_lesion_count INTEGER,
+    recurrent_infections BOOLEAN,
+    M_leprae_doubling_time TEXT, 
+    infectivity TEXT, 
+    muscle_atrophy_or_deformity_of_limbs BOOLEAN
+);
+
+-- =========================================================
+-- 9. Bảng Kế hoạch điều trị (TREATMENT_PLAN)
+-- =========================================================
+CREATE TABLE TREATMENT_PLAN (
+    id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES PATIENT_INFO(patient_id) ON DELETE CASCADE,
+    local_antiseptic TEXT,
+    topical_antibiotic TEXT,
+    systemic_antibiotic TEXT,
+    drainage_performed BOOLEAN,
+    pain_relief TEXT,
+    antipruritic TEXT,
+    acne_regimen TEXT,
+    treatment_duration TEXT,
+    follow_up_schedule TEXT,
+    prevention_advice TEXT,
+    regimen_choice INTEGER,
+    regimen TEXT,
+    local_treatment TEXT,
+    MDT_completed_as_recommended BOOLEAN,
+    leprosy_screening_and_contact_exam TEXT 
+);

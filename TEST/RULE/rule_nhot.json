@@ -1,0 +1,364 @@
+{
+  "disease": "Nhọt",
+  "rules": [
+    {
+      "id": "NHOT_1",
+      "group": "Chẩn đoán",
+      "description": "Nhận diện nhọt điển hình",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "nodule_or_abscess",
+          "operator": "=",
+          "value": true
+        },
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "pustule",
+          "operator": "=",
+          "value": true
+        },
+        {
+          "concept": "SYSTEMIC_AND_NEURO_SIGNS",
+          "attribute": "pain",
+          "operator": "=",
+          "value": true
+        },
+        {
+          "concept": "LESION_DISTRIBUTION",
+          "attribute": "follicular_area",
+          "operator": "=",
+          "value": true
+        }
+      ],
+      "then": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "main_diagnosis",
+          "value": "Nhọt"
+        }
+      ],
+      "explanation": "Nhọt là ổ viêm sâu của nang lông tạo thành nốt/ổ mủ đau và nằm ở vùng có nang lông. Khi có nốt/ổ mủ + mụn mủ + đau + vùng nang lông, hệ thống gán chẩn đoán là Nhọt."
+    },
+
+    {
+      "id": "NHOT_2",
+      "group": "Đánh giá mức độ",
+      "description": "Nhọt nhiều ổ → lan rộng (mức độ trung bình)",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "main_diagnosis",
+          "operator": "=",
+          "value": "Nhọt"
+        },
+        {
+          "concept": "LESION_DISTRIBUTION",
+          "attribute": "number_of_lesions",
+          "operator": "=",
+          "value": "Nhiều"
+        }
+      ],
+      "then": [
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "extent_of_lesions",
+          "value": "Lan rộng"
+        },
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "overall_severity",
+          "value": "Trung bình"
+        }
+      ],
+      "explanation": "Khi nhiều nhọt xuất hiện cùng lúc hoặc ở nhiều vùng khác nhau, mức độ nặng tăng. Luật này nâng đánh giá phạm vi lan rộng và mức độ chung trung bình để kích hoạt điều trị phù hợp."
+    },
+
+    {
+      "id": "NHOT_3",
+      "group": "Đánh giá mức độ",
+      "description": "Nhọt trên nền đái tháo đường hoặc suy giảm miễn dịch → mức độ nặng",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "main_diagnosis",
+          "operator": "=",
+          "value": "Nhọt"
+        },
+        {
+          "logic": "OR",
+          "conditions": [
+            {
+              "concept": "PATIENT_INFO",
+              "attribute": "diabetes",
+              "operator": "=",
+              "value": true
+            },
+            {
+              "concept": "PATIENT_INFO",
+              "attribute": "immunosuppressed",
+              "operator": "=",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "then": [
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "systemic_involvement",
+          "value": true
+        },
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "overall_severity",
+          "value": "Nặng"
+        }
+      ],
+      "explanation": "Nhọt ở bệnh nhân đái tháo đường hoặc suy giảm miễn dịch dễ lan rộng, chậm lành và dễ biến chứng. Vì vậy hệ thống đánh dấu có liên quan toàn thân và xếp mức độ nặng."
+    },
+
+    {
+      "id": "NHOT_4",
+      "group": "Đánh giá mức độ",
+      "description": "Nhọt ở mặt (vùng nguy hiểm) → mức độ nặng",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "main_diagnosis",
+          "operator": "=",
+          "value": "Nhọt"
+        },
+        {
+          "concept": "LESION_DISTRIBUTION",
+          "attribute": "main_location",
+          "operator": "=",
+          "value": "Mặt"
+        }
+      ],
+      "then": [
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "overall_severity",
+          "value": "Nặng"
+        },
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "systemic_involvement",
+          "value": true
+        }
+      ],
+      "explanation": "Nhọt vùng mặt (đặc biệt vùng 'tam giác nguy hiểm') có nguy cơ biến chứng nặng. Vì vậy hệ thống mặc định xếp mức độ nặng và cần theo dõi sát."
+    },
+
+    {
+      "id": "NHOT_5",
+      "group": "Yếu tố nguy cơ",
+      "description": "Đánh giá nguy cơ hình thành nhọt",
+      "logic": "OR",
+      "if": [
+        {
+          "concept": "RISK_FACTOR_ASSESSMENT",
+          "attribute": "hygiene_level",
+          "operator": "=",
+          "value": "Kém"
+        },
+        {
+          "concept": "RISK_FACTOR_ASSESSMENT",
+          "attribute": "occlusive_clothing",
+          "operator": "=",
+          "value": true
+        },
+        {
+          "concept": "RISK_FACTOR_ASSESSMENT",
+          "attribute": "hyperhidrosis",
+          "operator": "=",
+          "value": true
+        }
+      ],
+      "then": [
+        {
+          "concept": "RISK_FACTOR_ASSESSMENT",
+          "attribute": "overall_infection_risk",
+          "value": "Tăng"
+        }
+      ],
+      "explanation": "Nhọt dễ xuất hiện khi vệ sinh da kém, quần áo bí và tăng tiết mồ hôi. Luật này giúp hệ thống đánh dấu bệnh nhân đang thuộc nhóm nguy cơ cao."
+    },
+
+    {
+      "id": "NHOT_6",
+      "group": "Điều trị",
+      "description": "Điều trị nhọt nhẹ, khu trú (chăm sóc tại chỗ)",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "main_diagnosis",
+          "operator": "=",
+          "value": "Nhọt"
+        },
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "overall_severity",
+          "operator": "=",
+          "value": "Nhẹ"
+        }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "local_antiseptic",
+          "value": "Dung dịch sát khuẩn"
+        },
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "treatment_duration",
+          "value": "5–7 ngày"
+        }
+      ],
+      "explanation": "Nhọt nhỏ, khu trú, chưa lan rộng thường có thể chăm sóc tại chỗ bằng sát khuẩn và theo dõi trong 5–7 ngày."
+    },
+
+    {
+      "id": "NHOT_7",
+      "group": "Điều trị",
+      "description": "Điều trị nhọt trung bình/nặng bằng kháng sinh uống",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "main_diagnosis",
+          "operator": "=",
+          "value": "Nhọt"
+        },
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "overall_severity",
+          "operator": "IN",
+          "value": ["Trung bình", "Nặng"]
+        }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "systemic_antibiotic",
+          "value": ["Cloxacillin", "Cephalexin", "Amoxicillin/Clavulanate"]
+        },
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "treatment_duration",
+          "value": "7–10 ngày"
+        }
+      ],
+      "explanation": "Khi nhọt nhiều ổ, ở mặt hoặc trên nền đái tháo đường/suy giảm miễn dịch, điều trị chuẩn là kháng sinh đường uống 7–10 ngày. Danh mục thuốc theo khuyến cáo."
+    },
+
+    {
+      "id": "NHOT_8",
+      "group": "Thủ thuật",
+      "description": "Chỉ định rạch tháo mủ khi nhọt đã hóa mủ (mức nhẹ–trung bình)",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "main_diagnosis",
+          "operator": "=",
+          "value": "Nhọt"
+        },
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "nodule_or_abscess",
+          "operator": "=",
+          "value": true
+        },
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "overall_severity",
+          "operator": "IN",
+          "value": ["Nhẹ", "Trung bình"]
+        }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "drainage_performed",
+          "value": true
+        },
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "local_antiseptic",
+          "value": "Dung dịch sát khuẩn sau rạch"
+        }
+      ],
+      "explanation": "Nhọt hóa mủ cần rạch tháo mủ đúng kỹ thuật và sát khuẩn sau rạch. Với mức nặng thường cần phối hợp kháng sinh toàn thân và theo dõi cơ sở y tế (đã nằm trong NHOT_7)."
+    },
+
+    {
+      "id": "NHOT_9",
+      "group": "Điều trị triệu chứng",
+      "description": "Điều trị hỗ trợ giảm đau",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "main_diagnosis",
+          "operator": "=",
+          "value": "Nhọt"
+        },
+        {
+          "concept": "SYSTEMIC_AND_NEURO_SIGNS",
+          "attribute": "pain",
+          "operator": "=",
+          "value": true
+        }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "pain_relief",
+          "value": "Paracetamol"
+        }
+      ],
+      "explanation": "Nhọt thường gây đau nhiều, có thể dùng Paracetamol để giảm đau và hạ sốt nếu cần."
+    },
+
+    {
+      "id": "NHOT_10",
+      "group": "Phòng ngừa/tái phát",
+      "description": "Dự phòng nhọt tái phát",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "main_diagnosis",
+          "operator": "=",
+          "value": "Nhọt"
+        },
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "recurrent_infections",
+          "operator": "=",
+          "value": true
+        }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "topical_antibiotic",
+          "value": "Mupirocin mũi định kỳ"
+        },
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "follow_up_schedule",
+          "value": "Tái khám theo hẹn"
+        }
+      ],
+      "explanation": "Nhọt tái đi tái lại cần theo dõi định kỳ và có thể cân nhắc biện pháp giảm tái phát như Mupirocin bôi mũi định kỳ trong các khuyến cáo mở rộng."
+    }
+  ]
+}

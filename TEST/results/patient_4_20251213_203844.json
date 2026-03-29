@@ -1,0 +1,34 @@
+{
+    "meta_data": {
+        "patient_id": 4,
+        "created_at": "20251213_203844",
+        "system_version": "1.0"
+    },
+    "diagnosis_result": {
+        "main_diagnosis": "SSSS",
+        "subtype": null,
+        "diagnostic_certainty": null,
+        "WHO_group": null,
+        "treatment_plan": [
+            "Kháng sinh uống: Kháng sinh toàn thân",
+            "Giảm đau/Hồi sức: Bù nước-điện giải; chăm sóc da như bỏng",
+            "Kháng sinh uống: Amoxicillin/Clavulanate",
+            "Thời gian: 7 ngày",
+            "Giảm ngứa: Kem dưỡng ẩm hỗ trợ phục hồi da"
+        ],
+        "prevention_advice": [
+            "Giữ vệ sinh cho trẻ, tránh lây nhiễm tụ cầu, điều trị sớm các ổ nhiễm khuẩn"
+        ],
+        "warnings": [
+            "Biến chứng: Nhiễm khuẩn huyết hoặc viêm phổi"
+        ],
+        "rules_triggered": [
+            "SSSS_1",
+            "SSSS_10",
+            "SSSS_11",
+            "SSSS_14",
+            "SSSS_16",
+            "SSSS_17"
+        ]
+    }
+}

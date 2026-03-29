@@ -1,0 +1,408 @@
+{
+  "disease": "Bệnh phong",
+  "disease_code": "LEPROSY",
+  "rules": [
+    {
+      "id": "LEP_1",
+      "group": "Nguyên nhân – nguy cơ – cơ chế lây",
+      "description": "Xác định nguyên nhân bệnh phong do Mycobacterium leprae khi soi trực khuẩn phong dương tính.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "LABORATORY_ASSESSMENT",
+          "attribute": "leprosy_bacilloscopy_result",
+          "operator": "=",
+          "value": "Dương tính"
+        }
+      ],
+      "then": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "etiologic_agent",
+          "value": "Mycobacterium leprae"
+        }
+      ],
+      "explanation": "Soi trực khuẩn phong dương tính là bằng chứng tác nhân gây bệnh phong."
+    },
+    {
+      "id": "LEP_2",
+      "group": "Nguyên nhân – nguy cơ – cơ chế lây",
+      "description": "Xếp nhóm nguy cơ phong cao khi có tiếp xúc gần, kéo dài với bệnh nhân phong/lao da.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "RISK_FACTOR_ASSESSMENT",
+          "attribute": "close_contact_tb_leprosy",
+          "operator": "=",
+          "value": true
+        }
+      ],
+      "then": [
+        {
+          "concept": "RISK_FACTOR_ASSESSMENT",
+          "attribute": "leprosy_risk_group",
+          "value": "Nguy cơ cao"
+        }
+      ],
+      "explanation": "Tiếp xúc gần và kéo dài làm tăng nguy cơ mắc phong, cần theo dõi định kỳ."
+    },
+    {
+      "id": "LEP_3",
+      "group": "Nguyên nhân – nguy cơ – cơ chế lây",
+      "description": "Giải thích phong khó lây: miễn dịch chéo + vi khuẩn nhân đôi rất chậm → mức lây thấp.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "RISK_FACTOR_ASSESSMENT",
+          "attribute": "mycobacteria_cross_immunity",
+          "operator": "=",
+          "value": true
+        },
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "M_leprae_doubling_time",
+          "operator": "=",
+          "value": "Rất chậm"
+        }
+      ],
+      "then": [
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "infectivity",
+          "value": "Thấp"
+        }
+      ],
+      "explanation": "Miễn dịch chéo và tốc độ nhân đôi rất chậm làm khả năng lây truyền thấp."
+    },
+    {
+      "id": "LEP_4",
+      "group": "Nguyên nhân – nguy cơ – cơ chế lây",
+      "description": "Gợi ý phong khi thời gian ủ bệnh dài (>= 3 năm) sau phơi nhiễm.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "RISK_FACTOR_ASSESSMENT",
+          "attribute": "time_from_exposure_to_symptoms_in_years",
+          "operator": ">=",
+          "value": 3
+        }
+      ],
+      "then": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "leprosy_suspicion",
+          "value": true
+        }
+      ],
+      "explanation": "Phong có thời kỳ ủ bệnh dài; xuất hiện triệu chứng sau nhiều năm phơi nhiễm làm tăng nghi ngờ."
+    },
+
+    {
+      "id": "LEP_5",
+      "group": "Nhận diện thương tổn – phân thể",
+      "description": "Nhận diện thể bất định (I): dát nhạt màu, bờ không rõ, ít tổn thương.",
+      "logic": "AND",
+      "if": [
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "patch_type", "operator": "=", "value": true },
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "patch_color",
+          "operator": "IN",
+          "value": ["Trắng", "Thâm", "Hồng nhạt"]
+        },
+        { "concept": "LESION_DISTRIBUTION", "attribute": "border_clarity", "operator": "=", "value": "Không rõ" },
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "total_lesion_count",
+          "operator": "<=",
+          "value": 10
+        }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "subtype", "value": "Thể bất định (I)" }
+      ],
+      "explanation": "Thể bất định thường có vài dát nhạt màu, ranh giới không rõ; số lượng ít gợi ý giai đoạn sớm."
+    },
+    {
+      "id": "LEP_6",
+      "group": "Nhận diện thương tổn – phân thể",
+      "description": "Nhận diện thể củ (T): mảng/củ ranh giới rõ và giảm/mất cảm giác vùng tổn thương.",
+      "logic": "AND",
+      "if": [
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "plaque_type", "operator": "=", "value": true },
+        { "concept": "LESION_DISTRIBUTION", "attribute": "border_clarity", "operator": "=", "value": "Rõ" },
+        {
+          "concept": "SYSTEMIC_AND_NEURO_SIGNS",
+          "attribute": "center_sensation",
+          "operator": "IN",
+          "value": ["Mất", "Giảm", "Mất hoặc giảm"]
+        }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "subtype", "value": "Thể củ (T)" }
+      ],
+      "explanation": "Thể củ có mảng/củ rõ ranh giới và rối loạn cảm giác trung tâm tổn thương."
+    },
+    {
+      "id": "LEP_7",
+      "group": "Nhận diện thương tổn – phân thể",
+      "description": "Nhận diện thể u (L): thâm nhiễm lan tỏa đối xứng, ranh giới không rõ.",
+      "logic": "AND",
+      "if": [
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "diffuse_infiltration", "operator": "=", "value": true },
+        { "concept": "LESION_DISTRIBUTION", "attribute": "symmetry", "operator": "=", "value": "Đối xứng 2 bên" },
+        { "concept": "LESION_DISTRIBUTION", "attribute": "border_clarity", "operator": "=", "value": "Không rõ" }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "subtype", "value": "Thể u (L)" }
+      ],
+      "explanation": "Thể u thường lan tỏa, đối xứng, bờ mờ; thường nhiều vi khuẩn và nguy cơ biến chứng cao."
+    },
+    {
+      "id": "LEP_8",
+      "group": "Nhận diện thương tổn – phân thể",
+      "description": "Nhận diện thể trung gian (B) khi có đặc điểm trung gian giữa thể T và L, chưa phân subtype.",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "subtype", "operator": "IS_NULL", "value": true },
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "borderline_features_between_T_and_L",
+          "operator": "=",
+          "value": true
+        }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "subtype", "value": "Thể trung gian (B)" }
+      ],
+      "explanation": "Thể trung gian có biểu hiện pha trộn, khó xếp rõ T hay L."
+    },
+
+    {
+      "id": "LEP_9",
+      "group": "Thần kinh – biến chứng",
+      "description": "Nghi ngờ phong khi mất cảm giác nóng/lạnh/đau tại vùng tổn thương.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "SYSTEMIC_AND_NEURO_SIGNS",
+          "attribute": "temperature_or_pain_sensation_loss_on_lesion",
+          "operator": "=",
+          "value": true
+        }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "leprosy_suspicion", "value": true }
+      ],
+      "explanation": "Giảm/mất cảm giác là dấu hiệu kinh điển của phong."
+    },
+    {
+      "id": "LEP_10",
+      "group": "Thần kinh – biến chứng",
+      "description": "Nghi ngờ phong khi dây thần kinh ngoại biên phì đại/ấn đau.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "SYSTEMIC_AND_NEURO_SIGNS",
+          "attribute": "enlarged_painful_nerves",
+          "operator": "=",
+          "value": true
+        }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "leprosy_suspicion", "value": true }
+      ],
+      "explanation": "Dây thần kinh dày, ấn đau gợi ý viêm dây thần kinh do phong."
+    },
+    {
+      "id": "LEP_11",
+      "group": "Thần kinh – biến chứng",
+      "description": "Ghi nhận biến chứng tàn tật vận động khi có teo cơ/biến dạng chi.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "SEVERITY_ASSESSMENT",
+          "attribute": "muscle_atrophy_or_deformity_of_limbs",
+          "operator": "=",
+          "value": true
+        }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "complication_flag", "value": true },
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "complication_type", "value": "Tàn tật vận động" }
+      ],
+      "explanation": "Teo cơ/biến dạng chi là hậu quả muộn do tổn thương thần kinh trong phong."
+    },
+
+    {
+      "id": "LEP_12",
+      "group": "Xác định chẩn đoán – WHO",
+      "description": "Chẩn đoán xác định khi nhuộm Ziehl–Neelsen dương tính.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "LABORATORY_ASSESSMENT",
+          "attribute": "leprosy_Ziehl_Neelsen_smear",
+          "operator": "=",
+          "value": "Dương tính"
+        }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "confirmation_status", "value": "Xác định" }
+      ],
+      "explanation": "Nhuộm Ziehl–Neelsen dương tính là bằng chứng trực khuẩn phong."
+    },
+    {
+      "id": "LEP_13",
+      "group": "Xác định chẩn đoán – WHO",
+      "description": "Phân nhóm WHO PB khi số tổn thương ít (<=5) và BI = 0.",
+      "logic": "AND",
+      "if": [
+        { "concept": "SEVERITY_ASSESSMENT", "attribute": "total_lesion_count", "operator": "<=", "value": 5 },
+        { "concept": "LABORATORY_ASSESSMENT", "attribute": "bacteriological_index", "operator": "=", "value": 0 }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "WHO_group", "value": "PB (ít vi khuẩn)" }
+      ],
+      "explanation": "PB: ít tổn thương và không thấy vi khuẩn (BI=0) → phác đồ ngắn hơn."
+    },
+    {
+      "id": "LEP_14",
+      "group": "Xác định chẩn đoán – WHO",
+      "description": "Phân nhóm WHO MB khi số tổn thương >5 hoặc BI > 0.",
+      "logic": "OR",
+      "if": [
+        { "concept": "SEVERITY_ASSESSMENT", "attribute": "total_lesion_count", "operator": ">", "value": 5 },
+        { "concept": "LABORATORY_ASSESSMENT", "attribute": "bacteriological_index", "operator": ">", "value": 0 }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "WHO_group", "value": "MB (nhiều vi khuẩn)" }
+      ],
+      "explanation": "MB: nhiều tổn thương hoặc BI dương tính → điều trị dài hơn, mạnh hơn."
+    },
+
+    {
+      "id": "LEP_15",
+      "group": "Điều trị MDT",
+      "description": "Phác đồ MDT người lớn nhóm PB (>=15 tuổi).",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "WHO_group", "operator": "=", "value": "PB (ít vi khuẩn)" },
+        { "concept": "PATIENT_INFO", "attribute": "age", "operator": ">=", "value": 15 }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "regimen",
+          "value": "Rifampicin 600mg/tháng + DDS 100mg/ngày, trong 6 tháng"
+        }
+      ],
+      "explanation": "Người lớn PB: MDT 6 tháng với Rifampicin hàng tháng + DDS hằng ngày."
+    },
+    {
+      "id": "LEP_16",
+      "group": "Điều trị MDT",
+      "description": "Phác đồ MDT người lớn nhóm MB (>=15 tuổi).",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "WHO_group", "operator": "=", "value": "MB (nhiều vi khuẩn)" },
+        { "concept": "PATIENT_INFO", "attribute": "age", "operator": ">=", "value": 15 }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "regimen",
+          "value": "Rifampicin 600mg/tháng + Clofazimin 300mg/tháng + Clofazimin 50mg/ngày + DDS 100mg/ngày, trong 12 tháng"
+        }
+      ],
+      "explanation": "Người lớn MB: MDT 12 tháng với Rifampicin + DDS + Clofazimin."
+    },
+    {
+      "id": "LEP_17",
+      "group": "Điều trị MDT",
+      "description": "Phác đồ MDT trẻ em nhóm PB (<15 tuổi).",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "WHO_group", "operator": "=", "value": "PB (ít vi khuẩn)" },
+        { "concept": "PATIENT_INFO", "attribute": "age", "operator": "<", "value": 15 }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "regimen",
+          "value": "Rifampicin 300–450mg/tháng + DDS 25–50mg/ngày, trong 6 tháng"
+        }
+      ],
+      "explanation": "Trẻ em PB: liều giảm theo tuổi/cân nặng, thời gian điều trị 6 tháng."
+    },
+    {
+      "id": "LEP_18",
+      "group": "Điều trị MDT",
+      "description": "Phác đồ MDT trẻ em nhóm MB (<15 tuổi).",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "WHO_group", "operator": "=", "value": "MB (nhiều vi khuẩn)" },
+        { "concept": "PATIENT_INFO", "attribute": "age", "operator": "<", "value": 15 }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "regimen",
+          "value": "Rifampicin 300–450mg/tháng + DDS 25–50mg/ngày, trong 12 tháng"
+        }
+      ],
+      "explanation": "Trẻ em MB: điều trị 12 tháng, liều thuốc điều chỉnh theo tuổi/cân nặng."
+    },
+
+    {
+      "id": "LEP_19",
+      "group": "Tiên lượng – phòng bệnh",
+      "description": "Tiên lượng tốt khi phát hiện sớm và hoàn tất MDT theo khuyến cáo.",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "early_detection", "operator": "=", "value": true },
+        { "concept": "TREATMENT_PLAN", "attribute": "MDT_completed_as_recommended", "operator": "=", "value": true }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "prognosis", "value": "Tốt, khỏi hoàn toàn hoặc ít di chứng" }
+      ],
+      "explanation": "Phát hiện sớm + uống đủ MDT giúp khỏi bệnh và hạn chế di chứng."
+    },
+    {
+      "id": "LEP_20",
+      "group": "Tiên lượng – phòng bệnh",
+      "description": "Tiên lượng xấu khi phát hiện muộn hoặc không hoàn tất MDT.",
+      "logic": "OR",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "early_detection", "operator": "=", "value": false },
+        { "concept": "TREATMENT_PLAN", "attribute": "MDT_completed_as_recommended", "operator": "=", "value": false }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "prognosis", "value": "Xấu, dễ biến chứng và tàn tật" }
+      ],
+      "explanation": "Phát hiện muộn hoặc bỏ dở điều trị làm tăng nguy cơ tổn thương thần kinh và tàn tật."
+    },
+    {
+      "id": "LEP_21",
+      "group": "Tiên lượng – phòng bệnh",
+      "description": "Phòng bệnh phong trong cộng đồng bằng chương trình khám sàng lọc và khám người tiếp xúc.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "leprosy_screening_and_contact_exam",
+          "operator": "=",
+          "value": "Thực hiện"
+        }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "prevention_advice",
+          "value": "Chương trình phát hiện sớm & khám người tiếp xúc giúp giảm mắc mới, giảm tàn tật"
+        }
+      ],
+      "explanation": "Sàng lọc và khám người tiếp xúc giúp phát hiện sớm, điều trị kịp thời và giảm lây lan/tàn tật."
+    }
+  ]
+}

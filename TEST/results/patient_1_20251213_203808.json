@@ -1,0 +1,19 @@
+{
+    "meta_data": {
+        "patient_id": 1,
+        "created_at": "20251213_203808",
+        "system_version": "1.0"
+    },
+    "diagnosis_result": {
+        "main_diagnosis": null,
+        "subtype": null,
+        "diagnostic_certainty": null,
+        "WHO_group": null,
+        "treatment_plan": [],
+        "prevention_advice": [],
+        "warnings": [],
+        "rules_triggered": [
+            "LEP_9"
+        ]
+    }
+}

@@ -1,0 +1,283 @@
+A. Bệnh nhân 1 (Không đủ thông tin chuẩn đoán bệnh) :
+-- 1. Tạo bệnh nhân
+INSERT INTO PATIENT_INFO (patient_id, age, sex) 
+VALUES (1, 35, 'Nam');
+
+-- 2. Tạo triệu chứng da (Có mảng phong + mất cảm giác)
+INSERT INTO SKIN_LESION_MORPHOLOGY (patient_id, leprosy_patch, sensory_loss_on_lesion, primary_lesion, nodule_or_abscess)
+VALUES (1, TRUE, TRUE, 'củ lao', FALSE);
+
+-- 3. Tạo triệu chứng thần kinh (Mất cảm giác đau)
+INSERT INTO SYSTEMIC_AND_NEURO_SIGNS (patient_id, temperature_or_pain_sensation_loss_on_lesion, enlarged_painful_nerves)
+VALUES (1, TRUE, FALSE);
+
+-- 4. Tạo kết quả xét nghiệm (AFB âm tính -> để test ra thể PB)
+INSERT INTO LABORATORY_ASSESSMENT (patient_id, smear_afb_leprosy)
+VALUES (1, FALSE);
+
+-- 5. Tạo đánh giá mức độ (Tổng 3 tổn thương)
+INSERT INTO SEVERITY_ASSESSMENT (patient_id, total_lesion_count)
+VALUES (1, 3);
+
+-- 6. Tạo phân bố (Ranh giới rõ -> Thể Củ TT)
+INSERT INTO LESION_DISTRIBUTION (patient_id, border_clarity)
+VALUES (1, 'Rõ');
+
+-- Bổ sung triệu chứng để thỏa mãn luật LEP_1 (Chẩn đoán xác định)
+UPDATE SKIN_LESION_MORPHOLOGY 
+SET leprosy_patch = TRUE, sensory_loss_on_lesion = TRUE 
+WHERE patient_id = 1;
+
+
+-- ====================================================
+-- TEST CASE 2: BỆNH NHÂN TRỨNG CÁ THÔNG THƯỜNG (NHẸ)
+-- ====================================================
+
+-- 1. Tạo thông tin bệnh nhân (ID = 2)
+INSERT INTO PATIENT_INFO (patient_id, age, sex, occupation) 
+VALUES (2, 18, 'Nữ', 'Sinh viên');
+
+-- 2. Tạo hình thái tổn thương
+-- Điều kiện ACNE_1: Có mụn mủ + Có nhân mụn + Không sẹo
+INSERT INTO SKIN_LESION_MORPHOLOGY (patient_id, pustule, comedones_present, scar, nodule_or_abscess)
+VALUES (2, TRUE, TRUE, FALSE, FALSE);
+
+-- 3. Tạo phân bố tổn thương
+-- Điều kiện ACNE_1: Vị trí ở Mặt
+INSERT INTO LESION_DISTRIBUTION (patient_id, main_location)
+VALUES (2, 'Mặt');
+
+-- 4. Tạo đánh giá mức độ
+-- Điều kiện ACNE_10: Mức độ Nhẹ
+INSERT INTO SEVERITY_ASSESSMENT (patient_id, overall_severity)
+VALUES (2, 'Nhẹ');
+
+-- 5. Các bảng khác (Insert dữ liệu trống/mặc định để tránh lỗi Foreign Key nếu cần)
+INSERT INTO SYSTEMIC_AND_NEURO_SIGNS (patient_id, fever) VALUES (2, FALSE);
+INSERT INTO LABORATORY_ASSESSMENT (patient_id, inflammatory_markers) VALUES (2, 'Bình thường');
+-- Xóa kết quả chẩn đoán cũ (nếu có) để chạy lại từ đầu
+DELETE FROM DIAGNOSIS_ASSESSMENT WHERE patient_id = 2;
+
+
+-- ====================================================
+-- TEST CASE 3: CHỐC LÂY (IMPETIGO) - KHU TRÚ
+-- ====================================================
+-- 1. Xóa dữ liệu cũ của ID 3 (nếu có)
+DELETE FROM PATIENT_INFO WHERE patient_id = 3;
+
+-- 2. Thông tin bệnh nhân
+INSERT INTO PATIENT_INFO (patient_id, age, sex) VALUES (3, 6, 'Nam');
+
+-- 3. Hình thái tổn thương (Bọng nước + Vảy vàng nâu)
+INSERT INTO SKIN_LESION_MORPHOLOGY (patient_id, vesicle_or_bulla, crust_presence, crust_color)
+VALUES (3, TRUE, TRUE, 'Vàng nâu');
+
+-- 4. Phân bố (Ở Mặt - Điển hình)
+INSERT INTO LESION_DISTRIBUTION (patient_id, main_location)
+VALUES (3, 'Mặt');
+
+-- 5. Đánh giá mức độ (Khu trú)
+INSERT INTO SEVERITY_ASSESSMENT (patient_id, extent_of_lesions)
+VALUES (3, 'Khu trú');
+
+-- 6. Dữ liệu phụ (Không sốt)
+INSERT INTO SYSTEMIC_AND_NEURO_SIGNS (patient_id, fever) VALUES (3, FALSE);
+
+👉 Kỳ vọng: Chẩn đoán "Chốc điển hình", Điều trị "Mupirocin/Fusidic acid".
+
+
+-- ====================================================
+-- TEST CASE 4: SSSS (HỘI CHỨNG BONG VẢY DA DO TỤ CẦU)
+-- ====================================================
+DELETE FROM PATIENT_INFO WHERE patient_id = 4;
+
+-- 1. Thông tin bệnh nhân (< 5 tuổi)
+INSERT INTO PATIENT_INFO (patient_id, age, sex) VALUES (4, 2, 'Nữ');
+
+-- 2. Hình thái tổn thương (Bong đỏ da + Bọng nước + KHÔNG vảy tiết)
+INSERT INTO SKIN_LESION_MORPHOLOGY (patient_id, exfoliative_erythema, vesicle_or_bulla, crust_presence)
+VALUES (4, TRUE, TRUE, FALSE);
+
+-- 3. Triệu chứng toàn thân (Có biểu hiện toàn thân)
+INSERT INTO SEVERITY_ASSESSMENT (patient_id, systemic_involvement, overall_severity)
+VALUES (4, TRUE, 'Nặng');
+
+-- 4. Chẩn đoán phân biệt (Để tránh nhầm với Chốc)
+INSERT INTO DIAGNOSIS_ASSESSMENT (patient_id, differential_list) VALUES (4, NULL);
+
+👉 Kỳ vọng: Chẩn đoán "SSSS", Cảnh báo biến chứng "Nhiễm khuẩn huyết...", Điều trị "Amoxicillin/Clavulanate".
+
+
+-- ====================================================
+-- TEST CASE 5: NHỌT VÙNG MẶT (NẶNG)
+-- ====================================================
+DELETE FROM PATIENT_INFO WHERE patient_id = 5;
+
+INSERT INTO PATIENT_INFO (patient_id, age, sex) VALUES (5, 25, 'Nam');
+
+-- 1. Hình thái (Nốt/Áp xe + Mụn mủ)
+INSERT INTO SKIN_LESION_MORPHOLOGY (patient_id, nodule_or_abscess, pustule)
+VALUES (5, TRUE, TRUE);
+
+-- 2. Triệu chứng cơ năng (Đau)
+INSERT INTO SYSTEMIC_AND_NEURO_SIGNS (patient_id, pain) VALUES (5, TRUE);
+
+-- 3. Phân bố (Vùng nang lông + Vị trí Mặt)
+INSERT INTO LESION_DISTRIBUTION (patient_id, follicular_area, main_location)
+VALUES (5, TRUE, 'Mặt');
+
+-- 4. Khởi tạo đánh giá mức độ (Để trống để Rule Engine tự điền "Nặng" vào)
+INSERT INTO SEVERITY_ASSESSMENT (patient_id, overall_severity) VALUES (5, NULL);
+
+👉 Kỳ vọng: Chẩn đoán "Nhọt", Đánh giá mức độ "Nặng" (do ở mặt), Điều trị kháng sinh uống.
+
+
+-- ====================================================
+-- TEST CASE 6: VIÊM NANG LÔNG (TRÊN CƠ ĐỊA SUY GIẢM MIỄN DỊCH)
+-- ====================================================
+DELETE FROM PATIENT_INFO WHERE patient_id = 6;
+
+-- 1. Bệnh nhân có suy giảm miễn dịch
+INSERT INTO PATIENT_INFO (patient_id, age, immunosuppressed) VALUES (6, 30, TRUE);
+
+-- 2. Hình thái (Mụn mủ, không sẹo)
+INSERT INTO SKIN_LESION_MORPHOLOGY (patient_id, pustule, scar)
+VALUES (6, TRUE, FALSE);
+
+-- 3. Triệu chứng (Ngứa nhiều)
+INSERT INTO SYSTEMIC_AND_NEURO_SIGNS (patient_id, pruritus) VALUES (6, TRUE);
+
+-- 4. Phân bố (Vùng nang lông)
+INSERT INTO LESION_DISTRIBUTION (patient_id, follicular_area) VALUES (6, TRUE);
+
+-- 5. Đã có chẩn đoán sơ bộ (Để test luật FOL_3)
+INSERT INTO DIAGNOSIS_ASSESSMENT (patient_id, main_diagnosis) VALUES (6, 'Viêm nang lông');
+
+👉 Kỳ vọng: Chẩn đoán xác định "Viêm nang lông tăng bạch cầu ái toan", Mức độ "Trung bình".
+
+
+-- ====================================================
+-- TEST CASE 7: SĂNG LAO (LAO DA TIÊN PHÁT)
+-- ====================================================
+DELETE FROM PATIENT_INFO WHERE patient_id = 7;
+
+INSERT INTO PATIENT_INFO (patient_id, age, HIV_status) VALUES (7, 40, FALSE);
+
+-- 1. Hình thái (Loét + Viêm mạn tính + Hạch vùng)
+-- Lưu ý: chronic_inflammation_features dùng mảng TEXT[] trong Postgres
+INSERT INTO SKIN_LESION_MORPHOLOGY (patient_id, ulceration, chronic_inflamation_features, lymph_node)
+VALUES (7, TRUE, ARRAY['bờ nham nhở', 'áp xe lạnh'], 'Hạch vùng');
+
+-- 2. Xét nghiệm (Dương tính)
+INSERT INTO LABORATORY_ASSESSMENT (patient_id, bacteria_test, tuberculin_test)
+VALUES (7, 'Dương tính', 'Dương tính');
+
+👉 Kỳ vọng: Chẩn đoán "Săng lao (Tuberculosis Chancre)", Điều trị "6 tháng" (do HIV âm tính).
+
+
+-- ====================================================
+-- TEST CASE 8: BỆNH ÁN THỰC TẾ - CHỐC (IMPETIGO)
+-- Bệnh nhân: Bùi Xuân Khải, 59 tháng tuổi
+-- ====================================================
+
+-- 1. Xóa dữ liệu cũ của ID 8 (nếu có)
+DELETE FROM PATIENT_INFO WHERE patient_id = 8;
+
+-- 2. Thông tin bệnh nhân
+-- 59 tháng ~ 5 tuổi. Giới tính Nam.
+INSERT INTO PATIENT_INFO (patient_id, age, sex, onset_duration) 
+VALUES (8, 5, 'Nam', '3 ngày');
+
+-- 3. Hình thái tổn thương (Quan trọng nhất cho Chẩn đoán)
+-- Mô tả: Bọng nước dập trợt nhanh, vảy màu vàng nâu như mật ong
+INSERT INTO SKIN_LESION_MORPHOLOGY (
+    patient_id, 
+    vesicle_or_bulla,   -- Bọng nước
+    crust_presence,     -- Đóng vảy
+    crust_color,        -- Vảy vàng nâu
+    exfoliative_erythema, -- Không phải SSSS (không đỏ da toàn thân)
+    scar                -- Không sẹo
+)
+VALUES (8, TRUE, TRUE, 'Vàng nâu', FALSE, FALSE);
+
+-- 4. Phân bố tổn thương
+-- Mô tả: Rải rác ở tay, chân, bụng
+INSERT INTO LESION_DISTRIBUTION (patient_id, main_location, number_of_lesions)
+VALUES (8, 'Tay', 'Nhiều'); 
+-- Lưu ý: Rule CHOC_2 kiểm tra "Tay" có trong danh sách ["Mặt", "Tay", "Chân"] hay không -> Sẽ khớp.
+
+-- 5. Triệu chứng cơ năng & Toàn thân
+-- Mô tả: Ngứa nhiều, trẻ hay gãi. Không sốt.
+INSERT INTO SYSTEMIC_AND_NEURO_SIGNS (patient_id, pruritus, fever, pain)
+VALUES (8, TRUE, FALSE, FALSE);
+
+-- 6. Đánh giá mức độ
+-- Mô tả: Rải rác tay, chân, bụng -> Xếp vào "Lan rộng" để kích hoạt kháng sinh uống (theo thực tế bác sĩ đã kê Ceppodocin)
+INSERT INTO SEVERITY_ASSESSMENT (patient_id, extent_of_lesions)
+VALUES (8, 'Lan rộng');
+
+-- 7. Yếu tố nguy cơ
+-- Mô tả: Trẻ hay gãi -> Gây trầy xước (Skin trauma)
+INSERT INTO RISK_FACTOR_ASSESSMENT (patient_id, skin_trauma)
+VALUES (8, TRUE);
+
+
+👉 Kỳ vọng Chẩn đoán:Hệ thống sẽ khớp luật CHOC_1 (Bọng nước + Vảy vàng nâu) -> Chốc điển hình.
+
+
+
+-- ====================================================
+-- TEST CASE 9: BỆNH ÁN THỰC TẾ - TRỨNG CÁ (ACNE VULGARIS)
+-- Bệnh nhân: Phạm Thị Minh Tâm, 22 tuổi
+-- ====================================================
+
+-- 1. Xóa dữ liệu cũ của ID 9 (nếu có)
+DELETE FROM PATIENT_INFO WHERE patient_id = 9;
+
+-- 2. Thông tin bệnh nhân
+INSERT INTO PATIENT_INFO (patient_id, age, sex, occupation) 
+VALUES (9, 22, 'Nữ', 'Sinh viên');
+
+-- 3. Hình thái tổn thương
+-- Mô tả: "Sẩn viêm nhỏ", "mụn mủ", "nền da lành". 
+-- Quan trọng: Để chẩn đoán trứng cá, hệ thống cần 'comedones_present' = TRUE. 
+-- Mặc dù khám không ghi rõ "nhân mụn", nhưng chẩn đoán là Trứng cá và có kê Adapalene (tiêu nhân mụn), 
+-- nên ta set comedones_present = TRUE để khớp logic y khoa.
+INSERT INTO SKIN_LESION_MORPHOLOGY (
+    patient_id, 
+    pustule,            -- Có mụn mủ
+    comedones_present,  -- Có nhân mụn (ẩn/đầu trắng/đen)
+    nodule_or_abscess,  -- Không có cục/nang
+    scar,               -- Chưa sẹo rõ
+    ulceration          -- Không loét
+)
+VALUES (9, TRUE, TRUE, FALSE, FALSE, FALSE);
+
+-- 4. Phân bố tổn thương
+-- Mô tả: "Rải rác hai bên má", "Góc hàm phải" -> Vùng Mặt
+INSERT INTO LESION_DISTRIBUTION (patient_id, main_location)
+VALUES (9, 'Mặt');
+
+-- 5. Đánh giá mức độ
+-- Mô tả: Chẩn đoán sơ bộ là "Mức độ nhẹ".
+-- Để Rule Engine (ACNE_9) tự động ra "Nhẹ", ta cần nhập số lượng tổn thương < 20.
+INSERT INTO SEVERITY_ASSESSMENT (
+    patient_id, 
+    overall_severity,               -- Gán cứng hoặc để Rule tính
+    noninflammatory_lesion_count,   -- Sẩn
+    inflammatory_lesion_count,      -- Mụn mủ
+    total_lesion_count
+)
+VALUES (9, 'Nhẹ', 10, 5, 15); 
+
+-- 6. Triệu chứng cơ năng
+-- Mô tả: "Đau tại các mụn mủ", "Không ngứa"
+INSERT INTO SYSTEMIC_AND_NEURO_SIGNS (patient_id, pain, pruritus, fever)
+VALUES (9, TRUE, FALSE, FALSE);
+
+-- 7. Yếu tố nguy cơ
+-- Mô tả: "Hay nặn mụn và đưa tay lên mặt" -> Gây tổn thương da (Skin trauma)
+INSERT INTO RISK_FACTOR_ASSESSMENT (patient_id, skin_trauma)
+VALUES (9, TRUE);
+
+👉 Kỳ vọng: Hệ thống khớp luật ACNE_1 (Mụn mủ + Nhân mụn + Vùng mặt) -> Trứng cá thông thường.

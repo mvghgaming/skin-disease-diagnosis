@@ -1,0 +1,31 @@
+{
+    "meta_data": {
+        "patient_id": 6,
+        "created_at": "20251213_203904",
+        "system_version": "1.0"
+    },
+    "diagnosis_result": {
+        "main_diagnosis": "Viêm nang lông",
+        "subtype": null,
+        "diagnostic_certainty": "Viêm nang lông tăng bạch cầu ái toan",
+        "WHO_group": null,
+        "treatment_plan": [
+            "Giảm ngứa: Kháng histamin",
+            "Giảm đau/Hồi sức: Paracetamol",
+            "Giảm ngứa: Kháng histamin"
+        ],
+        "prevention_advice": [
+            "Rửa vùng da bị ảnh hưởng thường xuyên bằng xà phòng sát khuẩn",
+            "Tránh cào gãi, kích thích thương tổn"
+        ],
+        "warnings": [],
+        "rules_triggered": [
+            "CHOC_9",
+            "FOL_1",
+            "FOL_3",
+            "FOL_7",
+            "FOL_8",
+            "FOL_9"
+        ]
+    }
+}

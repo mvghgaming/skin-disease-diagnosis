@@ -1,0 +1,21 @@
+{
+    "meta_data": {
+        "patient_id": 7,
+        "created_at": "20251213_203914",
+        "system_version": "1.0"
+    },
+    "diagnosis_result": {
+        "main_diagnosis": null,
+        "subtype": null,
+        "diagnostic_certainty": null,
+        "WHO_group": null,
+        "treatment_plan": [
+            "local_treatment: Làm sạch – sát khuẩn vết loét thường xuyên, hỗ trợ liền thương"
+        ],
+        "prevention_advice": [],
+        "warnings": [],
+        "rules_triggered": [
+            "LAO_15"
+        ]
+    }
+}

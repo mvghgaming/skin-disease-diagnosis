@@ -1,0 +1,367 @@
+{
+  "disease": "Lao da",
+  "disease_code": "LAO_DA",
+  "rules": [
+    {
+      "id": "LAO_1",
+      "group": "Chẩn đoán",
+      "description": "Chẩn đoán Săng lao (Tuberculosis chancre) dựa trên loét + viêm mạn + hạch vùng + xét nghiệm lao dương tính.",
+      "logic": "AND",
+      "if": [
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "ulceration", "operator": "=", "value": true },
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "chronic_inflammation_features",
+          "operator": "CONTAINS_ANY",
+          "value": ["bờ nham nhở", "áp xe lạnh", "vỡ rò dịch", "hoại tử ở giữa"]
+        },
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "lymph_node", "operator": "=", "value": "Hạch vùng" },
+        { "concept": "LABORATORY_ASSESSMENT", "attribute": "bacteria_test", "operator": "=", "value": "Dương tính" },
+        { "concept": "LABORATORY_ASSESSMENT", "attribute": "tuberculin_test", "operator": "=", "value": "Dương tính" }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "value": "Săng lao (Tuberculosis Chancre)" }
+      ],
+      "explanation": "Săng lao thường là vết loét tiến triển chậm, bờ nham nhở, kèm hạch vùng; khi test lao và bằng chứng vi khuẩn học dương tính thì củng cố chẩn đoán."
+    },
+    {
+      "id": "LAO_2",
+      "group": "Chẩn đoán",
+      "description": "Chẩn đoán Lupus lao dựa trên củ lao + dấu hiệu màu 'thạch táo' + vị trí vùng mặt + mô bệnh học nang điển hình + tuberculin dương tính.",
+      "logic": "AND",
+      "if": [
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "primary_lesion", "operator": "IN", "value": ["củ lao"] },
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "visual_features",
+          "operator": "CONTAINS_ANY",
+          "value": ["màu vàng đỏ", "ấn kính xếp màu vàng nâu"]
+        },
+        {
+          "concept": "LESION_DISTRIBUTION",
+          "attribute": "main_location",
+          "operator": "IN",
+          "value": ["Mặt", "Môi trên", "Cằm", "Mũi", "Tai"]
+        },
+        { "concept": "LABORATORY_ASSESSMENT", "attribute": "histopathology", "operator": "=", "value": "Nang điển hình" },
+        { "concept": "LABORATORY_ASSESSMENT", "attribute": "tuberculin_test", "operator": "=", "value": "Dương tính" }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "value": "Lupus lao" }
+      ],
+      "explanation": "Lupus lao là lao da mạn hay gặp ở mặt; dấu hiệu màu vàng nâu khi ấn kính + mô bệnh học nang lao điển hình + tuberculin dương tính giúp xác định."
+    },
+    {
+      "id": "LAO_3",
+      "group": "Chẩn đoán",
+      "description": "Chẩn đoán Lao cốc dựa trên tổn thương mảng sùi/sẩn dày nứt nẻ + vị trí vùng tiếp xúc + mô bệnh học nang điển hình + tuberculin dương tính.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "primary_lesion",
+          "operator": "IN",
+          "value": ["mảng sùi", "sẩn dày sưng nứt nẻ"]
+        },
+        {
+          "concept": "LESION_DISTRIBUTION",
+          "attribute": "main_location",
+          "operator": "IN",
+          "value": ["Mu bàn tay", "Cẳng tay", "Mu bàn chân"]
+        },
+        { "concept": "LABORATORY_ASSESSMENT", "attribute": "histopathology", "operator": "=", "value": "Nang điển hình" },
+        { "concept": "LABORATORY_ASSESSMENT", "attribute": "tuberculin_test", "operator": "=", "value": "Dương tính" }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "value": "Lao cốc" }
+      ],
+      "explanation": "Lao cốc thường dai dẳng ở vùng tiếp xúc nhiều (mu bàn tay/chân, cẳng tay); mô bệnh học nang lao và tuberculin dương tính củng cố chẩn đoán."
+    },
+    {
+      "id": "LAO_4",
+      "group": "Chẩn đoán",
+      "description": "Chẩn đoán Loét lao dựa trên loét + dấu viêm mạn (đau, mủ nhầy thối, bờ nham nhở) + vị trí quanh các lỗ tự nhiên + test vi khuẩn dương tính.",
+      "logic": "AND",
+      "if": [
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "ulceration", "operator": "=", "value": true },
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "chronic_inflammation_features",
+          "operator": "CONTAINS_ANY",
+          "value": ["bờ nham nhở", "đau", "mủ nhầy thối"]
+        },
+        {
+          "concept": "LESION_DISTRIBUTION",
+          "attribute": "main_location",
+          "operator": "IN",
+          "value": ["Miệng", "Hậu môn", "Sinh dục"]
+        },
+        { "concept": "LABORATORY_ASSESSMENT", "attribute": "bacteria_test", "operator": "=", "value": "Dương tính" }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "value": "Loét lao" }
+      ],
+      "explanation": "Loét lao thường ở miệng–hậu môn–sinh dục, loét sâu đau, dễ chảy dịch; xét nghiệm vi khuẩn lao dương tính là bằng chứng quan trọng."
+    },
+    {
+      "id": "LAO_5",
+      "group": "Chẩn đoán",
+      "description": "Chẩn đoán Lao tăng (Scrofuloderma) dựa trên nốt dưới da/áp xe lạnh + rò dịch/đường hầm + vị trí vùng cổ/hạ đòn + xét nghiệm vi khuẩn dương tính.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "primary_lesion",
+          "operator": "IN",
+          "value": ["nốt dưới da", "áp xe lạnh"]
+        },
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "visual_features",
+          "operator": "CONTAINS_ANY",
+          "value": ["vỡ rò dịch", "tạo đường hầm"]
+        },
+        {
+          "concept": "LESION_DISTRIBUTION",
+          "attribute": "main_location",
+          "operator": "IN",
+          "value": ["Cổ dưới hàm", "Xương đòn"]
+        },
+        { "concept": "LABORATORY_ASSESSMENT", "attribute": "bacteria_test", "operator": "=", "value": "Dương tính" }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "value": "Lao tăng (Scrofuloderma)" }
+      ],
+      "explanation": "Lao tăng thường do hạch cổ/xương lan ra da: nốt dưới da → áp xe lạnh → vỡ rò, tạo đường hầm; xét nghiệm vi khuẩn lao dương tính giúp xác định."
+    },
+    {
+      "id": "LAO_6",
+      "group": "Chẩn đoán",
+      "description": "Chẩn đoán Á lao sẩn (Papulonecrotic tuberculid) dựa trên sẩn + hoại tử giữa/sẹo lõm + vị trí mặt hoặc mông.",
+      "logic": "AND",
+      "if": [
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "primary_lesion", "operator": "=", "value": "sẩn" },
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "visual_features",
+          "operator": "CONTAINS_ANY",
+          "value": ["hoại tử ở giữa", "sẹo lõm"]
+        },
+        { "concept": "LESION_DISTRIBUTION", "attribute": "main_location", "operator": "IN", "value": ["Mặt", "Mông"] }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "value": "Á lao sẩn" }
+      ],
+      "explanation": "Á lao sẩn là phản ứng miễn dịch liên quan lao: sẩn nhỏ, giữa sẩn hoại tử, lành để sẹo lõm; thường gặp ở mặt hoặc mông."
+    },
+    {
+      "id": "LAO_7",
+      "group": "Chẩn đoán",
+      "description": "Chẩn đoán Hồng ban rắn Bazin dựa trên cục dưới da + đỏ tím/đau/loét giữa + vị trí cẳng chân.",
+      "logic": "AND",
+      "if": [
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "primary_lesion", "operator": "=", "value": "cục nhỏ dưới da" },
+        {
+          "concept": "SKIN_LESION_MORPHOLOGY",
+          "attribute": "visual_features",
+          "operator": "CONTAINS_ANY",
+          "value": ["màu đỏ tím", "đau khi sờ nắn", "mềm ở giữa"]
+        },
+        { "concept": "LESION_DISTRIBUTION", "attribute": "main_location", "operator": "=", "value": "Cẳng chân" }
+      ],
+      "then": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "value": "Hồng ban rắn Bazin" }
+      ],
+      "explanation": "Hồng ban rắn Bazin là tổn thương sâu dưới da, đỏ tím, ấn đau, hay gặp ở cẳng chân; có thể mềm/loét ở giữa và để lại thâm dai dẳng."
+    },
+
+    {
+      "id": "LAO_8",
+      "group": "Điều trị",
+      "description": "Thời gian điều trị lao da chuẩn 6 tháng khi không nhiễm HIV.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "main_diagnosis",
+          "operator": "IN",
+          "value": [
+            "Săng lao (Tuberculosis Chancre)",
+            "Lupus lao",
+            "Lao cốc",
+            "Loét lao",
+            "Lao tăng (Scrofuloderma)",
+            "Á lao sẩn",
+            "Hồng ban rắn Bazin"
+          ]
+        },
+        { "concept": "PATIENT_INFO", "attribute": "HIV_status", "operator": "=", "value": false }
+      ],
+      "then": [
+        { "concept": "TREATMENT_PLAN", "attribute": "treatment_duration", "value": "6 tháng" }
+      ],
+      "explanation": "Lao da không kèm HIV thường đáp ứng tốt với phác đồ chuẩn 6 tháng."
+    },
+    {
+      "id": "LAO_9",
+      "group": "Điều trị",
+      "description": "Kéo dài điều trị 9 tháng khi bệnh nhân lao da có HIV.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "main_diagnosis",
+          "operator": "IN",
+          "value": [
+            "Săng lao (Tuberculosis Chancre)",
+            "Lupus lao",
+            "Lao cốc",
+            "Loét lao",
+            "Lao tăng (Scrofuloderma)",
+            "Á lao sẩn",
+            "Hồng ban rắn Bazin"
+          ]
+        },
+        { "concept": "PATIENT_INFO", "attribute": "HIV_status", "operator": "=", "value": true }
+      ],
+      "then": [
+        { "concept": "TREATMENT_PLAN", "attribute": "treatment_duration", "value": "9 tháng" }
+      ],
+      "explanation": "Người bệnh có HIV suy giảm miễn dịch, nguy cơ thất bại điều trị cao hơn nên thường cần kéo dài thời gian."
+    },
+    {
+      "id": "LAO_10",
+      "group": "Điều trị",
+      "description": "Lựa chọn phác đồ 1 điều trị lao da.",
+      "logic": "AND",
+      "if": [
+        { "concept": "TREATMENT_PLAN", "attribute": "regimen_choice", "operator": "=", "value": 1 }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "regimen",
+          "value": "Tấn công 8 tuần: R(H)Z(E) hằng ngày + Duy trì 16 tuần: RH 3 lần/tuần"
+        }
+      ],
+      "explanation": "Phác đồ 1: tấn công 2 tháng dùng R(H)Z(E) hằng ngày, duy trì 4 tháng RH 3 lần/tuần."
+    },
+    {
+      "id": "LAO_11",
+      "group": "Điều trị",
+      "description": "Lựa chọn phác đồ 2 điều trị lao da.",
+      "logic": "AND",
+      "if": [
+        { "concept": "TREATMENT_PLAN", "attribute": "regimen_choice", "operator": "=", "value": 2 }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "regimen",
+          "value": "Tấn công 2 tháng: R(H)Z(E) hằng ngày + Duy trì 16 tuần: RH hằng ngày"
+        }
+      ],
+      "explanation": "Phác đồ 2: giai đoạn tấn công giống phác đồ 1, nhưng duy trì RH hằng ngày để tăng mức độ tuân thủ/kiểm soát."
+    },
+    {
+      "id": "LAO_12",
+      "group": "Điều trị",
+      "description": "Lựa chọn phác đồ 3 điều trị lao da (giảm tần suất dùng thuốc).",
+      "logic": "AND",
+      "if": [
+        { "concept": "TREATMENT_PLAN", "attribute": "regimen_choice", "operator": "=", "value": 3 }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "regimen",
+          "value": "Tấn công 3 tháng: R(H)Z(E) 3 lần/tuần + Duy trì: RH 3 lần/tuần"
+        }
+      ],
+      "explanation": "Phác đồ 3 giảm tần suất dùng thuốc (3 lần/tuần), phù hợp một số bối cảnh quản lý điều trị."
+    },
+
+    {
+      "id": "LAO_13",
+      "group": "Cảnh báo",
+      "description": "Cảnh báo theo dõi xét nghiệm định kỳ khi điều trị lao kéo dài 6–9 tháng.",
+      "logic": "AND",
+      "if": [
+        { "concept": "TREATMENT_PLAN", "attribute": "treatment_duration", "operator": "IN", "value": ["6 tháng", "9 tháng"] }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "prevention_advice",
+          "value": "Cần theo dõi chức năng gan, thận, công thức máu trong quá trình điều trị"
+        }
+      ],
+      "explanation": "Điều trị lao kéo dài với nhiều thuốc có nguy cơ độc gan/thận, cần xét nghiệm định kỳ để theo dõi an toàn."
+    },
+
+    {
+      "id": "LAO_14",
+      "group": "Tư vấn",
+      "description": "Tư vấn điều trị tại chỗ hỗ trợ với Lupus lao hoặc Lao cốc (đốt điện/laser CO2/áp lạnh).",
+      "logic": "AND",
+      "if": [
+        { "concept": "DIAGNOSIS_ASSESSMENT", "attribute": "main_diagnosis", "operator": "IN", "value": ["Lupus lao", "Lao cốc"] }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "local_treatment",
+          "value": "Có thể áp dụng đốt điện, laser CO2, áp nito lỏng để hỗ trợ tổn thương lâu lành"
+        }
+      ],
+      "explanation": "Một số thể lao da mạn (lupus lao, lao cốc) có tổn thương dai dẳng; can thiệp tại chỗ có thể hỗ trợ lành và cải thiện thẩm mỹ."
+    },
+    {
+      "id": "LAO_15",
+      "group": "Tư vấn",
+      "description": "Tư vấn chăm sóc khi có tổn thương loét trong lao da.",
+      "logic": "AND",
+      "if": [
+        { "concept": "SKIN_LESION_MORPHOLOGY", "attribute": "ulceration", "operator": "=", "value": true }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "local_treatment",
+          "value": "Làm sạch – sát khuẩn vết loét thường xuyên, hỗ trợ liền thương"
+        }
+      ],
+      "explanation": "Tổn thương loét dễ bội nhiễm; vệ sinh và sát khuẩn nhẹ nhàng giúp mau lành và hạn chế sẹo."
+    },
+    {
+      "id": "LAO_16",
+      "group": "Tư vấn",
+      "description": "Tư vấn dinh dưỡng và nghỉ ngơi hỗ trợ điều trị cho mọi bệnh nhân lao da.",
+      "logic": "AND",
+      "if": [
+        {
+          "concept": "DIAGNOSIS_ASSESSMENT",
+          "attribute": "main_diagnosis",
+          "operator": "IN",
+          "value": [
+            "Săng lao (Tuberculosis Chancre)",
+            "Lupus lao",
+            "Lao cốc",
+            "Loét lao",
+            "Lao tăng (Scrofuloderma)",
+            "Á lao sẩn",
+            "Hồng ban rắn Bazin"
+          ]
+        }
+      ],
+      "then": [
+        {
+          "concept": "TREATMENT_PLAN",
+          "attribute": "prevention_advice",
+          "value": "Cần có chế độ dinh dưỡng tốt để nâng cao sức đề kháng và hỗ trợ điều trị"
+        }
+      ],
+      "explanation": "Dinh dưỡng đầy đủ và nghỉ ngơi hợp lý giúp nâng sức đề kháng, cải thiện đáp ứng điều trị ở bệnh nhân lao."
+    }
+  ]
+}

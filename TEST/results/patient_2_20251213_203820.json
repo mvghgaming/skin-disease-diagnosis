@@ -1,0 +1,26 @@
+{
+    "meta_data": {
+        "patient_id": 2,
+        "created_at": "20251213_203820",
+        "system_version": "1.0"
+    },
+    "diagnosis_result": {
+        "main_diagnosis": "Trứng cá thông thường",
+        "subtype": null,
+        "diagnostic_certainty": null,
+        "WHO_group": null,
+        "treatment_plan": [
+            "Phác đồ trứng cá: Retinoid bôi hoặc Benzoyl Peroxid hoặc Acid Azelaic hoặc kháng sinh bôi"
+        ],
+        "prevention_advice": [
+            "Rửa mặt bằng sữa rửa phù hợp, không chà xát mạnh, không tự nặn mụn, hạn chế dùng mỹ phẩm hoặc thuốc bôi chứa halogen/corticoid trên mặt"
+        ],
+        "warnings": [],
+        "rules_triggered": [
+            "CHOC_2",
+            "ACNE_1",
+            "ACNE_10",
+            "ACNE_17"
+        ]
+    }
+}
